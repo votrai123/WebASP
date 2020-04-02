@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Model.EF;
+using PagedList;
 namespace Model.Dao
 {
     public class UserDao
@@ -23,6 +24,10 @@ namespace Model.Dao
             db.Users.Add(entity);
             db.SaveChanges();
             return entity.ID;
+        }
+        public IEnumerable<User> ListAllPaping(int page,int pageSize)
+        {
+            return db.Users.ToPagedList(page,pageSize);
         }
         public int Login(string userName, string passWord, bool isLoginAdmin = false)
         {

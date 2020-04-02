@@ -18,10 +18,7 @@ namespace Model.EF
         public string Password { get; set; }
 
         [StringLength(50)]
-        public string FirtName { get; set; }
-
-        [StringLength(50)]
-        public string LastName { get; set; }
+        public string FullName { get; set; }
 
         [StringLength(50)]
         public string Country { get; set; }
