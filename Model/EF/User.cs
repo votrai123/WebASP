@@ -21,6 +21,8 @@ namespace Model.EF
         public string FullName { get; set; }
 
         [StringLength(50)]
+        public string Email { get; set; }
+        [StringLength(50)]
         public string Country { get; set; }
 
         [StringLength(250)]
@@ -39,5 +41,7 @@ namespace Model.EF
         [StringLength(50)]
         public string ModifiedBy { get; set; }
         public bool? Status { get; set; }
+        public bool? role { get; set; }
+
     }
 }

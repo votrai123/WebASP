@@ -19,15 +19,44 @@ namespace Model.Dao
         {
             return db.Users.SingleOrDefault(x => x.UserName == userName);
         }
+
+        public User ViewDetail(int id)
+        {
+            return db.Users.Find(id);
+        }
         public long Insert(User entity)
         {
             db.Users.Add(entity);
             db.SaveChanges();
             return entity.ID;
         }
-        public IEnumerable<User> ListAllPaping(int page,int pageSize)
+
+        public bool Update(User entity)
         {
-            return db.Users.ToPagedList(page,pageSize);
+            try
+            {
+                var user = db.Users.Find(entity.ID);
+                user.FullName = entity.FullName;
+                user.Password = entity.Password;
+                user.Phone = entity.Phone;
+                user.UserName = entity.UserName;
+                user.Country = entity.Country;
+                user.StreetAddress = entity.StreetAddress;
+                user.role = entity.role;
+                user.ModifiedDate = DateTime.Now;
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+            
+        }
+
+        public IEnumerable<User> ListAllPaping(int page, int pageSize)
+        {
+            return db.Users.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
         }
         public int Login(string userName, string passWord, bool isLoginAdmin = false)
         {
