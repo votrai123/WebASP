@@ -15,6 +15,7 @@ namespace WebShop.Areas.Admin.Controllers
         public ActionResult Index()
         {
             //var dao = new UserDao();
+            //bichtram commit
             //var model = dao.ListAllPaping(page, pageSize);
             return View();
         }
