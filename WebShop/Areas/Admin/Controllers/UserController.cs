@@ -12,11 +12,11 @@ namespace WebShop.Areas.Admin.Controllers
     public class UserController : Controller
     {
         // GET: Admin/User
-        public ActionResult Index(int page = 1, int pageSize = 10)
+        public ActionResult Index()
         {
-            var dao = new UserDao();
-            var model = dao.ListAllPaping(page, pageSize);
-            return View(model);
+            //var dao = new UserDao();
+            //var model = dao.ListAllPaping(page, pageSize);
+            return View();
         }
         [HttpPost]
         public ActionResult Create(User user)
