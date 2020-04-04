@@ -19,7 +19,8 @@ namespace Model.EF
 
         [StringLength(50)]
         public string FullName { get; set; }
-
+        [StringLength(50)]
+        public string Email { get; set; }
         [StringLength(50)]
         public string Country { get; set; }
 
