@@ -1,222 +1,117 @@
-﻿@model Model.EF.User
-
+﻿@model PagedList.IPagedList<Model.EF.User>
 @{
-    ViewBag.Title = "Create USER";
+    ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
-
-@using (Html.BeginForm("Create", "User", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-
-    <div class="card">
-        <h4 class="card-header">Create user</h4>
-        <hr />
-        <div class="card-body card-block">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            <form>
-                <div class="form-group">
-                    <div class="input-group">
-                        @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "input-group-addon" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+<div class="section__content section__content--p30">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- DATA TABLE -->
+                <h3 class="title-5 m-b-35">data table</h3>
+                <div class="table-data__tool">
+                    <div class="table-data__tool-left">
+                        <div class="rs-select2--light rs-select2--md">
+                            <select class="js-select2" name="property">
+                                <option selected="selected">All Properties</option>
+                                <option value="">Option 1</option>
+                                <option value="">Option 2</option>
+                            </select>
+                            <div class="dropDownSelect2"></div>
                         </div>
-                        <div class="input-group-addon">
-                            <i class="fa fa-user"></i>
+                        <div class="rs-select2--light rs-select2--sm">
+                            <select class="js-select2" name="time">
+                                <option selected="selected">Today</option>
+                                <option value="">3 Days</option>
+                                <option value="">1 Week</option>
+                            </select>
+                            <div class="dropDownSelect2"></div>
+                        </div>
+                        <button class="au-btn-filter">
+                            <i class="zmdi zmdi-filter-list"></i>filters
+                        </button>
+                    </div>
+                    <div class="table-data__tool-right">
+                        <a href="/Admin/User/Create">
+                            <button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                                <i class="zmdi zmdi-plus"></i>add item
+                            </button>
+                        </a>
+                        <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
+                            <select class="js-select2" name="type">
+                                <option selected="selected">Export</option>
+                                <option value="">Option 1</option>
+                                <option value="">Option 2</option>
+                            </select>
+                            <div class="dropDownSelect2"></div>
                         </div>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <div class="input-group">
-                        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "input-group-addon" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="input-group-addon">
-                            <i class="fa fa-asterisk"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="table-data__tool-right">
-                    <button class="au-btn au-btn-icon au-btn--green au-btn--small" data-toggle="modal" data-target="#exampleModal">
-                        <i class="zmdi zmdi-plus"></i>add item
-                    </button>
-                    @*Modals Adduser*@
-                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">New User</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    @using (Html.BeginForm("Create", "User", FormMethod.Post))
-                                    {
-                                        @Html.AntiForgeryToken()
-                                        <div class="form-group">
-                                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="table-responsive table-responsive-data2">
+                    <table class="table table-data2">
+                        <thead>
+                            <tr>
+                                <th>
+                                    <label class="au-checkbox">
+                                        <input type="checkbox">
+                                        <span class="au-checkmark"></span>
+                                    </label>
+                                </th>
+                                <th>fullname</th>
+                                <th>email</th>
+                                <th>username</th>
+                                <th>phone</th>
+                                <th>status</th>
+                                <th>role</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr class="tr-shadow">
+                                    <td>
+                                        <label class="au-checkbox">
+                                            <input type="checkbox">
+                                            <span class="au-checkmark"></span>
+                                        </label>
+                                    </td>
+                                    <td>@item.FullName</td>
+                                    <td>
+                                        <span class="block-email">@item.Email</span>
+                                    </td>
+                                    <td class="desc">@item.UserName</td>
+                                    <td>@item.Phone</td>
+                                    <td>
+                                        <span class="status--process">@item.Status</span>
+                                    </td>
+                                    <td>@item.role</td>
+                                    <td>
+                                        <div class="table-data-feature">
+                                            <button class="item" data-toggle="tooltip" data-placement="top" title="Send">
+                                                <i class="zmdi zmdi-mail-send"></i>
+                                            </button>
+                                            <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                <i class="zmdi zmdi-edit"></i>
+                                            </button>
+                                            <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
+                                                <i class="zmdi zmdi-delete"></i>
+                                            </button>
+                                            <button class="item" data-toggle="tooltip" data-placement="top" title="More">
+                                                <i class="zmdi zmdi-more"></i>
+                                            </button>
                                         </div>
-                                            <div class="form-group">
-                                                <label for="recipient-name" class="col-form-label">UserName:</label>
-                                                <br />
-                                                @*<input type="text" class="form-control" id="recipient-name">*@
-                                                @Html.TextBoxFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control", @id = "recipient-name" } })
-                                                @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="recipient-name" class="col-form-label">PassWord:</label>
-                                                <br />
-                                                @*<input type="password" class="form-control" id="recipient-name">*@
-                                                @Html.PasswordFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
-                                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="recipient-name" class="col-form-label">FullName:</label>
-                                                <br />
-                                                @*<input type="text" class="form-control" id="recipient-name">*@
-                                                @Html.TextBoxFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control", @style = "font-weight: bold;" } })
-                                                @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="recipient-name" class="col-form-label">Tỉnh, Thành phố:</label>
-                                                <br />
-                                                @*<input type="text" class="form-control" id="recipient-name">*@
-                                                @Html.TextBoxFor(model => model.Country, new { htmlAttributes = new { @class = "form-control" } })
-                                                @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="message-text" class="col-form-label">Street Address:</label>
-                                                <br />
-                                                @*<textarea class="form-control" id="message-text"></textarea>*@
-                                                @Html.TextBoxFor(model => model.StreetAddress, new { htmlAttributes = new { @class = "form-control" } })
-                                                @Html.ValidationMessageFor(model => model.StreetAddress, "", new { @class = "text-danger" })
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="recipient-name" class="col-form-label">Phone:</label>
-                                                <br />
-                                                @*<input type="text" class="form-control" id="recipient-name">*@
-                                                @Html.TextBoxFor(model => model.Phone, new { htmlAttributes = new { @class = "form-control" } })
-                                                @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Send message</button>
-                                            </div>
-                                    }
-                                </div>
+                                    </td>
+                                </tr>
+                            }
 
-                <div class="form-group">
-                    <div class="input-group">
-                        @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "input-group-addon" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="input-group-addon">
-                            <i class="fa fa-asterisk"></i>
-                        </div>
-                    </div>
+                        </tbody>
+                    </table>
                 </div>
-
-                <div class="form-group">
-                    <div class="input-group">
-                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "input-group-addon" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="input-group-addon">
-                            <i class="fa fa-envelope"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="input-group">
-                        @Html.LabelFor(model => model.Country, htmlAttributes: new { @class = "input-group-addon" })
-                        <div class="col-md-10">
-                            @Html.EditorFor(model => model.Country, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.Country, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="input-group-addon">
-                            <i class="fa fa-envelope"></i>
-                        </div>
-                    </div>
-                </div>
+                <!-- END DATA TABLE -->
             </div>
-            <div class="table-responsive table-responsive-data2">
-                <table class="table table-data2">
-                    <thead>
-                        <tr>
-                            <th>
-                                <label class="au-checkbox">
-                                    <input type="checkbox">
-                                    <span class="au-checkmark"></span>
-                                </label>
-                            </th>
-                            <th>fullname</th>
-                            <th>email</th>
-                            <th>username</th>
-                            <th>date</th>
-                            @*<th>status</th>*@
-                            @*<th>price</th>*@
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                        <tr class="tr-shadow">
-                            <td>
-                                <label class="au-checkbox">
-                                    <input type="checkbox">
-                                    <span class="au-checkmark"></span>
-                                </label>
-                            </td>
-                            <td>Lori Lynch</td>
-                            <td>
-                                <span class="block-email">lori@example.com</span>
-                            </td>
-                            <td class="desc">Samsung S8 Black</td>
-                            <td>2018-09-27 02:12</td>
-                            <td>
-                                <span class="status--process">Processed</span>
-                            </td>
-                            <td>$679.00</td>
-                            <td>
-                                <div class="table-data-feature">
-                                    <button class="item" data-toggle="tooltip" data-placement="top" title="Send">
-                                        <i class="zmdi zmdi-mail-send"></i>
-                                    </button>
-                                    <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
-                                        <i class="zmdi zmdi-edit"></i>
-                                    </button>
-                                    <button class="item" data-toggle="tooltip" data-placement="top" title="Delete">
-                                        <i class="zmdi zmdi-delete"></i>
-                                    </button>
-                                    <button class="item" data-toggle="tooltip" data-placement="top" title="More">
-                                        <i class="zmdi zmdi-more"></i>
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class="spacer"></tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-            <!-- END DATA TABLE -->
         </div>
     </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
 </div>

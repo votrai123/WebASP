@@ -12,21 +12,37 @@ namespace WebShop.Areas.Admin.Controllers
     public class UserController : Controller
     {
         // GET: Admin/User
-        public ActionResult Index()
+        public ActionResult Index(int page = 1, int pageSize = 10)
         {
-            //var dao = new UserDao();
-            //var model = dao.ListAllPaping(page, pageSize);
+            var dao = new UserDao();
+            var model = dao.ListAllPaping(page, pageSize);
+            return View(model);
+        }
+        [HttpGet]
+        public ActionResult Create()
+        {
             return View();
         }
         [HttpPost]
         public ActionResult Create(User user)
         {
-            var dao = new UserDao();
-            var encryptedPw = Encrytor.MD5Hash(user.Password);
-            user.Password = encryptedPw;
-            dao.Insert(user);
-            return Json(new { Messeage = "SUCCESS", JsonRequestBehavior.AllowGet });
-        }
+            if (ModelState.IsValid)
+            {
 
+                var dao = new UserDao();
+                var encryptedPw = Encrytor.MD5Hash(user.Password);
+                user.Password = encryptedPw;
+                long id = dao.Insert(user);
+                if (id > 0)
+                {
+                    return RedirectToAction("Index", "User");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Them user khong thanh cong");
+                }
+            }
+            return View("Index");
+        }
     }
 }
