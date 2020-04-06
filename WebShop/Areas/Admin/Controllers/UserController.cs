@@ -45,7 +45,7 @@ namespace WebShop.Areas.Admin.Controllers
                     ModelState.AddModelError("", "Them user khong thanh cong");
                 }
             }
-            return View("Index");
+            return View("Create");
         }
 
         [HttpGet]
@@ -78,7 +78,7 @@ namespace WebShop.Areas.Admin.Controllers
                     ModelState.AddModelError("", "Cap nhat user khong thanh cong");
                 }
             }
-            return View("Index");
+            return View("Update");
         } 
         public ActionResult Delete(int id)
         {
