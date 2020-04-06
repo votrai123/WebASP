@@ -17,7 +17,7 @@ namespace Model.Dao
 
         public User GetById(string userName)
         {
-            return db.Users.SingleOrDefault(x => x.UserName == userName);
+            return db.Users.OrderByDescending(x=>x.ID).SingleOrDefault(x => x.UserName == userName);
         }
 
         public User ViewDetail(int id)
@@ -37,12 +37,17 @@ namespace Model.Dao
             {
                 var user = db.Users.Find(entity.ID);
                 user.FullName = entity.FullName;
-                user.Password = entity.Password;
+                if (!string.IsNullOrEmpty(entity.Password))
+                {
+                    user.Password = entity.Password;
+
+                }
                 user.Phone = entity.Phone;
-                user.UserName = entity.UserName;
                 user.Country = entity.Country;
                 user.StreetAddress = entity.StreetAddress;
+
                 user.role = entity.role;
+                user.Status = entity.Status;
                 user.ModifiedDate = DateTime.Now;
                 db.SaveChanges();
                 return true;
@@ -52,6 +57,21 @@ namespace Model.Dao
                 return false;
             }
             
+        }
+
+        public bool Delete(int id)
+        {
+            try
+            {
+                var user = db.Users.Find(id);
+                db.Users.Remove(user);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
         }
 
         public IEnumerable<User> ListAllPaping(int page, int pageSize)
