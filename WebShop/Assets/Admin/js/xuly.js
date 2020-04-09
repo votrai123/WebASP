@@ -26,3 +26,20 @@
         });
     });
 });
+selected_id = null;
+function setiduser(id) {
+    selected_id = id;
+}
+//deleteUser
+function deleteUser() {
+
+    $.post(`/Admin/User/Delete/${selected_id}`,
+    {
+
+    },
+    function (data, status) {
+        //   alert("Data: " + data + "\nStatus: " + status);
+        location.reload();
+    });
+    // console.log('abcd')
+}
