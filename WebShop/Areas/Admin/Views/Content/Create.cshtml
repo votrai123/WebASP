@@ -7,7 +7,8 @@
 
 <h2>CREATE CONTENT</h2>
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Create", "Content", FormMethod.Post, new { enctype = "multipart/form-data" }))
+
 {
     @Html.AntiForgeryToken()
 
@@ -24,27 +25,16 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <div class="input-group">
-                @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "input-group-addon" })
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
+        
 
         <div class="form-group">
             <div class="input-group">
 
                 @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "input-group-addon" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Image, new { htmlAttributes = new { @class = "form-control", @id = "txtImage" } })
+                   @Html.TextBox("file", "", new { type = "file" })
                     @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
-                </div>
-                <div>
-                    <button type="button" class="btn btn-link" id="btnSelectImage"><i class="fa fa-link">Link</i></button>
-
+                    @ViewBag.Message
                 </div>
             </div>
         </div>
@@ -70,7 +60,15 @@
                 </div>
             </div>
         </div>
-
+        @*<div id="summernote"></div>*@
+        <div class="form-group">
+            <div class="input-group">
+                <div class="col-md-10">
+                    @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", @id = "summernote" } })
+                    @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <button class="btn btn-success btn-lg btn-block" type="submit">Create</button>
