@@ -12,19 +12,27 @@ namespace Model.EF
         public long ID { get; set; }
 
         [StringLength(250)]
+        [Required(ErrorMessage = "You must provide a Content Name")]
+        [Display(Name = "Name")]
         public string Name { get; set; }
-
+        
+        [Display(Name = "MetaTitle")]
         [StringLength(250)]
         public string MetaTitle { get; set; }
-
+        
+        [Display(Name = "Description")]
         [StringLength(500)]
         public string Description { get; set; }
-
+        
+        [Display(Name = "Image")]
         [StringLength(250)]
         public string Image { get; set; }
 
+        [Required(ErrorMessage = "You must provide a ID Category")]
+        [Display(Name = "Category")]
         public long? CategoryID { get; set; }
 
+        [Display(Name = "Detail")]
         [Column(TypeName = "ntext")]
         public string Detail { get; set; }
 
@@ -44,10 +52,14 @@ namespace Model.EF
         [StringLength(250)]
         public string MetaDescriptions { get; set; }
 
+        [Display(Name = "Status")]
         public bool? Status { get; set; }
 
+        [Display(Name = "Top Hot")]
         public DateTime? TopHot { get; set; }
 
+
+        [Display(Name = "View Count")]
         public int? ViewCount { get; set; }
     }
 }

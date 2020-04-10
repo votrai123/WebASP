@@ -67,7 +67,7 @@ namespace WebShop.Areas.Admin.Controllers
                     user.Password = encryptedPw;
                 }
                 
-                user.CreatedDate = DateTime.Now;
+                user.ModifiedDate = DateTime.Now;
                 var result = dao.Update(user);
                 if (result)
                 {

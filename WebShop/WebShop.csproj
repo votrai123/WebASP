@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\EntityFramework.6.4.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.0\build\EntityFramework.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
@@ -137,6 +137,18 @@
     <Content Include="Assets\Admin\js\bootstrap-datetimepicker.js" />
     <Content Include="Assets\Admin\js\main.js" />
     <Content Include="Assets\Admin\js\moment.js" />
+    <Content Include="Assets\Admin\js\plugins\Summernote\summernote-bs4.css" />
+    <Content Include="Assets\Admin\js\plugins\Summernote\summernote-bs4.js" />
+    <Content Include="Assets\Admin\js\plugins\Summernote\summernote-bs4.min.css" />
+    <Content Include="Assets\Admin\js\plugins\Summernote\summernote-bs4.min.js" />
+    <Content Include="Assets\Admin\js\plugins\Summernote\summernote-lite.css" />
+    <Content Include="Assets\Admin\js\plugins\Summernote\summernote-lite.js" />
+    <Content Include="Assets\Admin\js\plugins\Summernote\summernote-lite.min.css" />
+    <Content Include="Assets\Admin\js\plugins\Summernote\summernote-lite.min.js" />
+    <Content Include="Assets\Admin\js\plugins\Summernote\summernote.css" />
+    <Content Include="Assets\Admin\js\plugins\Summernote\summernote.js" />
+    <Content Include="Assets\Admin\js\plugins\Summernote\summernote.min.css" />
+    <Content Include="Assets\Admin\js\plugins\Summernote\summernote.min.js" />
     <Content Include="Assets\Admin\js\xuly.js" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Global.asax" />
@@ -192,10 +204,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\UploadedFiles\" />
     <Folder Include="Areas\Admin\Views\Base\" />
     <Folder Include="Assets\Admin\css\" />
     <Folder Include="Assets\Admin\fonts\" />
     <Folder Include="Assets\Admin\images\" />
+    <Folder Include="Assets\Admin\js\plugins\Summernote\font\" />
+    <Folder Include="Assets\Admin\js\plugins\Summernote\lang\" />
+    <Folder Include="Assets\Admin\js\plugins\Summernote\plugin\" />
     <Folder Include="Assets\Admin\media\" />
     <Folder Include="Assets\Admin\vendor\" />
     <Folder Include="Assets\Client\" />
