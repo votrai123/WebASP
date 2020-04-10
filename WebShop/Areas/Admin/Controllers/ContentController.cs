@@ -24,13 +24,14 @@ namespace WebShop.Areas.Admin.Controllers
             return View();
         }
         [HttpPost, ValidateInput(false)]
-        public ActionResult Create (Content content, HttpPostedFileBase file)
+        public ActionResult Create(Content content, HttpPostedFileBase file)
         {
             try
             {
 
                 if (file.ContentLength > 0 && ModelState.IsValid)
                 {
+
                     var dao = new ContentDao();
                     content.Status = true;
                     content.ViewCount = 0;
@@ -38,7 +39,7 @@ namespace WebShop.Areas.Admin.Controllers
                     content.CreatedDate = DateTime.Now;
                     string _FileName = Path.GetFileName(file.FileName);
                     string _path = Path.Combine(Server.MapPath("~/Areas/Admin/UploadedFiles"), _FileName);
-                    content.Image = _path; 
+                    content.Image = _path;
                     long id = dao.Insert(content);
                     if (id > 0)
                     {
@@ -70,5 +71,53 @@ namespace WebShop.Areas.Admin.Controllers
             new ContentDao().Delete(id);
             return RedirectToAction("Index");
         }
+        [HttpGet]
+        public ActionResult Update(int id)
+        {
+            var content = new ContentDao().ViewDetail(id);
+            return View(content);
+        }
+
+
+        [HttpPost, ValidateInput(false)]
+        public ActionResult Update(Content content, HttpPostedFileBase file)
+        {
+
+            if (ModelState.IsValid)
+            {
+                var dao = new ContentDao();
+
+                content.ModifiedDate = DateTime.Now;
+                
+                    
+                if (file != null)
+                {
+                    string _FileName = Path.GetFileName(file.FileName);
+                    string _path = Path.Combine(Server.MapPath("~/Areas/Admin/UploadedFiles"), _FileName);
+                    content.Image = _path;
+                    file.SaveAs(_path);
+                }
+                  
+
+                var result = dao.Update(content);
+                if (result)
+                {
+                    ViewBag.Message = "File Uploaded Successfully!!";
+                    ModelState.AddModelError("", "Cap nhat  thanh cong");
+                    return RedirectToAction("Index", "Content");
+
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Cap nhat khong thanh cong");
+                }
+
+            }
+            return View("Index", "Content");
+
+
+
+        }
+
     }
 }

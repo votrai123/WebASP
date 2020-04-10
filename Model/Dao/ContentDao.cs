@@ -40,5 +40,32 @@ namespace Model.Dao
                 return false;
             }
         }
+
+        public Content ViewDetail(int id)
+        {
+            return db.Contents.Find(id);
+        }
+        public bool Update(Content entity)
+        {
+            try
+            {
+                var content = db.Contents.Find(entity.ID);
+                content.Name = entity.Name;
+                if (!string.IsNullOrEmpty(entity.Image))
+                {
+                    content.Image = entity.Image;
+
+                }
+                content.Status = entity.Status;
+                content.ModifiedDate = DateTime.Now;
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+        }
     }
 }

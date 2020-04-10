@@ -165,6 +165,7 @@
     <Content Include="Assets\Admin\js\plugins\Summernote\summernote-lite.min.js.map" />
     <Content Include="Assets\Admin\js\plugins\Summernote\summernote.js.map" />
     <Content Include="Assets\Admin\js\plugins\Summernote\summernote.min.js.map" />
+    <Content Include="Areas\Admin\Views\Content\Update.cshtml" />
     <None Include="scripts\jquery-1.8.0.intellisense.js" />
     <Content Include="scripts\jquery-1.8.0.js" />
     <Content Include="scripts\jquery-1.8.0.min.js" />
