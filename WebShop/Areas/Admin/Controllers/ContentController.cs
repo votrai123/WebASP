@@ -3,39 +3,26 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-<<<<<<< HEAD
-=======
 using System.IO;
 using Model.EF;
 using Model.Dao;
 using WebShop.Common;
->>>>>>> content
 
 namespace WebShop.Areas.Admin.Controllers
 {
     public class ContentController : Controller
     {
         // GET: Admin/Content
-<<<<<<< HEAD
-        public ActionResult Index()
-        {
-            return View();
-=======
         public ActionResult Index(int page = 1, int pageSize = 8)
         {
             var dao = new ContentDao();
             var model = dao.ListAllPaping(page, pageSize);
             return View(model);
->>>>>>> content
         }
         public ActionResult Create()
         {
             return View();
         }
-<<<<<<< HEAD
-    }
-}
-=======
         [HttpPost, ValidateInput(false)]
         public ActionResult Create(Content content, HttpPostedFileBase file)
         {
@@ -134,4 +121,3 @@ namespace WebShop.Areas.Admin.Controllers
 
     }
 }
->>>>>>> content
