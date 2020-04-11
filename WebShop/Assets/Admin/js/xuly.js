@@ -43,3 +43,22 @@ function deleteUser() {
     });
     // console.log('abcd')
 }
+//call summernote
+$('#Description').summernote({
+    placeholder: 'Xin mời nhập mô tả',
+    tabsize: 2,
+    height: 100
+});
+//delete content
+function deleteContent() {
+
+    $.post(`/Admin/Content/Delete/${selected_id}`,
+    {
+
+    },
+    function (data, status) {
+        //   alert("Data: " + data + "\nStatus: " + status);
+        location.reload();
+    });
+    // console.log('abcd')
+}

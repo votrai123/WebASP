@@ -137,6 +137,18 @@
     <Content Include="Assets\Admin\js\bootstrap-datetimepicker.js" />
     <Content Include="Assets\Admin\js\main.js" />
     <Content Include="Assets\Admin\js\moment.js" />
+    <Content Include="Assets\Admin\js\plugins\Summernote\summernote-bs4.css" />
+    <Content Include="Assets\Admin\js\plugins\Summernote\summernote-bs4.js" />
+    <Content Include="Assets\Admin\js\plugins\Summernote\summernote-bs4.min.css" />
+    <Content Include="Assets\Admin\js\plugins\Summernote\summernote-bs4.min.js" />
+    <Content Include="Assets\Admin\js\plugins\Summernote\summernote-lite.css" />
+    <Content Include="Assets\Admin\js\plugins\Summernote\summernote-lite.js" />
+    <Content Include="Assets\Admin\js\plugins\Summernote\summernote-lite.min.css" />
+    <Content Include="Assets\Admin\js\plugins\Summernote\summernote-lite.min.js" />
+    <Content Include="Assets\Admin\js\plugins\Summernote\summernote.css" />
+    <Content Include="Assets\Admin\js\plugins\Summernote\summernote.js" />
+    <Content Include="Assets\Admin\js\plugins\Summernote\summernote.min.css" />
+    <Content Include="Assets\Admin\js\plugins\Summernote\summernote.min.js" />
     <Content Include="Assets\Admin\js\xuly.js" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Global.asax" />
@@ -146,6 +158,14 @@
     <Content Include="Areas\Admin\Views\User\Create.cshtml" />
     <Content Include="Areas\Admin\Views\User\Update.cshtml" />
     <Content Include="Areas\Admin\Views\Content\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Content\Index.cshtml" />
+    <Content Include="Assets\Admin\js\plugins\Summernote\summernote-bs4.js.map" />
+    <Content Include="Assets\Admin\js\plugins\Summernote\summernote-bs4.min.js.map" />
+    <Content Include="Assets\Admin\js\plugins\Summernote\summernote-lite.js.map" />
+    <Content Include="Assets\Admin\js\plugins\Summernote\summernote-lite.min.js.map" />
+    <Content Include="Assets\Admin\js\plugins\Summernote\summernote.js.map" />
+    <Content Include="Assets\Admin\js\plugins\Summernote\summernote.min.js.map" />
+    <Content Include="Areas\Admin\Views\Content\Update.cshtml" />
     <None Include="scripts\jquery-1.8.0.intellisense.js" />
     <Content Include="scripts\jquery-1.8.0.js" />
     <Content Include="scripts\jquery-1.8.0.min.js" />
@@ -192,10 +212,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\Admin\UploadedFiles\" />
     <Folder Include="Areas\Admin\Views\Base\" />
     <Folder Include="Assets\Admin\css\" />
     <Folder Include="Assets\Admin\fonts\" />
     <Folder Include="Assets\Admin\images\" />
+    <Folder Include="Assets\Admin\js\plugins\Summernote\font\" />
+    <Folder Include="Assets\Admin\js\plugins\Summernote\lang\" />
+    <Folder Include="Assets\Admin\js\plugins\Summernote\plugin\" />
     <Folder Include="Assets\Admin\media\" />
     <Folder Include="Assets\Admin\vendor\" />
     <Folder Include="Assets\Client\" />
