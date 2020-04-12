@@ -12,10 +12,11 @@ namespace WebShop.Areas.Admin.Controllers
     public class UserController : Controller
     {
         // GET: Admin/User
-        public ActionResult Index(int page = 1, int pageSize = 8)
+        public ActionResult Index(string searchString, int page = 1, int pageSize = 8)
         {
             var dao = new UserDao();
-            var model = dao.ListAllPaping(page, pageSize);
+            var model = dao.ListAllPaping(searchString, page, pageSize);
+            ViewBag.searchString = searchString;
             return View(model);
         }
         [HttpGet]
@@ -66,7 +67,7 @@ namespace WebShop.Areas.Admin.Controllers
                     var encryptedPw = Encrytor.MD5Hash(user.Password);
                     user.Password = encryptedPw;
                 }
-                
+
                 user.ModifiedDate = DateTime.Now;
                 var result = dao.Update(user);
                 if (result)
@@ -79,7 +80,7 @@ namespace WebShop.Areas.Admin.Controllers
                 }
             }
             return View("Update");
-        } 
+        }
         public ActionResult Delete(int id)
         {
             new UserDao().Delete(id);
