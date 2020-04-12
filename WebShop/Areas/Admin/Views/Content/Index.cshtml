@@ -71,6 +71,21 @@
                         </div>
                     </div>
                 </div>
+                @using (Html.BeginForm("Index", "Content", FormMethod.Get))
+                {
+                    <div class="row form-group">
+                        <div class="col col-md-12">
+                            <div class="input-group">
+                                <div class="input-group-btn">
+                                    <button class="btn btn-primary">
+                                        <i class="fa fa-search"></i> Search
+                                    </button>
+                                </div>
+                                <input type="text" id="searchString" name="searchString" placeholder="Searching............" value="@ViewBag.searchString" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                }
                 <div class="table-responsive table-responsive-data2">
                     <table class="table table-data2">
                         <thead>
@@ -143,7 +158,7 @@
 
                 <br />
                 Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
-                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "" }))
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = @ViewBag.searchString }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "" }))
             </div>
         </div>
     </div>

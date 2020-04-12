@@ -16,9 +16,14 @@ namespace Model.Dao
         {
             db = new WebShopDbContext();
         }
-        public IEnumerable<Content> ListAllPaping(int page, int pageSize)
+        public IEnumerable<Content> ListAllPaping(string searchString, int page, int pageSize)
         {
-            return db.Contents.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
+            IQueryable<Content> model = db.Contents;
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                model = model.Where(x => x.Name.Contains(searchString));
+            }
+            return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
         }
         public long Insert(Content entity)
         {

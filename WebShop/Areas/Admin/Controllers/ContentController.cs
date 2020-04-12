@@ -13,10 +13,11 @@ namespace WebShop.Areas.Admin.Controllers
     public class ContentController : Controller
     {
         // GET: Admin/Content
-        public ActionResult Index(int page = 1, int pageSize = 8)
+        public ActionResult Index(string searchString, int page = 1, int pageSize = 8)
         {
             var dao = new ContentDao();
-            var model = dao.ListAllPaping(page, pageSize);
+            var model = dao.ListAllPaping(searchString, page, pageSize);
+            ViewBag.searchString = searchString;
             return View(model);
         }
         public ActionResult Create()
@@ -88,8 +89,8 @@ namespace WebShop.Areas.Admin.Controllers
                 var dao = new ContentDao();
 
                 content.ModifiedDate = DateTime.Now;
-                
-                    
+
+
                 if (file != null)
                 {
                     string _FileName = Path.GetFileName(file.FileName);
@@ -97,7 +98,7 @@ namespace WebShop.Areas.Admin.Controllers
                     content.Image = _path;
                     file.SaveAs(_path);
                 }
-                  
+
 
                 var result = dao.Update(content);
                 if (result)
