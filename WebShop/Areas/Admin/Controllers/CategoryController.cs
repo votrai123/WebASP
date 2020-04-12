@@ -77,5 +77,10 @@ namespace WebShop.Areas.Admin.Controllers
             }
             return View("Update");
         }
+        public ActionResult Delete(int id)
+        {
+            new CategoryDao().Delete(id);
+            return RedirectToAction("Index");
+        }
     }
 }

@@ -30,6 +30,19 @@ selected_id = null;
 function setiduser(id) {
     selected_id = id;
 }
+//delete Category
+function deleteCategory() {
+
+    $.post(`/Admin/Category/Delete/${selected_id}`,
+    {
+
+    },
+    function (data, status) {
+        //   alert("Data: " + data + "\nStatus: " + status);
+        location.reload();
+    });
+    // console.log('abcd')
+}
 //deleteUser
 function deleteUser() {
 
@@ -62,3 +75,4 @@ function deleteContent() {
     });
     // console.log('abcd')
 }
+
