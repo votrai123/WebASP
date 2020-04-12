@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<Model.EF.User>
+﻿@model PagedList.IPagedList<Model.EF.Category>
 @using PagedList.Mvc;
 @{
     ViewBag.Title = "Index";
@@ -54,7 +54,7 @@
                         </button>
                     </div>
                     <div class="table-data__tool-right">
-                        <a href="/Admin/User/Create">
+                        <a href="/Admin/Category/Create">
                             <button class="au-btn au-btn-icon au-btn--green au-btn--small">
                                 <i class="zmdi zmdi-plus"></i>add item
                             </button>
@@ -69,7 +69,7 @@
                         </div>
                     </div>
                 </div>
-                @using (Html.BeginForm("Index", "User", FormMethod.Get))
+                @using (Html.BeginForm("Index", "Category", FormMethod.Get))
                 {
                     <div class="row form-group">
                         <div class="col col-md-12">
@@ -94,12 +94,10 @@
                                         <span class="au-checkmark"></span>
                                     </label>
                                 </th>
-                                <th>fullname</th>
-                                <th>email</th>
-                                <th>username</th>
-                                <th>phone</th>
+                                <th>name</th>
+                                <th>Parent</th>
+                                <th>created date</th>
                                 <th>status</th>
-                                <th>role</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -113,12 +111,11 @@
                                             <span class="au-checkmark"></span>
                                         </label>
                                     </td>
-                                    <td>@item.FullName</td>
+                                    <td>@item.Name</td>
                                     <td>
-                                        <span class="block-email">@item.Email</span>
+                                        <span class="block-email">@item.ParentID</span>
                                     </td>
-                                    <td class="desc">@item.UserName</td>
-                                    <td>@item.Phone</td>
+                                    <td class="desc">@item.CreatedDate</td>
                                     <td>
                                         @if (@item.Status == true)
                                         {
@@ -129,13 +126,12 @@
                                             <span class="role admin">stop</span>
                                         }
                                     </td>
-                                    <td>@item.role</td>
                                     <td>
                                         <div class="table-data-feature">
                                             <button class="item" data-toggle="tooltip" data-placement="top" title="Send">
                                                 <i class="zmdi zmdi-mail-send"></i>
                                             </button>
-                                            <a href="/Admin/User/Update/@item.ID">
+                                            <a href="/Admin/Category/Update/@item.ID">
                                                 <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                                     <i class="zmdi zmdi-edit"></i>
                                                 </button>
