@@ -187,7 +187,9 @@
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
     <Compile Include="Areas\Admin\Models\LoginModel.cs" />
     <Compile Include="Common\CommonConstants.cs" />
+    <Compile Include="Common\ConvertTxt.cs" />
     <Compile Include="Common\Encrytor.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -206,6 +208,9 @@
     <Content Include="Areas\Admin\Views\Login\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\_layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\Header.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -216,7 +221,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\Admin\UploadedFiles\" />
     <Folder Include="Areas\Admin\Views\Base\" />
     <Folder Include="Assets\Admin\css\" />
     <Folder Include="Assets\Admin\fonts\" />
@@ -226,8 +230,11 @@
     <Folder Include="Assets\Admin\js\plugins\Summernote\plugin\" />
     <Folder Include="Assets\Admin\media\" />
     <Folder Include="Assets\Admin\vendor\" />
-    <Folder Include="Assets\Client\" />
-    <Folder Include="Controllers\" />
+    <Folder Include="Assets\Client\css\" />
+    <Folder Include="Assets\Client\fonts\" />
+    <Folder Include="Assets\Client\images\" />
+    <Folder Include="Assets\Client\js\" />
+    <Folder Include="Assets\Client\scss\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Model\Model.csproj">

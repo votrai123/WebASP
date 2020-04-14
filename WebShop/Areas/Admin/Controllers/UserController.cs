@@ -11,7 +11,9 @@ namespace WebShop.Areas.Admin.Controllers
 {
     public class UserController : Controller
     {
+
         // GET: Admin/User
+        [Route("abc")]
         public ActionResult Index(string searchString, int page = 1, int pageSize = 8)
         {
             var dao = new UserDao();
@@ -19,7 +21,9 @@ namespace WebShop.Areas.Admin.Controllers
             ViewBag.searchString = searchString;
             return View(model);
         }
+
         [HttpGet]
+        [Route("Create")]
         public ActionResult Create()
         {
             return View();

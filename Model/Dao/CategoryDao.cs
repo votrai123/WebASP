@@ -67,5 +67,9 @@ namespace Model.Dao
                 return false;
             }
         }
+        public List<Category> ListByGroupStatus(bool status)
+        {
+            return db.Categories.Where(x=>x.Status==status).ToList();
+        }
     }
 }

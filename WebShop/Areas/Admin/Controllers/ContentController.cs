@@ -34,12 +34,14 @@ namespace WebShop.Areas.Admin.Controllers
                 {
 
                     var dao = new ContentDao();
+                    var convert = ConvertTxt.utf8Convert3(content.Name);
+                    content.MetaTitle = convert;
                     content.Status = true;
                     content.ViewCount = 0;
                     content.TopHot = DateTime.Now;
                     content.CreatedDate = DateTime.Now;
                     string _FileName = Path.GetFileName(file.FileName);
-                    string _path = Path.Combine(Server.MapPath("~/Areas/Admin/UploadedFiles"), _FileName);
+                    string _path = Path.Combine(Server.MapPath("~/Assets/Client/images"), _FileName);
                     content.Image = _path;
                     long id = dao.Insert(content);
                     if (id > 0)
@@ -89,7 +91,11 @@ namespace WebShop.Areas.Admin.Controllers
                 var dao = new ContentDao();
 
                 content.ModifiedDate = DateTime.Now;
-
+                if (!string.IsNullOrEmpty(content.Name))
+                {
+                    var convert = ConvertTxt.utf8Convert3(content.Name);
+                    content.MetaTitle = convert;
+                }
 
                 if (file != null)
                 {

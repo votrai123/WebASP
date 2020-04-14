@@ -33,7 +33,8 @@ namespace WebShop.Areas.Admin.Controllers
 
                 var dao = new CategoryDao();
                 category.ShowOnHome = true;
-
+                var convert = ConvertTxt.utf8Convert3(category.Name);
+                category.MetaTitle = convert;
                 category.Status = true;
                 category.CreatedDate = DateTime.Now;
                 long id = dao.Insert(category);
@@ -62,7 +63,11 @@ namespace WebShop.Areas.Admin.Controllers
             {
 
                 var dao = new CategoryDao();
-
+                if (!string.IsNullOrEmpty(category.Name))
+                {
+                    var convert = ConvertTxt.utf8Convert3(category.Name);
+                    category.MetaTitle = convert;
+                }
 
                 category.ModifiedDate = DateTime.Now;
                 var result = dao.Update(category);
