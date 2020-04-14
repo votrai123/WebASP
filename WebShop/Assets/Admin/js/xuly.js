@@ -75,4 +75,16 @@ function deleteContent() {
     });
     // console.log('abcd')
 }
+//deleteSlide
+function deleteSlide() {
 
+    $.post(`/Admin/Slide/Delete/${selected_id}`,
+    {
+
+    },
+    function (data, status) {
+        //   alert("Data: " + data + "\nStatus: " + status);
+        location.reload();
+    });
+    // console.log('abcd')
+}

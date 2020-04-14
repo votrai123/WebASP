@@ -10,22 +10,24 @@ using WebShop.Common;
 
 namespace WebShop.Areas.Admin.Controllers
 {
-    public class ContentController : Controller
+    public class SlideController : Controller
     {
-        // GET: Admin/Content
-        public ActionResult Index(string searchString, int page = 1, int pageSize = 8)
+        // GET: Admin/Slide
+        public ActionResult Index(int page=1,int pageSize=5)
         {
-            var dao = new ContentDao();
-            var model = dao.ListAllPaping(searchString, page, pageSize);
-            ViewBag.searchString = searchString;
+            var dao = new SlideDao();
+            var model = dao.ListAllPaping( page, pageSize);
             return View(model);
         }
+
+
+        [HttpGet]
         public ActionResult Create()
         {
             return View();
         }
         [HttpPost, ValidateInput(false)]
-        public ActionResult Create(Content content, HttpPostedFileBase file)
+        public ActionResult Create(Slide slide, HttpPostedFileBase file)
         {
             try
             {
@@ -33,23 +35,19 @@ namespace WebShop.Areas.Admin.Controllers
                 if (file.ContentLength > 0 && ModelState.IsValid)
                 {
 
-                    var dao = new ContentDao();
-                    var convert = ConvertTxt.utf8Convert3(content.Name);
-                    content.MetaTitle = convert;
-                    content.Status = true;
-                    content.ViewCount = 0;
-                    content.TopHot = DateTime.Now;
-                    content.CreatedDate = DateTime.Now;
+                    var dao = new SlideDao();
+                    slide.Status = true;
+                    slide.CreatedDate = DateTime.Now;
                     string _FileName = Path.GetFileName(file.FileName);
-                    string _path = Path.Combine(Server.MapPath("~/Assets/Client/images"), _FileName);
-                    content.Image = "/Assets/Client/images/" + _FileName;
-                    long id = dao.Insert(content);
+                    string _path = Path.Combine(Server.MapPath("/Assets/Client/images"), _FileName);
+                    slide.Image = "/Assets/Client/images/"+ _FileName;
+                    long id = dao.Insert(slide);
                     if (id > 0)
                     {
                         file.SaveAs(_path);
                         ViewBag.Message = "File Uploaded Successfully!!";
                         ModelState.AddModelError("", "Them  thanh cong");
-                        return RedirectToAction("Index", "Content");
+                        return RedirectToAction("Index", "Slide");
 
                     }
                     else
@@ -58,7 +56,7 @@ namespace WebShop.Areas.Admin.Controllers
                     }
 
                 }
-                return View("Index", "Content");
+                return View("Create", "Slide");
 
 
 
@@ -71,47 +69,42 @@ namespace WebShop.Areas.Admin.Controllers
         }
         public ActionResult Delete(int id)
         {
-            new ContentDao().Delete(id);
+            new SlideDao().Delete(id);
             return RedirectToAction("Index");
         }
         [HttpGet]
         public ActionResult Update(int id)
         {
-            var content = new ContentDao().ViewDetail(id);
-            return View(content);
+            var slide = new SlideDao().ViewDetail(id);
+            return View(slide);
         }
 
 
         [HttpPost, ValidateInput(false)]
-        public ActionResult Update(Content content, HttpPostedFileBase file)
+        public ActionResult Update(Slide slide, HttpPostedFileBase file)
         {
 
             if (ModelState.IsValid)
             {
-                var dao = new ContentDao();
+                var dao = new SlideDao();
 
-                content.ModifiedDate = DateTime.Now;
-                if (!string.IsNullOrEmpty(content.Name))
-                {
-                    var convert = ConvertTxt.utf8Convert3(content.Name);
-                    content.MetaTitle = convert;
-                }
-
+                slide.ModifiedDate = DateTime.Now;
+             
                 if (file != null)
                 {
                     string _FileName = Path.GetFileName(file.FileName);
                     string _path = Path.Combine(Server.MapPath("~/Areas/Admin/UploadedFiles"), _FileName);
-                    content.Image = "/Assets/Client/images/" + _FileName;
+                    slide.Image = "/Assets/Client/images/" + _FileName;
                     file.SaveAs(_path);
                 }
 
 
-                var result = dao.Update(content);
+                var result = dao.Update(slide);
                 if (result)
                 {
                     ViewBag.Message = "File Uploaded Successfully!!";
                     ModelState.AddModelError("", "Cap nhat  thanh cong");
-                    return RedirectToAction("Index", "Content");
+                    return RedirectToAction("Index", "Slide");
 
                 }
                 else
@@ -120,7 +113,7 @@ namespace WebShop.Areas.Admin.Controllers
                 }
 
             }
-            return View("Index", "Content");
+            return View("Index", "Slide");
 
 
 

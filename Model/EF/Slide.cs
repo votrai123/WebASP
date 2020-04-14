@@ -19,6 +19,13 @@ namespace Model.EF
         [StringLength(250)]
         public string Link { get; set; }
 
+
+        [StringLength(250)]
+        public string TextSmall { get; set; }
+
+        [StringLength(50)]
+        public string TextBig { get; set; }
+
         [StringLength(50)]
         public string Description { get; set; }
 
