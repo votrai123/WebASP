@@ -82,7 +82,7 @@ namespace WebShop.Areas.Admin.Controllers
             return View(product);
         }
 
-
+        //a
         [HttpPost, ValidateInput(false)]
         public ActionResult Update(Product product, HttpPostedFileBase file)
         {
