@@ -39,7 +39,10 @@ namespace Model.Dao
             try
             {
                 var category = db.Categories.Find(entity.ID);
-
+                if (entity.MetaTitle != null)
+                {
+                    category.MetaTitle = entity.MetaTitle;
+                }
                 category.Name = entity.Name;
                 category.Status = entity.Status;
                 category.ModifiedDate = DateTime.Now;

@@ -12,6 +12,9 @@ namespace Model.EF
         public long ID { get; set; }
 
         [StringLength(250)]
+        [Required(ErrorMessage = "You must provide a Name Product")]
+        [Display(Name = "Product Name")]
+
         public string Name { get; set; }
 
         [StringLength(250)]
@@ -21,6 +24,7 @@ namespace Model.EF
         public string Code { get; set; }
 
         [StringLength(500)]
+        [Display(Name = "Description")]
         public string Description { get; set; }
 
         [StringLength(250)]
@@ -29,10 +33,18 @@ namespace Model.EF
         [Column(TypeName = "xml")]
         public string MoreImages { get; set; }
 
+        [Required(ErrorMessage = "You must provide a Prrice")]
+        [Display(Name = "Prrice")]
+        [Range(0, Int32.MaxValue)]
         public decimal? Prrice { get; set; }
 
+        [Required(ErrorMessage = "You must provide a Promotion")]
+        [Display(Name = "Promotion")]
+        [Range(0, Int32.MaxValue)]
         public decimal? Promotion { get; set; }
 
+        [Required(ErrorMessage = "You must provide a Quantity")]
+        [Display(Name = "Quantity")]
         public int? Quantity { get; set; }
 
         public long? CategoryID { get; set; }

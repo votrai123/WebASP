@@ -88,3 +88,16 @@ function deleteSlide() {
     });
     // console.log('abcd')
 }
+//deleteProduct
+function deleteProduct() {
+
+    $.post(`/Admin/Product/Delete/${selected_id}`,
+    {
+
+    },
+    function (data, status) {
+        //   alert("Data: " + data + "\nStatus: " + status);
+        location.reload();
+    });
+    // console.log('abcd')
+}

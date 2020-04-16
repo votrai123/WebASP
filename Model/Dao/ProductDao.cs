@@ -1,33 +1,37 @@
-﻿using System;
+﻿using Model.EF;
+using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Model.EF;
-using PagedList;
+
 namespace Model.Dao
 {
-    public class ContentDao
+    public class ProductDao
     {
-
         WebShopDbContext db = null;
-
-        public ContentDao()
+        public ProductDao()
         {
             db = new WebShopDbContext();
         }
-        public IEnumerable<Content> ListAllPaping(string searchString, int page, int pageSize)
+
+        public List<Product> ListNewProduct(int top)
         {
-            IQueryable<Content> model = db.Contents;
+            return db.Products.OrderByDescending(x => x.CreatedDate).Take(top).ToList();
+        }
+        public IEnumerable<Product> ListAllPaping(string searchString, int page, int pageSize)
+        {
+            IQueryable<Product> model = db.Products;
             if (!string.IsNullOrEmpty(searchString))
             {
                 model = model.Where(x => x.Name.Contains(searchString));
             }
             return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
         }
-        public long Insert(Content entity)
+        public long Insert(Product entity)
         {
-            db.Contents.Add(entity);
+            db.Products.Add(entity);
             db.SaveChanges();
             return entity.ID;
         }
@@ -35,8 +39,8 @@ namespace Model.Dao
         {
             try
             {
-                var content = db.Contents.Find(id);
-                db.Contents.Remove(content);
+                var product = db.Products.Find(id);
+                db.Products.Remove(product);
                 db.SaveChanges();
                 return true;
             }
@@ -46,27 +50,27 @@ namespace Model.Dao
             }
         }
 
-        public Content ViewDetail(int id)
+        public Product ViewDetail(int id)
         {
-            return db.Contents.Find(id);
+            return db.Products.Find(id);
         }
-        public bool Update(Content entity)
+        public bool Update(Product entity)
         {
             try
             {
-                var content = db.Contents.Find(entity.ID);
-                content.Name = entity.Name;
+                var product = db.Products.Find(entity.ID);
+                product.Name = entity.Name;
                 if (!string.IsNullOrEmpty(entity.Image))
                 {
-                    content.Image = entity.Image;
+                    product.Image = entity.Image;
 
                 }
-                if (entity.MetaTitle != null)
+                if(entity.MetaTitle != null)
                 {
-                    content.MetaTitle = entity.MetaTitle;
+                    product.MetaTitle = entity.MetaTitle;
                 }
-                content.Status = entity.Status;
-                content.ModifiedDate = DateTime.Now;
+                product.Status = entity.Status;
+                product.ModifiedDate = DateTime.Now;
                 db.SaveChanges();
                 return true;
             }
