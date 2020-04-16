@@ -23,8 +23,10 @@ namespace Model.EF
         [StringLength(10)]
         public string Code { get; set; }
 
-        [StringLength(500)]
+        [StringLength(1500)]
         [Display(Name = "Description")]
+        [Required(ErrorMessage = "You must provide a Description")]
+        [MaxLength(ErrorMessage = "max 1500")]
         public string Description { get; set; }
 
         [StringLength(250)]
@@ -49,7 +51,10 @@ namespace Model.EF
 
         public long? CategoryID { get; set; }
 
-        [Column(TypeName = "ntext")]
+        [StringLength(1500)]
+        [Display(Name = "Detail")]
+        [Required(ErrorMessage = "You must provide a Detail")]
+        [MaxLength(ErrorMessage = "max 1500")]
         public string Detail { get; set; }
 
         public DateTime? CreatedDate { get; set; }

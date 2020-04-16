@@ -100,7 +100,7 @@ namespace WebShop.Areas.Admin.Controllers
                 if (file != null)
                 {
                     string _FileName = Path.GetFileName(file.FileName);
-                    string _path = Path.Combine(Server.MapPath("~/Areas/Admin/UploadedFiles"), _FileName);
+                    string _path = Path.Combine(Server.MapPath("~/Assets/Client/images"), _FileName);
                     content.Image = "/Assets/Client/images/" + _FileName;
                     file.SaveAs(_path);
                 }

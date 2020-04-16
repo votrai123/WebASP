@@ -62,6 +62,11 @@ $('#Description').summernote({
     tabsize: 2,
     height: 100
 });
+$('#Detail').summernote({
+    placeholder: 'Xin mời nhập mô tả',
+    tabsize: 2,
+    height: 100
+});
 //delete content
 function deleteContent() {
 
