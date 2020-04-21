@@ -18,6 +18,8 @@ namespace WebShop.Areas.Admin.Controllers
             var dao = new ProductDao();
             var model = dao.ListAllPaping(searchString, page, pageSize);
             ViewBag.searchString = searchString;
+            var categorydao = new CategoryDao();
+            ViewBag.ListCategory = categorydao.ListByGroupStatus(true);
             return View(model);
         }
         [HttpGet]
@@ -128,5 +130,6 @@ namespace WebShop.Areas.Admin.Controllers
 
 
         }
+       
     }
 }

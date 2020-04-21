@@ -21,7 +21,7 @@ namespace WebShop.Controllers
         [ChildActionOnly]
         public ActionResult Header()
         {
-            var model = new CategoryDao().ListByGroupStatus(true); ;
+            var model = new CategoryDao().ListByGroupStatus(true); 
             return PartialView(model);
         }
     }

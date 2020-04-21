@@ -50,7 +50,7 @@ namespace Model.Dao
             }
         }
 
-        public Product ViewDetail(int id)
+        public Product ViewDetail(long id)
         {
             return db.Products.Find(id);
         }
@@ -79,6 +79,10 @@ namespace Model.Dao
                 return false;
             }
 
+        }
+        public List<Category> ListByGroupStatus(bool status)
+        {
+            return db.Categories.Where(x => x.Status == status).ToList();
         }
     }
 }

@@ -30,7 +30,7 @@ namespace Model.Dao
             }
             return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
         }
-        public Category ViewDetail(int id)
+        public Category ViewDetail(long id)
         {
             return db.Categories.Find(id);
         }
