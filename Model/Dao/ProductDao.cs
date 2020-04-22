@@ -29,6 +29,12 @@ namespace Model.Dao
             }
             return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
         }
+        public List<Product> ListByCategoryId(long categoryID, ref int totalRecord, int pageIndex = 1, int pageSize = 2)
+        {
+            totalRecord = db.Products.Where(x => x.CategoryID == categoryID).Count();
+            var model=  db.Products.Where(x => x.CategoryID == categoryID).OrderByDescending(x=>x.CreatedDate).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+            return model;
+        }
         public long Insert(Product entity)
         {
             db.Products.Add(entity);
@@ -65,7 +71,7 @@ namespace Model.Dao
                     product.Image = entity.Image;
 
                 }
-                if(entity.MetaTitle != null)
+                if (entity.MetaTitle != null)
                 {
                     product.MetaTitle = entity.MetaTitle;
                 }

@@ -1,0 +1,276 @@
+﻿@model List<Model.EF.Product>
+@{
+    ViewBag.Title = "Category";
+    Layout = "~/Views/Shared/_layout.cshtml";
+    var category = (Model.EF.Category)ViewBag.Category;
+    var listcategory = ViewBag.ListCategory;
+
+}
+
+<div class="hero-wrap hero-bread" style="background-image: url('/Assets/Client/images/bg_6.jpg');">
+    <div class="container">
+        <div class="row no-gutters slider-text align-items-center justify-content-center">
+            <div class="col-md-9 ftco-animate text-center">
+                <p class="breadcrumbs"><span class="mr-2"><a href="index.html">Home</a></span> <span>Shop</span></p>
+                <h1 class="mb-0 bread">@category.Name</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="ftco-section bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-lg-10 order-md-last">
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        var link = "/chi-tiet/" + item.MetaTitle + "-" + item.ID;
+                        <div class="col-sm-12 col-md-12 col-lg-4 ftco-animate d-flex">
+                            <div class="product d-flex flex-column">
+                                <a href="@link" class="img-prod">
+                                    <img class="img-fluid" src="@item.Image" alt="Colorlib Template">
+                                    <div class="overlay"></div>
+                                </a>
+                                <div class="text py-3 pb-4 px-3">
+                                    <div class="d-flex">
+                                        <div class="cat">
+                                            <span>@category.Name</span>
+                                        </div>
+                                        <div class="rating">
+                                            <p class="text-right mb-0">
+                                                <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                                <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                                <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                                <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                                <a href="#"><span class="ion-ios-star-outline"></span></a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <h3><a href="#">@item.Name</a></h3>
+                                    <div class="pricing">
+                                        <p class="price">
+                                            @if (item.Prrice > item.Promotion)
+                                            {
+                                                <span class="mr-2 price-dc">$@item.Prrice</span>
+                                                <span class="price-sale">$@item.Promotion</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="price-sale">$@item.Prrice</span>
+
+                                            }
+                                        </p>
+                                    </div>
+                                    <p class="bottom-area d-flex px-3">
+                                        <a href="/gio-hang/@item.ID" class="add-to-cart text-center py-2 mr-1"><span>Add to cart <i class="ion-ios-add ml-1"></i></span></a>
+                                        <a href="#" class="buy-now text-center py-2">Buy now<span><i class="ion-ios-cart ml-1"></i></span></a>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+                @*<div class="row mt-5">
+            <div class="col text-center">
+                <div class="block-27">
+                    <ul>
+                        <li><a href="#">&lt;</a></li>
+                        <li class="active"><span>1</span></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">&gt;</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>*@
+                @*Phân trang*@
+                @if (ViewBag.TotalPage > 1)
+                {
+                    var pageDisplay = (int)ViewBag.MaxPage;
+                    int totalPage = (int)ViewBag.TotalPage;
+                    int currentPage = ((int)ViewBag.Page);
+
+                    // Create numeric links
+                    var startPageIndex = Math.Max(1, currentPage - pageDisplay / 2);
+                    var endPageIndex = Math.Min(totalPage, currentPage + pageDisplay / 2);
+
+                    var link = "/san-pham/" + category.MetaTitle + "-" + category.ID;
+            <div class="row mt-5">
+                <div class="col text-center">
+                    <div class="block-27">
+                        <ul>
+                            @if (currentPage > ViewBag.First)
+                            {
+                                <li><a href="@link?page=@ViewBag.First" title="Trang đầu"><<</a></li>
+                                <li>
+                                    <a href="@link?page=@ViewBag.Prev" title="Trang trước"><</a>
+                                </li>
+
+                            }
+                            @for (int i = startPageIndex; i <= endPageIndex; i++)
+                            {
+                                if (currentPage == i)
+                                {
+
+                                    <li> <a href="@link?page=@i" class="active" title="Trang @i">@i</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="@link?page=@i" title="Trang @i" class="pos">@i</a></li>
+                                }
+                            }
+                            @if (currentPage < totalPage)
+                            {
+                                <li><a href="@link?page=@ViewBag.Next" class="next" title="Trang sau">></a></li>
+                                <li> <a href="@link?page=@ViewBag.Last" class="last" title="Trang cuối">>></a></li>
+                            }
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+                }
+                else
+                {
+                    <span>Không có bản ghi nào</span>
+                }
+            </div>
+
+            <div class="col-md-4 col-lg-2">
+                <div class="sidebar">
+                    <div class="sidebar-box-2">
+                        <h2 class="heading">Categories</h2>
+                        <div class="fancy-collapse-panel">
+                            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="headingOne">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                Men's Shoes
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                                        <div class="panel-body">
+                                            <ul>
+                                                <li><a href="#">Sport</a></li>
+                                                <li><a href="#">Casual</a></li>
+                                                <li><a href="#">Running</a></li>
+                                                <li><a href="#">Jordan</a></li>
+                                                <li><a href="#">Soccer</a></li>
+                                                <li><a href="#">Football</a></li>
+                                                <li><a href="#">Lifestyle</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="headingTwo">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                                Women's Shoes
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                                        <div class="panel-body">
+                                            <ul>
+                                                <li><a href="#">Sport</a></li>
+                                                <li><a href="#">Casual</a></li>
+                                                <li><a href="#">Running</a></li>
+                                                <li><a href="#">Jordan</a></li>
+                                                <li><a href="#">Soccer</a></li>
+                                                <li><a href="#">Football</a></li>
+                                                <li><a href="#">Lifestyle</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="headingThree">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                Accessories
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                                        <div class="panel-body">
+                                            <ul>
+                                                <li><a href="#">Jeans</a></li>
+                                                <li><a href="#">T-Shirt</a></li>
+                                                <li><a href="#">Jacket</a></li>
+                                                <li><a href="#">Shoes</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading" role="tab" id="headingFour">
+                                        <h4 class="panel-title">
+                                            <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseFour" aria-expanded="false" aria-controls="collapseThree">
+                                                Clothing
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseFour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingFour">
+                                        <div class="panel-body">
+                                            <ul>
+                                                <li><a href="#">Jeans</a></li>
+                                                <li><a href="#">T-Shirt</a></li>
+                                                <li><a href="#">Jacket</a></li>
+                                                <li><a href="#">Shoes</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sidebar-box-2">
+                        <h2 class="heading">Price Range</h2>
+                        <form method="post" class="colorlib-form-2">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="guests">Price from:</label>
+                                        <div class="form-field">
+                                            <i class="icon icon-arrow-down3"></i>
+                                            <select name="people" id="people" class="form-control">
+                                                <option value="#">1</option>
+                                                <option value="#">200</option>
+                                                <option value="#">300</option>
+                                                <option value="#">400</option>
+                                                <option value="#">1000</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label for="guests">Price to:</label>
+                                        <div class="form-field">
+                                            <i class="icon icon-arrow-down3"></i>
+                                            <select name="people" id="people" class="form-control">
+                                                <option value="#">2000</option>
+                                                <option value="#">4000</option>
+                                                <option value="#">6000</option>
+                                                <option value="#">8000</option>
+                                                <option value="#">10000</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
