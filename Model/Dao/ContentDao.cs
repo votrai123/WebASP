@@ -83,6 +83,10 @@ namespace Model.Dao
                 {
                     content.MetaTitle = entity.MetaTitle;
                 }
+                if (entity.CategoryID != null)
+                {
+                    content.CategoryID = entity.CategoryID;
+                }
                 content.Status = entity.Status;
                 content.ModifiedDate = DateTime.Now;
                 db.SaveChanges();

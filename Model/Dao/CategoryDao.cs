@@ -70,9 +70,9 @@ namespace Model.Dao
                 return false;
             }
         }
-        public List<Category> ListByGroupStatus(bool status)
+        public List<ProductCategory> ListByGroupStatus(bool status)
         {
-            return db.Categories.Where(x=>x.Status==status).ToList();
+            return db.ProductCategories.Where(x=>x.Status==status).ToList();
         }
     }
 }

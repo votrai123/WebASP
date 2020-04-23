@@ -22,7 +22,7 @@ namespace WebShop.Areas.Admin.Controllers
         }
         public ActionResult Create()
         {
-            var dao = new ProductCategoryDao();
+            var dao = new ContentDao();
             ViewBag.Category = dao.ListByGroupStatus(true);
             return View();
         }
@@ -79,6 +79,9 @@ namespace WebShop.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Update(int id)
         {
+            var dao = new ContentDao();
+            ViewBag.Category = dao.ListByGroupStatus(true);
+
             var content = new ContentDao().ViewDetail(id);
             return View(content);
         }
