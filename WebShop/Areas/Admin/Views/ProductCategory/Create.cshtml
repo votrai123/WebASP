@@ -1,13 +1,14 @@
-﻿@model Model.EF.Category
+﻿@model Model.EF.ProductCategory
 
 @{
     ViewBag.Title = "Create";
     Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
 }
 
-<h2>CREATE CATEGORY</h2>
+<h2>CREATE CATEGORY PRODUCT</h2>
 
-@using (Html.BeginForm("Create","Category",FormMethod.Post))
+
+@using (Html.BeginForm("Create", "ProductCategory", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -24,6 +25,16 @@
             </div>
         </div>
 
+        <div class="form-group">
+            <div class="input-group">
+
+                @Html.LabelFor(model => model.ParentID, htmlAttributes: new { @class = "input-group-addon" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.ParentID, new SelectList(ViewBag.Category,"ID","Name"), new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.ParentID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
         <div class="form-group">
             <div class="input-group">
                 @Html.LabelFor(model => model.MetaDescriptions, htmlAttributes: new { @class = "input-group-addon" })

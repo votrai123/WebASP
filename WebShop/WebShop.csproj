@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -175,6 +176,9 @@
     <Content Include="Areas\Admin\Views\Product\Create.cshtml" />
     <Content Include="Areas\Admin\Views\Product\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Product\Update.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductCategory\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductCategory\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ProductCategory\Update.cshtml" />
     <None Include="scripts\jquery-1.8.0.intellisense.js" />
     <Content Include="scripts\jquery-1.8.0.js" />
     <Content Include="scripts\jquery-1.8.0.min.js" />
@@ -190,6 +194,7 @@
     <Compile Include="Areas\Admin\Controllers\ContentController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ProductCategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Areas\Admin\Controllers\SlideController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserController.cs" />
@@ -198,6 +203,7 @@
     <Compile Include="Common\ConvertTxt.cs" />
     <Compile Include="Common\Encrytor.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -219,6 +225,8 @@
     <Content Include="Views\Shared\_layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Header.cshtml" />
+    <Content Include="Views\Product\Detail.cshtml" />
+    <Content Include="Views\Product\Category.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

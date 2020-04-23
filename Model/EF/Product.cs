@@ -49,6 +49,7 @@ namespace Model.EF
         [Display(Name = "Quantity")]
         public int? Quantity { get; set; }
 
+        [Display(Name = "Category")]
         public long? CategoryID { get; set; }
 
         [StringLength(1500)]

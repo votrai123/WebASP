@@ -13,17 +13,28 @@ namespace WebShop.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         // GET: Admin/Product
-        public ActionResult Index(string searchString, int page = 1, int pageSize = 8)
+        public ActionResult Index(string searchString, int page = 1, int pageSize = 6)
         {
             var dao = new ProductDao();
             var model = dao.ListAllPaping(searchString, page, pageSize);
             ViewBag.searchString = searchString;
+            var categorydao = new CategoryDao();
+            ViewBag.ListCategory = categorydao.ListByGroupStatus(true);
             return View(model);
         }
         [HttpGet]
         public ActionResult Create()
         {
+            var dao = new ProductDao();
+            //ViewBag.ProductCategory = dao.ListByGroupStatus(true);
+            ViewBag.Category = new CategoryDao().ListByGroupStatus(true);
             return View();
+        }
+        public JsonResult GetProductCategory(int id)
+        {
+            var dao = new ProductDao().ListCategory(id);
+            return Json(dao, JsonRequestBehavior.AllowGet);
+
         }
         [HttpPost, ValidateInput(false)]
         public ActionResult Create(Product product, HttpPostedFileBase file)
@@ -78,7 +89,11 @@ namespace WebShop.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Update(int id)
         {
-            var product = new ProductDao().ViewDetail(id);
+            var dao = new ProductDao();
+            var product = dao.ViewDetail(id);
+            //ViewBag.ProductCategory = dao.ListByGroupStatus(true);
+            ViewBag.Category = new CategoryDao().ListByGroupStatus(true);
+
             return View(product);
         }
 
@@ -128,5 +143,6 @@ namespace WebShop.Areas.Admin.Controllers
 
 
         }
+       
     }
 }

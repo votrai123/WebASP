@@ -13,13 +13,15 @@ namespace WebShop.Controllers
         public ActionResult Index()
         {
             ViewBag.Slides = new SlideDao().ListAll();
+            var productDao = new ProductDao();
+            ViewBag.NewProducts = productDao.ListNewProduct(8);
             return View();
         }
 
         [ChildActionOnly]
         public ActionResult Header()
         {
-            var model = new CategoryDao().ListByGroupStatus(true); ;
+            var model = new CategoryDao().ListByGroupStatus(true); 
             return PartialView(model);
         }
     }
