@@ -106,3 +106,16 @@ function deleteProduct() {
     });
     // console.log('abcd')
 }
+//deleteProductCategory
+function deleteProductCategory() {
+
+    $.post(`/Admin/ProductCategory/Delete/${selected_id}`,
+        {
+
+        },
+        function (data, status) {
+            //   alert("Data: " + data + "\nStatus: " + status);
+            location.reload();
+        });
+    // console.log('abcd')
+}

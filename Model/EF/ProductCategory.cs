@@ -12,11 +12,13 @@ namespace Model.EF
         public long ID { get; set; }
 
         [StringLength(250)]
+        [Required(ErrorMessage = "You must provide a Name")]
         public string Name { get; set; }
 
         [StringLength(250)]
         public string MetaTitle { get; set; }
 
+        [Required(ErrorMessage = "You must provide a Name")]
         public long? ParentID { get; set; }
 
         public int? DisplayOrder { get; set; }
@@ -38,6 +40,7 @@ namespace Model.EF
         public string MetaKeywords { get; set; }
 
         [StringLength(250)]
+        [Required(ErrorMessage = "You must provide a MetaDescriptions")]
         public string MetaDescriptions { get; set; }
 
         public bool? Status { get; set; }

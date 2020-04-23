@@ -18,7 +18,6 @@ namespace Model.EF
         [StringLength(250)]
         public string MetaTitle { get; set; }
 
-        [Required(ErrorMessage = "You must provide a Name")]
         public long? ParentID { get; set; }
 
         public int? DisplayOrder { get; set; }

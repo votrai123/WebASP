@@ -9,13 +9,15 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Thông Báo</h5>
+                <h5 class="modal-title">Notification</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p>Bạn có muốn xoá user này không??</p>
+                <p>
+                    Do you want to delete?
+                </p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" onclick="deleteUser()">Có</button>
@@ -30,7 +32,7 @@
         <div class="row">
             <div class="col-md-12">
                 <!-- DATA TABLE -->
-                <h3 class="title-5 m-b-35">data table</h3>
+                <h3 class="title-5 m-b-35">List Users</h3>
                 <div class="table-data__tool">
                     <div class="table-data__tool-left">
                         <div class="rs-select2--light rs-select2--md">
@@ -129,12 +131,18 @@
                                             <span class="role admin">stop</span>
                                         }
                                     </td>
-                                    <td>@item.role</td>
+                                    <td>
+                                        @if (@item.role == true)
+                                        {
+                                            <span class="role member">Admin</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="role admin">User</span>
+                                        }
+                                    </td>
                                     <td>
                                         <div class="table-data-feature">
-                                            <button class="item" data-toggle="tooltip" data-placement="top" title="Send">
-                                                <i class="zmdi zmdi-mail-send"></i>
-                                            </button>
                                             <a href="/Admin/User/Update/@item.ID">
                                                 <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
                                                     <i class="zmdi zmdi-edit"></i>
@@ -145,9 +153,6 @@
                                                 <i class="zmdi zmdi-delete"></i>
                                             </button>
                                             @*</a>*@
-                                            <button class="item" data-toggle="tooltip" data-placement="top" title="More">
-                                                <i class="zmdi zmdi-more"></i>
-                                            </button>
                                         </div>
                                     </td>
                                 </tr>
