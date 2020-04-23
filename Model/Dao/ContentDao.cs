@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Model.EF;
+using Model.ViewModel;
 using PagedList;
 namespace Model.Dao
 {
@@ -16,9 +17,26 @@ namespace Model.Dao
         {
             db = new WebShopDbContext();
         }
-        public IEnumerable<Content> ListAllPaping(string searchString, int page, int pageSize)
+        public IEnumerable<ContentViewModel> ListAllPaping(string searchString, int page, int pageSize)
         {
-            IQueryable<Content> model = db.Contents;
+            IQueryable<ContentViewModel> model = from a in db.Contents
+                                                 join b in db.ProductCategories
+                                                  on a.CategoryID equals b.ID
+                                                 select new ContentViewModel()
+                                                 {
+                                                     ID = a.ID,
+                                                     Name = a.Name,
+                                                     MetaTitle = a.MetaTitle,
+                                                     CateName = b.Name,
+                                                     CreatedDate = a.CreatedDate,
+                                                     Status = a.Status,
+                                                     Description = a.Description,
+                                                     Detail = a.Detail,
+                                                     Image = a.Image,
+                                                     ModifiedDate = a.ModifiedDate,
+                                                     TopHot = a.TopHot,
+                                                     ViewCount = a.ViewCount
+                                                 };
             if (!string.IsNullOrEmpty(searchString))
             {
                 model = model.Where(x => x.Name.Contains(searchString));
@@ -75,6 +93,10 @@ namespace Model.Dao
                 return false;
             }
 
+        }
+        public List<ProductCategory> ListByGroupStatus(bool status)
+        {
+            return db.ProductCategories.Where(x => x.Status == status).ToList();
         }
     }
 }

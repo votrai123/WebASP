@@ -1,4 +1,4 @@
-﻿@model PagedList.IPagedList<Model.EF.Product>
+﻿@model PagedList.IPagedList<Model.ViewModel.ProductViewModel>
 @using PagedList.Mvc;
 @{
     ViewBag.Title = "Index";
@@ -119,7 +119,7 @@
                                         </label>
                                     </td>
                                     <td>@item.Name</td>
-                                    <td class="desc">@item.CategoryID</td>
+                                    <td class="desc">@item.CateName</td>
                                     <td>@item.Prrice</td>
                                     <td> <span class="status--process"></span>@item.Promotion</td>
                                     <td> <span class="status--denied"></span>@item.Quantity</td>

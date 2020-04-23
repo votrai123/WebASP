@@ -1,4 +1,5 @@
 ﻿using Model.EF;
+using Model.ViewModel;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -20,19 +21,41 @@ namespace Model.Dao
         {
             return db.Products.OrderByDescending(x => x.CreatedDate).Take(top).ToList();
         }
-        public IEnumerable<Product> ListAllPaping(string searchString, int page, int pageSize)
+        public IEnumerable<ProductViewModel> ListAllPaping(string searchString, int page, int pageSize)
         {
-            IQueryable<Product> model = db.Products;
+            IQueryable<ProductViewModel> model = from a in db.Products
+                                                 join b in db.ProductCategories
+                                                 on a.CategoryID equals b.ID
+                                                 select new ProductViewModel()
+                                                 {
+                                                     ID = a.ID,
+                                                     Name = a.Name,
+                                                     MetaTitle = a.MetaTitle,
+                                                     CateName = b.Name,
+                                                     CreatedDate = a.CreatedDate,
+                                                     Status = a.Status,
+                                                     Code = a.Code,
+                                                     Description = a.Description,
+                                                     Detail = a.Detail,
+                                                     Image = a.Image,
+                                                     Promotion = a.Promotion,
+                                                     Prrice=a.Prrice,
+                                                     Quantity=a.Quantity,
+                                                     TopHot=a.TopHot,
+                                                     ViewCount=a.ViewCount
+                                                     
+
+                                                 };
             if (!string.IsNullOrEmpty(searchString))
             {
-                model = model.Where(x => x.Name.Contains(searchString));
+                model = model.Where(x => x.Name.Contains(searchString)||x.CateName.Contains(searchString));
             }
             return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
         }
         public List<Product> ListByCategoryId(long categoryID, ref int totalRecord, int pageIndex = 1, int pageSize = 2)
         {
             totalRecord = db.Products.Where(x => x.CategoryID == categoryID).Count();
-            var model=  db.Products.Where(x => x.CategoryID == categoryID).OrderByDescending(x=>x.CreatedDate).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+            var model = db.Products.Where(x => x.CategoryID == categoryID).OrderByDescending(x => x.CreatedDate).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
             return model;
         }
         public long Insert(Product entity)
@@ -76,6 +99,10 @@ namespace Model.Dao
                     product.MetaTitle = entity.MetaTitle;
                 }
                 product.Status = entity.Status;
+                if (entity.CategoryID != null)
+                {
+                    product.CategoryID = entity.CategoryID;
+                }
                 product.ModifiedDate = DateTime.Now;
                 db.SaveChanges();
                 return true;
@@ -86,9 +113,13 @@ namespace Model.Dao
             }
 
         }
-        public List<Category> ListByGroupStatus(bool status)
+        public List<ProductCategory> ListByGroupStatus(bool status)
         {
-            return db.Categories.Where(x => x.Status == status).ToList();
+            return db.ProductCategories.Where(x => x.Status == status).ToList();
+        }
+        public List<ProductCategory> ListCategory(int id)
+        {
+            return db.ProductCategories.Where(x => x.ParentID == id).ToList();
         }
     }
 }
