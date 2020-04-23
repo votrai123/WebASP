@@ -151,6 +151,8 @@
     <Content Include="Assets\Admin\js\plugins\Summernote\summernote.min.css" />
     <Content Include="Assets\Admin\js\plugins\Summernote\summernote.min.js" />
     <Content Include="Assets\Admin\js\xuly.js" />
+    <Content Include="Assets\Client\css\bootstrap.min.css" />
+    <Content Include="Assets\Client\css\style.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Global.asax" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
@@ -246,7 +248,6 @@
     <Folder Include="Assets\Admin\js\plugins\Summernote\plugin\" />
     <Folder Include="Assets\Admin\media\" />
     <Folder Include="Assets\Admin\vendor\" />
-    <Folder Include="Assets\Client\css\" />
     <Folder Include="Assets\Client\fonts\" />
     <Folder Include="Assets\Client\images\" />
     <Folder Include="Assets\Client\js\" />

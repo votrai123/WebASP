@@ -27,7 +27,7 @@ namespace WebShop.Areas.Admin.Controllers
         {
             var dao = new ProductDao();
             //ViewBag.ProductCategory = dao.ListByGroupStatus(true);
-            ViewBag.Category = new CategoryDao().ListByGroupStatus(true);
+            ViewBag.Category = dao.ListByGroupStatus(true);
             return View();
         }
         public JsonResult GetProductCategory(int id)

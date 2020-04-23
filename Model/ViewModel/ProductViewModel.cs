@@ -24,6 +24,9 @@ namespace Model.ViewModel
 
         public decimal? Promotion { get; set; }
 
+        public long? CategoryID { get; set; }
+
+
         public int? Quantity { get; set; }
 
         public String CateName { get; set; }

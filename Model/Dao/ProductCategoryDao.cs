@@ -38,7 +38,7 @@ namespace Model.Dao
                                                   };
             if (!string.IsNullOrEmpty(searchString))
             {
-                model = model.Where(x => x.Name.Contains(searchString)||x.CateName.Contains(searchString));
+                model = model.Where(x => x.Name.Contains(searchString) || x.CateName.Contains(searchString));
             }
             return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
         }
@@ -86,6 +86,25 @@ namespace Model.Dao
         public List<Category> ListByGroupStatus(bool status)
         {
             return db.Categories.Where(x => x.Status == status).ToList();
+        }
+
+        public List<ThreeViewModel> ListCategory(bool status)
+        {
+            var model = from a in db.ProductCategories
+                        join b in db.Categories
+                        on a.ID equals b.ParentID
+                        select new ThreeViewModel()
+                        {
+                            IDCategory = b.ID,
+                            IDProductCategory = a.ID,
+                            NameCategory=b.Name,
+                            NameProductCategory = a.Name,
+                            MetaTitleCategory = b.MetaTitle,
+                            CreatedDate = a.CreatedDate,
+                            Status = a.Status,
+                            MetaTitleProductCategory=a.MetaTitle
+                        };
+            return model.Where(x => x.Status == status).ToList();
         }
     }
 }

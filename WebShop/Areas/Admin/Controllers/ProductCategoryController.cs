@@ -25,7 +25,7 @@ namespace WebShop.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Create()
         {
-            var dao = new CategoryDao();
+            var dao = new ProductCategoryDao();
             ViewBag.Category = dao.ListByGroupStatus(true);
             return View();
         }

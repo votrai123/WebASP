@@ -17,9 +17,32 @@ namespace Model.Dao
             db = new WebShopDbContext();
         }
 
-        public List<Product> ListNewProduct(int top)
+        public List<ProductViewModel> ListNewProduct(int top)
         {
-            return db.Products.OrderByDescending(x => x.CreatedDate).Take(top).ToList();
+            var model = from a in db.Products
+                        join b in db.ProductCategories
+                        on a.CategoryID equals b.ID
+                        select new ProductViewModel()
+                        {
+                            ID = a.ID,
+                            Name = a.Name,
+                            MetaTitle = a.MetaTitle,
+                            CateName = b.Name,
+                            CreatedDate = a.CreatedDate,
+                            Status = a.Status,
+                            Code = a.Code,
+                            Description = a.Description,
+                            Detail = a.Detail,
+                            Image = a.Image,
+                            Promotion = a.Promotion,
+                            Prrice = a.Prrice,
+                            Quantity = a.Quantity,
+                            TopHot = a.TopHot,
+                            ViewCount = a.ViewCount
+
+
+                        };
+            return model.OrderByDescending(x => x.CreatedDate).Take(top).ToList();
         }
         public IEnumerable<ProductViewModel> ListAllPaping(string searchString, int page, int pageSize)
         {
@@ -39,23 +62,46 @@ namespace Model.Dao
                                                      Detail = a.Detail,
                                                      Image = a.Image,
                                                      Promotion = a.Promotion,
-                                                     Prrice=a.Prrice,
-                                                     Quantity=a.Quantity,
-                                                     TopHot=a.TopHot,
-                                                     ViewCount=a.ViewCount
-                                                     
+                                                     Prrice = a.Prrice,
+                                                     Quantity = a.Quantity,
+                                                     TopHot = a.TopHot,
+                                                     ViewCount = a.ViewCount
+
 
                                                  };
             if (!string.IsNullOrEmpty(searchString))
             {
-                model = model.Where(x => x.Name.Contains(searchString)||x.CateName.Contains(searchString));
+                model = model.Where(x => x.Name.Contains(searchString) || x.CateName.Contains(searchString));
             }
             return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
         }
-        public List<Product> ListByCategoryId(long categoryID, ref int totalRecord, int pageIndex = 1, int pageSize = 2)
+        public List<ProductViewModel> ListByCategoryId(long categoryID, ref int totalRecord, int pageIndex = 1, int pageSize = 2)
         {
-            totalRecord = db.Products.Where(x => x.CategoryID == categoryID).Count();
-            var model = db.Products.Where(x => x.CategoryID == categoryID).OrderByDescending(x => x.CreatedDate).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+            var join = from a in db.Products
+                       join b in db.ProductCategories
+                       on a.CategoryID equals b.ID
+                       select new ProductViewModel()
+                       {
+                           ID = a.ID,
+                           Name = a.Name,
+                           MetaTitle = a.MetaTitle,
+                           CateName = b.Name,
+                           CreatedDate = a.CreatedDate,
+                           Status = a.Status,
+                           Code = a.Code,
+                           Description = a.Description,
+                           Detail = a.Detail,
+                           Image = a.Image,
+                           Promotion = a.Promotion,
+                           Prrice = a.Prrice,
+                           Quantity = a.Quantity,
+                           TopHot = a.TopHot,
+                           ViewCount = a.ViewCount,
+                           CategoryID = a.CategoryID
+
+                       };
+            totalRecord = join.Where(x => x.CategoryID == categoryID).Count();
+            var model = join.Where(x => x.CategoryID == categoryID).OrderByDescending(x => x.CreatedDate).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
             return model;
         }
         public long Insert(Product entity)
@@ -113,9 +159,9 @@ namespace Model.Dao
             }
 
         }
-        public List<ProductCategory> ListByGroupStatus(bool status)
+        public List<Category> ListByGroupStatus(bool status)
         {
-            return db.ProductCategories.Where(x => x.Status == status).ToList();
+            return db.Categories.Where(x => x.Status == status).ToList();
         }
         public List<ProductCategory> ListCategory(int id)
         {

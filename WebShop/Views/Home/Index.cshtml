@@ -3,7 +3,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_layout.cshtml";
     var slides = (List<Model.EF.Slide>)ViewBag.Slides;
-    var newproducts = (List<Model.EF.Product>)ViewBag.NewProducts;
+    var newproducts = (List<Model.ViewModel.ProductViewModel>)ViewBag.NewProducts;
 }
 
 <section id="home-section" class="hero">
@@ -104,7 +104,7 @@
                         <div class="text py-3 pb-4 px-3">
                             <div class="d-flex">
                                 <div class="cat">
-                                    <span>Lifestyle</span>
+                                    <span>@item.CateName</span>
                                 </div>
                                 <div class="rating">
                                     <p class="text-right mb-0">
