@@ -153,6 +153,7 @@
     <Content Include="Assets\Admin\js\xuly.js" />
     <Content Include="Assets\Client\css\bootstrap.min.css" />
     <Content Include="Assets\Client\css\style.css" />
+    <Content Include="Assets\Client\js\xuly.js" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Global.asax" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
@@ -250,7 +251,6 @@
     <Folder Include="Assets\Admin\vendor\" />
     <Folder Include="Assets\Client\fonts\" />
     <Folder Include="Assets\Client\images\" />
-    <Folder Include="Assets\Client\js\" />
     <Folder Include="Assets\Client\scss\" />
   </ItemGroup>
   <ItemGroup>

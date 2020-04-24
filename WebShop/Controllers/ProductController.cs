@@ -18,10 +18,19 @@ namespace WebShop.Controllers
             return View();
         }
 
-        public ActionResult Category(long CateId, int page = 1, int pageSize = 2)
+        public ActionResult Category(long CateId, int page = 1, int pageSize = 9)
         {
-            var category = new CategoryDao().ViewDetail(CateId);
-            ViewBag.Category = category;
+            var category = new ProductDao().ViewDetailCategory(CateId);
+            if (category != null)
+            {
+                ViewBag.Category = category;
+            }
+            else
+            {
+                var productcategory = new ProductDao().ViewDetailProductCategory(CateId);
+
+                ViewBag.ProductCategory = productcategory;
+            }
             int totalRecord = 0;
             var model = new ProductDao().ListByCategoryId(CateId, ref totalRecord, page, pageSize);
             ViewBag.Total = totalRecord;
@@ -35,23 +44,26 @@ namespace WebShop.Controllers
             ViewBag.Last = maxPage;
             ViewBag.Next = page + 1;
             ViewBag.Prev = page - 1;
-            var list = new CategoryDao().ListByGroupStatus(true);
-            ViewBag.ListCategory = list;
+            var ListCategory = new ProductDao().ListByGroupStatus(true);
+            ViewBag.ListCategory = ListCategory;
+            var ListProductCategory = new ProductDao().ListProductCategoryByGroupStatus(true);
+            ViewBag.ListProductCategory = ListProductCategory;
             return View(model);
         }
 
         public ActionResult Detail(long id)
         {
             var product = new ProductDao().ViewDetail(id);
-            ViewBag.Category = new CategoryDao().ViewDetail(product.CategoryID.Value);
+            ViewBag.Category = new ProductDao().ViewDetailProductCategory(product.CategoryID.Value);
             return View(product);
         }
         [ChildActionOnly]
         public ActionResult ListCategory()
         {
-            var model = new CategoryDao().ListByGroupStatus(true);
+            var model = new ProductDao().ListByGroupStatus(true);
             ViewBag.ListCategory = model;
             return PartialView(model);
         }
+        
     }
 }

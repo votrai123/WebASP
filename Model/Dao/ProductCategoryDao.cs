@@ -88,23 +88,23 @@ namespace Model.Dao
             return db.Categories.Where(x => x.Status == status).ToList();
         }
 
-        public List<ThreeViewModel> ListCategory(bool status)
+        public List<Category> ListCategory(bool status)
         {
-            var model = from a in db.ProductCategories
-                        join b in db.Categories
-                        on a.ID equals b.ParentID
-                        select new ThreeViewModel()
-                        {
-                            IDCategory = b.ID,
-                            IDProductCategory = a.ID,
-                            NameCategory=b.Name,
-                            NameProductCategory = a.Name,
-                            MetaTitleCategory = b.MetaTitle,
-                            CreatedDate = a.CreatedDate,
-                            Status = a.Status,
-                            MetaTitleProductCategory=a.MetaTitle
-                        };
-            return model.Where(x => x.Status == status).ToList();
+            //var model = from a in db.ProductCategories
+            //            join b in db.Categories
+            //            on a.ParentID equals b.ID
+            //            select new ThreeViewModel()
+            //            {
+            //                IDCategory = b.ID,
+            //                IDProductCategory = a.ID,
+            //                NameCategory=b.Name,
+            //                NameProductCategory = a.Name,
+            //                MetaTitleCategory = b.MetaTitle,
+            //                CreatedDate = a.CreatedDate,
+            //                Status = a.Status,
+            //                MetaTitleProductCategory=a.MetaTitle
+            //            };
+            return db.Categories.Where(x => x.Status == status).ToList();
         }
     }
 }

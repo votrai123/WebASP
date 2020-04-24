@@ -21,6 +21,9 @@ namespace Model.EF
         public virtual DbSet<ProductCategory> ProductCategories { get; set; }
         public virtual DbSet<Slide> Slides { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
+
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -127,6 +130,10 @@ namespace Model.EF
             modelBuilder.Entity<User>()
                 .Property(e => e.ModifiedBy)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<OrderDetail>()
+                .Property(e => e.Price)
+                .HasPrecision(18, 0);
         }
     }
 }

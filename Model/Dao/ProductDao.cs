@@ -75,33 +75,38 @@ namespace Model.Dao
             }
             return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
         }
-        public List<ProductViewModel> ListByCategoryId(long categoryID, ref int totalRecord, int pageIndex = 1, int pageSize = 2)
+        public List<ThreeViewModel> ListByCategoryId(long categoryID, ref int totalRecord, int pageIndex = 1, int pageSize = 2)
         {
             var join = from a in db.Products
                        join b in db.ProductCategories
                        on a.CategoryID equals b.ID
-                       select new ProductViewModel()
+                       join c in db.Categories
+                       on b.ParentID equals c.ID
+                       select new ThreeViewModel()
                        {
-                           ID = a.ID,
-                           Name = a.Name,
-                           MetaTitle = a.MetaTitle,
-                           CateName = b.Name,
-                           CreatedDate = a.CreatedDate,
-                           Status = a.Status,
-                           Code = a.Code,
-                           Description = a.Description,
-                           Detail = a.Detail,
-                           Image = a.Image,
-                           Promotion = a.Promotion,
-                           Prrice = a.Prrice,
-                           Quantity = a.Quantity,
-                           TopHot = a.TopHot,
-                           ViewCount = a.ViewCount,
-                           CategoryID = a.CategoryID
-
+                           IDCategory=c.ID,
+                           CreatedDate=a.CreatedDate,
+                           Description=a.Description,
+                           Detail=a.Detail,
+                           IDProduct=a.ID,
+                           IDProductCategory=b.ID,
+                           Image=a.Image,
+                           MetaTitleCategory=c.MetaTitle,
+                           MetaTitleProduct=a.MetaTitle,
+                           MetaTitleProductCategory=b.MetaTitle,
+                           NameCategory=c.Name,
+                           NameProductCategory=b.Name,
+                           Promotion=a.Promotion,
+                           Prrice=a.Prrice,
+                            Quantity=a.Quantity,
+                            Status=a.Status,
+                            TopHot=a.TopHot,
+                            ViewCount=a.ViewCount,
+                            CategoryID=a.CategoryID,
+                            NameProduct=a.Name
                        };
-            totalRecord = join.Where(x => x.CategoryID == categoryID).Count();
-            var model = join.Where(x => x.CategoryID == categoryID).OrderByDescending(x => x.CreatedDate).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+            totalRecord = join.Where(x => x.IDCategory == categoryID || x.IDProductCategory ==categoryID).Count();
+            var model = join.Where(x => x.IDCategory == categoryID || x.IDProductCategory == categoryID).OrderByDescending(x => x.CreatedDate).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
             return model;
         }
         public long Insert(Product entity)
@@ -166,6 +171,19 @@ namespace Model.Dao
         public List<ProductCategory> ListCategory(int id)
         {
             return db.ProductCategories.Where(x => x.ParentID == id).ToList();
+        }
+        public Category ViewDetailCategory(long id)
+        {
+            return db.Categories.Find(id);
+        }
+
+        public ProductCategory ViewDetailProductCategory(long id)
+        {
+            return db.ProductCategories.Find(id);
+        }
+        public List<ProductCategory> ListProductCategoryByGroupStatus(bool status)
+        {
+            return db.ProductCategories.Where(x => x.Status == status).ToList();
         }
     }
 }

@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Detail";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    var category = (Model.EF.Category)ViewBag.Category;
+    var category = (Model.EF.ProductCategory)ViewBag.Category;
 }
 
 
@@ -45,13 +45,11 @@
                     <p class="price">
                         @if (Model.Promotion < Model.Prrice)
                         {
-                            <span class="mr-2 price-dc">$@Model.Prrice</span>
                             <span class="price-sale">$@Model.Promotion</span>
                         }
                         else
                         {
                             <span class="price-sale">$@Model.Prrice</span>
-
                         }
                     </p>
                 </div>
