@@ -102,5 +102,9 @@ namespace Model.Dao
         {
             return db.ProductCategories.Where(x => x.Status == status).ToList();
         }
+        public List<Category> ListByGroupStatusCategory(bool status)
+        {
+            return db.Categories.Where(x => x.Status == status).ToList();
+        }
     }
 }
