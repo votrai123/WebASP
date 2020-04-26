@@ -96,7 +96,8 @@
                             <img class="img-fluid" src="@item.Image" alt="Colorlib Template">
                             @if (@item.Prrice > @item.Promotion)
                             {
-                                <span class="status">Sale</span>
+                                var percent = Convert.ToDecimal(((item.Prrice - item.Promotion) / item.Prrice) * 100).ToString("#,##0"); 
+                                <span class="status">Sale @percent %</span>
                             }
 
                             <div class="overlay"></div>

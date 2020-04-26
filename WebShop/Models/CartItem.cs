@@ -11,6 +11,7 @@ namespace WebShop.Models
     {
         public Product Product { set; get; }
         public int Quantity { set; get; }
-        public int Size { set; get; }
+        public decimal SubTotal { set; get; }
+        public decimal Discount { set; get; }
     }
 }

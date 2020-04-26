@@ -5,16 +5,16 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using WebShop.Models;
+using System.Web.Script.Serialization;
 
 namespace WebShop.Controllers
 {
     public class CartController : Controller
     {
-        private const string CartSession = "CartSession";
         // GET: Cart
         public ActionResult Index()
         {
-            var cart = Session[CartSession];
+            var cart = Session[Common.CommonConstants.CartSession];
             var list = new List<CartItem>();
             if (cart != null)
             {
@@ -23,10 +23,10 @@ namespace WebShop.Controllers
             return View(list);
         }
 
-        public ActionResult AddItem(long productId, int quantity, int size = 32)
+        public ActionResult AddItem(long productId, int quantity)
         {
             var product = new ProductDao().ViewDetail(productId);
-            var cart = Session[CartSession];
+            var cart = Session[Common.CommonConstants.CartSession];
             if (cart != null)
             {
                 var list = (List<CartItem>)cart;
@@ -47,11 +47,14 @@ namespace WebShop.Controllers
                     var item = new CartItem();
                     item.Product = product;
                     item.Quantity = quantity;
-                    item.Size = size;
+                    var promotion = product.Prrice - product.Promotion;
+                    item.Discount = quantity * (decimal)promotion;
+                    item.SubTotal = quantity * (decimal)product.Prrice;
+
                     list.Add(item);
                 }
                 //Gán vào session
-                Session[CartSession] = list;
+                Session[Common.CommonConstants.CartSession] = list;
             }
             else
             {
@@ -59,13 +62,81 @@ namespace WebShop.Controllers
                 var item = new CartItem();
                 item.Product = product;
                 item.Quantity = quantity;
-                item.Size = size;
+                var promotion = product.Prrice - product.Promotion;
+                item.Discount = (decimal)promotion;
+                item.SubTotal = (decimal)product.Prrice;
                 var list = new List<CartItem>();
                 list.Add(item);
                 //Gán vào session
-                Session[CartSession] = list;
+                Session[Common.CommonConstants.CartSession] = list;
             }
             return RedirectToAction("Index");
+        }
+
+        public JsonResult DeleteAll()
+        {
+            Session[Common.CommonConstants.CartSession] = null;
+            return Json(new
+            {
+                status = true
+            });
+        }
+
+        public JsonResult Delete(long id)
+        {
+            var sessionCart = (List<CartItem>)Session[Common.CommonConstants.CartSession];
+            sessionCart.RemoveAll(x => x.Product.ID == id);
+            Session[Common.CommonConstants.CartSession] = sessionCart;
+            return Json(new
+            {
+                status = true
+            });
+        }
+
+        public JsonResult Update(string CartModel)
+        {
+            var jsoncart = new JavaScriptSerializer().Deserialize<List<CartItem>>(CartModel);
+            var sessioncart =(List<CartItem>)Session[Common.CommonConstants.CartSession];
+
+            foreach(var item in sessioncart)
+            {
+                var JsonItem = jsoncart.SingleOrDefault(x => x.Product.ID == item.Product.ID);
+                if (JsonItem !=null)
+                {
+                    item.Quantity = JsonItem.Quantity;
+                }
+            }
+            Session[Common.CommonConstants.CartSession] = sessioncart;
+            return Json(new
+            {
+                status = true
+            });
+        }
+
+        public ActionResult Payment()
+        {
+            var cart = Session[Common.CommonConstants.CartSession];
+            var list = new List<CartItem>();
+            if (cart != null)
+            {
+                list = (List<CartItem>)cart;
+            }
+            return View(list);
+        }
+
+        public JsonResult UpdateQuantity(long ProductID, int quantity)
+        {
+            var sessioncart = (List<CartItem>)Session[Common.CommonConstants.CartSession];
+            CartItem item = sessioncart.FirstOrDefault(x => x.Product.ID == ProductID);
+            if (item != null)
+            {
+                item.Quantity = quantity;
+            }
+            Session[Common.CommonConstants.CartSession] = sessioncart;
+            return Json(new
+            {
+                status = true
+            });
         }
     }
 }

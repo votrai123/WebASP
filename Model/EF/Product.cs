@@ -37,16 +37,17 @@ namespace Model.EF
 
         [Required(ErrorMessage = "You must provide a Prrice")]
         [Display(Name = "Prrice")]
-        [Range(0, Int32.MaxValue)]
+        [Range(0, Int32.MaxValue,ErrorMessage ="Format Number")]
         public decimal? Prrice { get; set; }
 
         [Required(ErrorMessage = "You must provide a Promotion")]
         [Display(Name = "Promotion")]
-        [Range(0, Int32.MaxValue)]
+        [Range(0, Int32.MaxValue, ErrorMessage = "Format Number")]
         public decimal? Promotion { get; set; }
 
         [Required(ErrorMessage = "You must provide a Quantity")]
         [Display(Name = "Quantity")]
+        [Range(0, Int32.MaxValue, ErrorMessage = "Format Number")]
         public int? Quantity { get; set; }
 
         [Display(Name = "Category")]

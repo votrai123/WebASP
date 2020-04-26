@@ -26,7 +26,6 @@
                                 <th>&nbsp;</th>
                                 <th>&nbsp;</th>
                                 <th>Product</th>
-                                <th>Size</th>
                                 <th>Quantity</th>
                                 <th>Price</th>
                                 <th>Total</th>
@@ -38,7 +37,7 @@
                                 foreach (var item in Model)
                                 {
                                     <tr class="text-center">
-                                        <td class="product-remove"><a href="#"><span class="ion-ios-close"></span></a></td>
+                                        <td class="product-remove"><a href="#" data-id="@item.Product.ID" id="btnDeleteItem"><span class="ion-ios-close"></span></a></td>
 
                                         <td class="image-prod"><div class="img" style="background-image:url(@item.Product.Image);"></div></td>
 
@@ -50,13 +49,7 @@
 
                                         <td class="quantity">
                                             <div class="input-group mb-3">
-                                                <input type="text" name="quantity" class="quantity form-control input-number" value="@item.Size" min="30" max="60">
-                                            </div>
-                                        </td>
-
-                                        <td class="quantity">
-                                            <div class="input-group mb-3">
-                                                <input type="text" name="quantity" class="quantity form-control input-number" value="@item.Quantity" min="1" max="100">
+                                                <input type="text" id="txtQuantity" class="ProductQuantity form-control input-number" data-id="@item.Product.ID" value="@item.Quantity" min="1" max="100">
                                             </div>
                                         </td>
 
@@ -86,38 +79,37 @@
                             }
                             else
                             {
-                                <tr>
-                                    <p>Giỏ hàng trống</p>
+                                <span>Giỏ hàng trống</span>
 
-                                </tr>
                             }
 
 
                         </tbody>
                     </table>
+
+
                 </div>
             </div>
+            <p class="text-center"><a  class="btn btn-primary py-3 px-4" id="btnContinue">Continue Shopping</a></p>
+            <p class="text-center"><a  class="btn btn-primary py-3 px-4" id="btnUpdate">Update Cart</a></p>
+            <p class="text-center"><a  class="btn btn-primary py-3 px-4" id="btnDeleteAll">Delete All Cart</a></p>
         </div>
         <div class="row justify-content-start">
             <div class="col col-lg-5 col-md-6 mt-5 cart-wrap ftco-animate">
                 <div class="cart-total mb-3">
                     <h3>Cart Totals</h3>
                     <p class="d-flex">
-                        <span>Subtotal</span>
-                        <span>$20.60</span>
-                    </p>
-                    <p class="d-flex">
-                        <span>Delivery</span>
-                        <span>$0.00</span>
+                        <span>Subtotal</span> 
+                        <span>$@Model.Sum(x=>x.SubTotal * x.Quantity)</span>
                     </p>
                     <p class="d-flex">
                         <span>Discount</span>
-                        <span>$3.00</span>
+                        <span>$@Model.Sum(x => x.Discount * x.Quantity)</span>
                     </p>
                     <hr>
                     <p class="d-flex total-price">
                         <span>Total</span>
-                        <span>$17.60</span>
+                        <span>$@Model.Sum(x => x.Product.Promotion * x.Quantity)</span>
                     </p>
                 </div>
                 <p class="text-center"><a href="checkout.html" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
