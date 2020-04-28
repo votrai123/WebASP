@@ -17,13 +17,12 @@ namespace Model.EF
         public virtual DbSet<Contact> Contacts { get; set; }
         public virtual DbSet<Content> Contents { get; set; }
         public virtual DbSet<Feedback> Feedbacks { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<ProductCategory> ProductCategories { get; set; }
         public virtual DbSet<Slide> Slides { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<Order> Orders { get; set; }
-        public virtual DbSet<OrderDetail> OrderDetails { get; set; }
-
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -66,6 +65,14 @@ namespace Model.EF
             modelBuilder.Entity<Content>()
                 .Property(e => e.MetaDescriptions)
                 .IsFixedLength();
+
+            modelBuilder.Entity<Order>()
+                .Property(e => e.Email)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<OrderDetail>()
+                .Property(e => e.Price)
+                .HasPrecision(18, 0);
 
             modelBuilder.Entity<Product>()
                 .Property(e => e.Code)
@@ -115,8 +122,20 @@ namespace Model.EF
                 .Property(e => e.ModifiedBy)
                 .IsUnicode(false);
 
+            modelBuilder.Entity<Slide>()
+                .Property(e => e.TextSmall)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Slide>()
+                .Property(e => e.TextBig)
+                .IsUnicode(false);
+
             modelBuilder.Entity<User>()
                 .Property(e => e.UserName)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<User>()
+                .Property(e => e.Email)
                 .IsUnicode(false);
 
             modelBuilder.Entity<User>()
@@ -130,10 +149,6 @@ namespace Model.EF
             modelBuilder.Entity<User>()
                 .Property(e => e.ModifiedBy)
                 .IsUnicode(false);
-
-            modelBuilder.Entity<OrderDetail>()
-                .Property(e => e.Price)
-                .HasPrecision(18, 0);
         }
     }
 }

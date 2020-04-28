@@ -19,10 +19,10 @@
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public long OrderID { get; set; }
 
-        public int? Quantity { get; set; }
-
         public decimal? Price { get; set; }
-        public DateTime? CreatedDate { get; set; }
 
+        public DateTime? CreateDate { get; set; }
+
+        public int? Quantity { get; set; }
     }
 }

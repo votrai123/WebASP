@@ -13,8 +13,6 @@
 
         public DateTime? CreatedDate { get; set; }
 
-        public long? UserID { get; set; }
-
         [StringLength(50)]
         public string Email { get; set; }
 
@@ -34,5 +32,7 @@
 
         [StringLength(100)]
         public string Note { get; set; }
+
+        public long? UserID { get; set; }
     }
 }

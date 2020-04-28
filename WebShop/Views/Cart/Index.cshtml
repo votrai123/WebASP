@@ -90,30 +90,40 @@
 
                 </div>
             </div>
-            <p class="text-center"><a  class="btn btn-primary py-3 px-4" id="btnContinue">Continue Shopping</a></p>
-            <p class="text-center"><a  class="btn btn-primary py-3 px-4" id="btnUpdate">Update Cart</a></p>
-            <p class="text-center"><a  class="btn btn-primary py-3 px-4" id="btnDeleteAll">Delete All Cart</a></p>
+            <p class="text-center"><a class="btn btn-primary py-3 px-4" id="btnContinue">Continue Shopping</a></p>
+            <p class="text-center"><a class="btn btn-primary py-3 px-4" id="btnUpdate">Update Cart</a></p>
+            <p class="text-center"><a class="btn btn-primary py-3 px-4" id="btnDeleteAll">Delete All Cart</a></p>
         </div>
-        <div class="row justify-content-start">
-            <div class="col col-lg-5 col-md-6 mt-5 cart-wrap ftco-animate">
-                <div class="cart-total mb-3">
-                    <h3>Cart Totals</h3>
-                    <p class="d-flex">
-                        <span>Subtotal</span> 
-                        <span>$@Model.Sum(x=>x.SubTotal * x.Quantity)</span>
-                    </p>
-                    <p class="d-flex">
-                        <span>Discount</span>
-                        <span>$@Model.Sum(x => x.Discount * x.Quantity)</span>
-                    </p>
-                    <hr>
-                    <p class="d-flex total-price">
-                        <span>Total</span>
-                        <span>$@Model.Sum(x => x.Product.Promotion * x.Quantity)</span>
-                    </p>
+        @if (Model.Count == 0)
+        {
+            <h3>
+                Please purchase before payment
+            </h3>
+        }
+        else
+        {
+            <div class="row justify-content-start">
+                <div class="col col-lg-5 col-md-6 mt-5 cart-wrap ftco-animate">
+                    <div class="cart-total mb-3">
+                        <h3>Cart Totals</h3>
+                        <p class="d-flex">
+                            <span>Subtotal</span>
+                            <span>$@Model.Sum(x => x.SubTotal * x.Quantity)</span>
+                        </p>
+                        <p class="d-flex">
+                            <span>Discount</span>
+                            <span>$@Model.Sum(x => x.Discount * x.Quantity)</span>
+                        </p>
+                        <hr>
+                        <p class="d-flex total-price">
+                            <span>Total</span>
+                            <span>$@Model.Sum(x => x.Product.Promotion * x.Quantity)</span>
+                        </p>
+                    </div>
+                    <p class="text-center"><a id="btnPayments" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
                 </div>
-                <p class="text-center"><a href="checkout.html" class="btn btn-primary py-3 px-4">Proceed to Checkout</a></p>
             </div>
-        </div>
+        }
+
     </div>
 </section>

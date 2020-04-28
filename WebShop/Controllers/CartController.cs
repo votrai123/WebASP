@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Mvc;
 using WebShop.Models;
 using System.Web.Script.Serialization;
+using Model.EF;
 
 namespace WebShop.Controllers
 {
@@ -96,12 +97,12 @@ namespace WebShop.Controllers
         public JsonResult Update(string CartModel)
         {
             var jsoncart = new JavaScriptSerializer().Deserialize<List<CartItem>>(CartModel);
-            var sessioncart =(List<CartItem>)Session[Common.CommonConstants.CartSession];
+            var sessioncart = (List<CartItem>)Session[Common.CommonConstants.CartSession];
 
-            foreach(var item in sessioncart)
+            foreach (var item in sessioncart)
             {
                 var JsonItem = jsoncart.SingleOrDefault(x => x.Product.ID == item.Product.ID);
-                if (JsonItem !=null)
+                if (JsonItem != null)
                 {
                     item.Quantity = JsonItem.Quantity;
                 }
@@ -113,6 +114,7 @@ namespace WebShop.Controllers
             });
         }
 
+        [HttpGet]
         public ActionResult Payment()
         {
             var cart = Session[Common.CommonConstants.CartSession];
@@ -124,19 +126,57 @@ namespace WebShop.Controllers
             return View(list);
         }
 
-        public JsonResult UpdateQuantity(long ProductID, int quantity)
+        [HttpPost]
+        public ActionResult Payment(string FullName, string Email, string StreetAddress, string Country, string Phone, String Note)
         {
-            var sessioncart = (List<CartItem>)Session[Common.CommonConstants.CartSession];
-            CartItem item = sessioncart.FirstOrDefault(x => x.Product.ID == ProductID);
-            if (item != null)
+            try
             {
-                item.Quantity = quantity;
+                var order = new Order();
+                order.FullName = FullName;
+                order.CreatedDate = DateTime.Now;
+                order.Country = Country;
+                order.Email = Email;
+                order.Note = Note;
+                order.Phone = Phone;
+                order.StreetAddress = StreetAddress;
+                order.Status = 1;
+
+                var id = new OrderDao().Insert(order);
+                var cart = (List<CartItem>)Session[Common.CommonConstants.CartSession];
+                var detaildao = new OrderDetailDao();
+                foreach (var item in cart)
+                {
+                    var orderdetail = new OrderDetail();
+                    orderdetail.ProductID = item.Product.ID;
+                    orderdetail.CreateDate = DateTime.Now;
+                    orderdetail.OrderID = id;
+                    orderdetail.Price = (item.SubTotal - item.Discount) * item.Quantity;
+                    orderdetail.Quantity = item.Quantity;
+                    detaildao.Insert(orderdetail);
+                }
+                Session[Common.CommonConstants.CartSession] = null;
+                return Json(new
+                {
+                    status = true
+                });
             }
-            Session[Common.CommonConstants.CartSession] = sessioncart;
-            return Json(new
+            catch
             {
-                status = true
-            });
+                return Json(new
+                {
+                    status = false
+                });
+            }
+            
+        }
+        public ActionResult Success()
+        {
+            return View();
+        }
+
+        public ActionResult Fail()
+        {
+            return View();
         }
     }
 }

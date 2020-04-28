@@ -102,6 +102,12 @@ namespace WebShop
           namespaces: new[] { "WebShop.Controllers" }
       );
             routes.MapRoute(
+         name: "Payment Fail",
+         url: "that-bai",
+         defaults: new { controller = "Cart", action = "Fail", id = UrlParameter.Optional },
+         namespaces: new[] { "WebShop.Controllers" }
+     );
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },

@@ -42,6 +42,9 @@ var cart = {
 		$('#btnContinue').off('click').on('click', function () {
 			window.location.href = "/";
 		});
+		$('#btnPayments').off('click').on('click', function () {
+			window.location.href = "/thanh-toan";
+		});
 		$('#btnUpdate').off('click').on('click', function () {
 			var listproduct = $('.ProductQuantity');
 			//var listproduct1 = $('#txtSize');
@@ -99,3 +102,29 @@ var cart = {
     }
 }
 cart.init();
+
+$("#btnPayment").click(function () {
+	//alert("da vo");
+	
+	var Email = $("#email").val();
+	var FullName = $("#fullname").val();
+	var Country = $("#country").val();
+	var StreetAddress = $("#streetaddress").val();
+	var Phone = $("#phone").val();
+	var Note = $("#note").val();
+	
+	$.ajax({
+		type: "POST",
+		url: "/Cart/Payment",
+		data: { Email,FullName,Country,StreetAddress,Phone,Note},
+		dataType: "json",
+		success: function (res) {
+			if (res.status == true) {
+				window.location.href = "/hoan-thanh";
+			}
+		},
+		error: function () {
+				window.location.href = "/that-bai";
+		}
+	});
+});
