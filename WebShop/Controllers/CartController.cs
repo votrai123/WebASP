@@ -7,6 +7,9 @@ using System.Web.Mvc;
 using WebShop.Models;
 using System.Web.Script.Serialization;
 using Model.EF;
+using System.Configuration;
+using System.IO;
+using Common;
 
 namespace WebShop.Controllers
 {
@@ -143,6 +146,7 @@ namespace WebShop.Controllers
 
                 var id = new OrderDao().Insert(order);
                 var cart = (List<CartItem>)Session[Common.CommonConstants.CartSession];
+
                 var detaildao = new OrderDetailDao();
                 foreach (var item in cart)
                 {
@@ -154,6 +158,21 @@ namespace WebShop.Controllers
                     orderdetail.Quantity = item.Quantity;
                     detaildao.Insert(orderdetail);
                 }
+                string content = System.IO.File.ReadAllText(Server.MapPath("~/Assets/Client/template/sendmail.html"));
+
+                content = content.Replace("{{FullName}}", FullName);
+                content = content.Replace("{{Phone}}", Phone);
+                content = content.Replace("{{Email}}", Email);
+                content = content.Replace("{{StreetAddress}}", StreetAddress);
+                content = content.Replace("{{Country}}", Country);
+                content = content.Replace("{{Note}}", Note);
+                var total = cart.Sum(x => x.Product.Promotion * x.Quantity);
+                content = content.Replace("{{Item}}", total.ToString());
+
+                var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
+
+                new MailHelper().SendMail(Email, "Đơn hàng mới từ Three-T Shop", content);
+                //new MailHelper().SendMail(toEmail, "Đơn hàng mới từ OnlineShop", content);
                 Session[Common.CommonConstants.CartSession] = null;
                 return Json(new
                 {
@@ -167,7 +186,7 @@ namespace WebShop.Controllers
                     status = false
                 });
             }
-            
+
         }
         public ActionResult Success()
         {

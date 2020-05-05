@@ -168,6 +168,7 @@
     <Content Include="Assets\Client\css\bootstrap.min.css" />
     <Content Include="Assets\Client\css\style.css" />
     <Content Include="Assets\Client\js\xuly.js" />
+    <Content Include="Assets\Client\template\sendmail.html" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Global.asax" />
     <Content Include="scripts\ai.0.22.9-build00167.js" />
@@ -275,6 +276,10 @@
     <Folder Include="Assets\Client\scss\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{CFBF80F3-F91D-4D81-95E8-4AF4EF361EE0}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Model\Model.csproj">
       <Project>{56e36dde-212e-45ab-85df-98e906dd5ade}</Project>
       <Name>Model</Name>

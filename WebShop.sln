@@ -1,11 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebShop", "WebShop\WebShop.csproj", "{9763000C-45FD-4A62-9424-FEDB08B05654}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{56E36DDE-212E-45AB-85DF-98E906DD5ADE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{CFBF80F3-F91D-4D81-95E8-4AF4EF361EE0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,8 +33,19 @@ Global
 		{56E36DDE-212E-45AB-85DF-98E906DD5ADE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{56E36DDE-212E-45AB-85DF-98E906DD5ADE}.Release|x64.ActiveCfg = Release|x64
 		{56E36DDE-212E-45AB-85DF-98E906DD5ADE}.Release|x64.Build.0 = Release|x64
+		{CFBF80F3-F91D-4D81-95E8-4AF4EF361EE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFBF80F3-F91D-4D81-95E8-4AF4EF361EE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFBF80F3-F91D-4D81-95E8-4AF4EF361EE0}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CFBF80F3-F91D-4D81-95E8-4AF4EF361EE0}.Debug|x64.Build.0 = Debug|Any CPU
+		{CFBF80F3-F91D-4D81-95E8-4AF4EF361EE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFBF80F3-F91D-4D81-95E8-4AF4EF361EE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFBF80F3-F91D-4D81-95E8-4AF4EF361EE0}.Release|x64.ActiveCfg = Release|Any CPU
+		{CFBF80F3-F91D-4D81-95E8-4AF4EF361EE0}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {35A3FF9A-DEA5-4505-8DAC-BEFBADC3E922}
 	EndGlobalSection
 EndGlobal
