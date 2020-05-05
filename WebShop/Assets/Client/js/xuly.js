@@ -128,3 +128,51 @@ $("#btnPayment").click(function () {
 		}
 	});
 });
+
+$("#btnSendFeed").click(function () {
+	//alert("da vo");
+
+	var Email = $("#txtEmail").val();
+	var FullName = $("#txtName").val();
+	var Phone = $("#txtPhone").val();
+	var Note = $("#txtContent").val();
+
+	$.ajax({
+		type: "POST",
+		url: "/Contact/Send",
+		data: { Email, FullName, Phone, Note },
+		dataType: "json",
+		success: function (res) {
+			if (res.status == true) {
+				window.location.href = "/hoan-thanh";
+			}
+		},
+		error: function () {
+			window.location.href = "/that-bai";
+		}
+	});
+});
+function initMap() {
+	var uluru = { lat: 10.818692, lng: 106.677464 };
+	var map = new google.maps.Map(document.getElementById('map'), {
+		zoom: 15,
+		center: uluru
+	});
+
+	var contentString = '';
+
+	var infowindow = new google.maps.InfoWindow({
+		content: contentString
+	});
+
+	var marker = new google.maps.Marker({
+		position: uluru,
+		map: map,
+		title: 'Address'
+	});
+	marker.addListener('click', function () {
+		infowindow.open(map, marker);
+	});
+}
+
+google.maps.event.addDomListener(window, 'load', initMap);

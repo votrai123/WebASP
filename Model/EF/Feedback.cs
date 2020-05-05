@@ -23,9 +23,6 @@ namespace Model.EF
         [StringLength(250)]
         public string Content { get; set; }
 
-        [StringLength(50)]
-        public string Address { get; set; }
-
         public DateTime? CreatedDate { get; set; }
 
         public bool? Status { get; set; }
