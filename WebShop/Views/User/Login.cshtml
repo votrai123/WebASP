@@ -19,52 +19,65 @@
 
 <section class="ftco-section contact-section bg-light">
     <div class="container">
+        <div class="login-wrap">
+            <div class="login-content">
+                @using (Html.BeginForm("Login", "User", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-group">
+                        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-6">
+                            @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Login" class="btn btn-primary py-3 px-5" />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <a class="btn btn-primary py-3 px-5" href="/User/LoginFacebook">
+                                <i class="fab fa-facebook-square" aria-hidden="true"></i>
+                                Đăng nhập bằng Facebook
+                            </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
         @*<div class="bg-white p-5 contact-form">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Your Name">
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" id="txtPhone" placeholder="Your Phone">
-                </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" id="txtEmail" placeholder="Your Email">
-                </div>
-                <div class="form-group">
-                    <textarea name="" id="txtContent" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
-                </div>
-                <div class="form-group">
-                    <input id="btnSendFeed" value="Send Message" class="btn btn-primary py-3 px-5">
-                </div>
-            </div>*@
-        @using (Html.BeginForm("Login", "User", FormMethod.Post))
-        {
-            @Html.AntiForgeryToken()
             <div class="form-group">
-                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-
+                <input type="text" class="form-control" placeholder="Your Name">
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.UserName, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-6">
-                    @Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })
-                    @Html.ValidationMessageFor(model => model.UserName, "", new { @class = "text-danger" })
-                </div>
+                <input type="text" class="form-control" id="txtPhone" placeholder="Your Phone">
             </div>
-
             <div class="form-group">
-                @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
-                <div class="col-md-6">
-                    @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                </div>
+                <input type="text" class="form-control" id="txtEmail" placeholder="Your Email">
             </div>
-
             <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Login" class="btn btn-primary py-3 px-5" />
-                </div>
+                <textarea name="" id="txtContent" cols="30" rows="7" class="form-control" placeholder="Message"></textarea>
             </div>
-        }
+            <div class="form-group">
+                <input id="btnSendFeed" value="Send Message" class="btn btn-primary py-3 px-5">
+            </div>
+        </div>*@
+        
 
     </div>
 </section>
