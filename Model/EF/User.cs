@@ -11,7 +11,7 @@ namespace Model.EF
     {
         public long ID { get; set; }
 
-        [StringLength(20)]
+        [StringLength(50)]
         [Required(ErrorMessage = "You must provide a Username")]
         [Display(Name = "UserName")]
 
@@ -19,14 +19,14 @@ namespace Model.EF
 
         [Required(ErrorMessage = "You must provide a Password")]
         [Display(Name = "Password")]
-        [StringLength(20)]
+        [StringLength(32)]
         public string Password { get; set; }
 
         [Required(ErrorMessage = "You must provide a Full Name")]
         [Display(Name = "FullName")]
-        [StringLength(25)]
+        [StringLength(50)]
         public string FullName { get; set; }
-        [StringLength(30)]
+        [StringLength(50)]
         [Display(Name = "Email")]
         [Required(ErrorMessage = "Email is required.")]
         [EmailAddress(ErrorMessage = "Invalid Email Address.")]
@@ -57,7 +57,7 @@ namespace Model.EF
 
         [StringLength(50)]
         public string ModifiedBy { get; set; }
-        public bool? Status { get; set; } 
+        public bool? Status { get; set; }
         public bool? role { get; set; }
 
     }

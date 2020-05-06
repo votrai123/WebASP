@@ -26,9 +26,17 @@ namespace Model.Dao
         }
         public long Insert(User entity)
         {
-            db.Users.Add(entity);
-            db.SaveChanges();
-            return entity.ID;
+            try
+            {
+                db.Users.Add(entity);
+                db.SaveChanges();
+                return entity.ID;
+            }
+            catch(Exception ex)
+            {
+                return 0;
+            }
+            
         }
 
         public bool Update(User entity)
@@ -104,6 +112,16 @@ namespace Model.Dao
                         return -2;
                 }
             }
+        }
+
+        public bool CheckUserName(string username)
+        {
+            return db.Users.Count(x => x.UserName == username) > 0;
+        }
+
+        public bool CheckEmail(string email)
+        {
+            return db.Users.Count(x => x.Email == email) > 0;
         }
     }
 }

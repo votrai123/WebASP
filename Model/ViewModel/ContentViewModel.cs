@@ -27,8 +27,6 @@ namespace Model.ViewModel
 
         public DateTime? ModifiedDate { get; set; }
 
-
-
         public bool? Status { get; set; }
 
         public DateTime? TopHot { get; set; }

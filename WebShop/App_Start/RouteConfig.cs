@@ -15,7 +15,6 @@ namespace WebShop
 
             routes.IgnoreRoute("{*botdetect}",
       new { botdetect = @"(.*)BotDetectCaptcha\.ashx" });
-
             routes.MapRoute(
                name: "Product Category",
                url: "san-pham/{metatitle}-{CateId}",
