@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using WebShop.Models;
 using Common;
 using BotDetect.Web.Mvc;
+using WebShop.Common;
 
 namespace WebShop.Controllers
 {
@@ -56,11 +57,57 @@ namespace WebShop.Controllers
                     }
                     else
                     {
-                        ModelState.AddModelError("","Đăng ký không thành công");
+                        ModelState.AddModelError("", "Đăng ký không thành công");
                     }
                 }
             }
             return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Login(LoginModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var dao = new UserDao();
+                var result = dao.Login(model.UserName, Encrytor.MD5Hash(model.Password));
+                if (result == 1)
+                {
+                    var user = dao.GetById(model.UserName);
+                    var userSession = new UserLogin();
+                    userSession.UserName = user.UserName;
+                    userSession.UserID = user.ID;
+                    Session.Add(CommonConstants.USER_SESSION, userSession);
+                    return Redirect("/");
+                }
+                else if (result == 0)
+                {
+                    ModelState.AddModelError("", "Tai Khoan Khong Ton Tai");
+                }
+                else if (result == -1)
+                {
+                    ModelState.AddModelError("", "Tai Khoan Dang Bi Khoa");
+                }
+                else if (result == -2)
+                {
+                    ModelState.AddModelError("", "Mat Khau Khong Dung");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Đăng nhập không đúng");
+                }
+            }
+            return View(model);
+        }
+        public ActionResult Logout()
+        {
+            Session[Common.CommonConstants.USER_SESSION] = null;
+            return Redirect("/");
         }
     }
 }
