@@ -22,6 +22,7 @@ namespace WebShop.Areas.Admin.Controllers
             {
                 var dao = new UserDao();
                 var result = dao.Login(model.UserName, Encrytor.MD5Hash(model.PassWord));
+                //checkout
                 if (result == 1)
                 {
                     var user = dao.GetById(model.UserName);
