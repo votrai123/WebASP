@@ -10,7 +10,7 @@ using WebShop.Common;
 
 namespace WebShop.Areas.Admin.Controllers
 {
-    public class SlideController : Controller
+    public class SlideController : BaseController
     {
         // GET: Admin/Slide
         public ActionResult Index(int page=1,int pageSize=5)
