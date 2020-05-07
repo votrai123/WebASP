@@ -22,7 +22,6 @@ namespace WebShop.Areas.Admin.Controllers
             {
                 var dao = new UserDao();
                 var result = dao.Login(model.UserName, Encrytor.MD5Hash(model.PassWord));
-                //checkout
                 if (result == 1)
                 {
                     var user = dao.GetById(model.UserName);
@@ -34,19 +33,22 @@ namespace WebShop.Areas.Admin.Controllers
                 }
                 else if (result == 0)
                 {
-                    ModelState.AddModelError("", "Tai Khoan Khong Ton Tai");
+                    ModelState.AddModelError("", "Tài khoản không tồn tại");
                 }
                 else if (result == -1)
                 {
-                    ModelState.AddModelError("", "Tai Khoan Dang Bi Khoa");
+                    ModelState.AddModelError("", "Tài khoản đang bị khoá");
                 }
                 else if (result == -2)
                 {
-                    ModelState.AddModelError("", "Mat Khau Khong Dung");
+                    ModelState.AddModelError("", "Mật khẩu không đúng");
                 }
-                else
+                else if (result == 1)
                 {
                     ModelState.AddModelError("", "Đăng nhập không đúng");
+                }else if (result == 2)
+                {
+                    ModelState.AddModelError("", "Không có quyền truy cập");
                 }
             }
             return View("Index");
