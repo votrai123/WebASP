@@ -40,6 +40,7 @@ namespace Model.EF
 
         [StringLength(250)]
         [Required(ErrorMessage = "You must provide a MetaDescriptions")]
+        [Display(Name = "Decriptions")]
         public string MetaDescriptions { get; set; }
 
         public bool? Status { get; set; }
