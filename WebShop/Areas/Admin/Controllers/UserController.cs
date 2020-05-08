@@ -35,20 +35,32 @@ namespace WebShop.Areas.Admin.Controllers
             {
 
                 var dao = new UserDao();
-                var encryptedPw = Encrytor.MD5Hash(user.Password);
-                user.Password = encryptedPw;
-                user.role = false;
-                user.Status = true;
-                user.CreatedDate = DateTime.Now;
-                long id = dao.Insert(user);
-                if (id > 0)
+                if (dao.CheckUserName(user.UserName))
                 {
-                    return RedirectToAction("Index", "User");
+                    ModelState.AddModelError("", "Tên đăng nhập đã tồn tại");
+                }
+                else if (dao.CheckEmail(user.Email))
+                {
+                    ModelState.AddModelError("", "Email đã tồn tại");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Them user khong thanh cong");
+                    var encryptedPw = Encrytor.MD5Hash(user.Password);
+                    user.Password = encryptedPw;
+                    user.role = false;
+                    user.Status = true;
+                    user.CreatedDate = DateTime.Now;
+                    long id = dao.Insert(user);
+                    if (id > 0)
+                    {
+                        return RedirectToAction("Index", "User");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Them user khong thanh cong");
+                    }
                 }
+                
             }
             return View("Create");
         }

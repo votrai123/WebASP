@@ -23,7 +23,7 @@ namespace Model.EF
         public string Password { get; set; }
 
         [Required(ErrorMessage = "You must provide a Full Name")]
-        [Display(Name = "FullName")]
+        [Display(Name = "Full Name")]
         [StringLength(50)]
         public string FullName { get; set; }
         [StringLength(50)]
@@ -58,6 +58,8 @@ namespace Model.EF
         [StringLength(50)]
         public string ModifiedBy { get; set; }
         public bool? Status { get; set; }
+
+        [Display(Name = "Role")]
         public bool? role { get; set; }
 
     }
