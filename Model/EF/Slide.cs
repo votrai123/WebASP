@@ -21,9 +21,11 @@ namespace Model.EF
 
 
         [StringLength(250)]
+        [Required(ErrorMessage = "You must provide a Text Small")]
         public string TextSmall { get; set; }
 
         [StringLength(50)]
+        [Required(ErrorMessage = "You must provide a Text Big")]
         public string TextBig { get; set; }
 
         [StringLength(50)]
