@@ -20,7 +20,7 @@ namespace Model.Dao
         public IEnumerable<ContentViewModel> ListAllPaping(string searchString, int page, int pageSize)
         {
             IQueryable<ContentViewModel> model = from a in db.Contents
-                                                 join b in db.ProductCategories
+                                                 join b in db.Categories
                                                   on a.CategoryID equals b.ID
                                                  select new ContentViewModel()
                                                  {
