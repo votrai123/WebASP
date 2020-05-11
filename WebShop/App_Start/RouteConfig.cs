@@ -36,7 +36,7 @@ namespace WebShop
             routes.MapRoute(
              name: "Content Detail",
              url: "tin-tuc/{metatitle}-{id}",
-             defaults: new { controller = "Content", action = "Detail", id = UrlParameter.Optional },
+             defaults: new { controller = "Blog", action = "Detail", id = UrlParameter.Optional },
              namespaces: new[] { "WebShop.Controllers" }
          );
             routes.MapRoute(
@@ -55,7 +55,7 @@ namespace WebShop
             routes.MapRoute(
        name: "News",
        url: "tin-tuc",
-       defaults: new { controller = "Content", action = "Index", id = UrlParameter.Optional },
+       defaults: new { controller = "Blog", action = "Index", id = UrlParameter.Optional },
        namespaces: new[] { "WebShop.Controllers" }
    );
             routes.MapRoute(

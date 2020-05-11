@@ -233,6 +233,7 @@
     <Compile Include="Common\CommonConstants.cs" />
     <Compile Include="Common\ConvertTxt.cs" />
     <Compile Include="Common\Encrytor.cs" />
+    <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -294,6 +295,7 @@
     <Folder Include="Assets\Client\fonts\" />
     <Folder Include="Assets\Client\images\" />
     <Folder Include="Assets\Client\scss\" />
+    <Folder Include="Views\Blog\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Common\Common.csproj">
