@@ -10,7 +10,7 @@ using WebShop.Common;
 
 namespace WebShop.Areas.Admin.Controllers
 {
-    public class SlideController : Controller
+    public class SlideController : BaseController
     {
         // GET: Admin/Slide
         public ActionResult Index(int page=1,int pageSize=5)
@@ -19,7 +19,12 @@ namespace WebShop.Areas.Admin.Controllers
             var model = dao.ListAllPaping( page, pageSize);
             return View(model);
         }
-
+        public ActionResult ABC(int page = 1, int pageSize = 5)
+        {
+            var dao = new SlideDao();
+            var model = dao.ListAllPaping(page, pageSize);
+            return View(model);
+        }
 
         [HttpGet]
         public ActionResult Create()
@@ -113,7 +118,7 @@ namespace WebShop.Areas.Admin.Controllers
                 }
 
             }
-            return View("Index", "Slide");
+            return View("Update");
 
 
 

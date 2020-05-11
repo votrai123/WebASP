@@ -14,40 +14,35 @@
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Image, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.TextBox("file", "", new { type = "file" })
+
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                @Html.LabelFor(model => model.Image)
                 @Html.ValidationMessageFor(model => model.Image, "", new { @class = "text-danger" })
+                @Html.TextBox("file", "", new { type = "file", @class = "form-control" })
                 @ViewBag.Message
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Link, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Link, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="form-group col-md-4">
+                @Html.LabelFor(model => model.Link)
                 @Html.ValidationMessageFor(model => model.Link, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Link, new { htmlAttributes = new { @class = "form-control", @placeholder = "Link to the product" } })
             </div>
         </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.TextBig, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TextBig, new { htmlAttributes = new { @class = "form-control" } })
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                @Html.LabelFor(model => model.TextBig)
                 @Html.ValidationMessageFor(model => model.TextBig, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.TextBig, new { htmlAttributes = new { @class = "form-control", @placeholder = "Email" } })
             </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.TextSmall, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.TextSmall, new { htmlAttributes = new { @class = "form-control" } })
+            <div class="form-group col-md-4">
+                @Html.LabelFor(model => model.TextSmall)
                 @Html.ValidationMessageFor(model => model.TextSmall, "", new { @class = "text-danger" })
+                @Html.PasswordFor(model => model.TextSmall, new { @class = "form-control", @placeholder = "Password" })
             </div>
         </div>
 
-
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+            <div class="col-md-offset-2 col-md-8">
                 <button class="btn btn-success btn-lg btn-block" type="submit">Create</button>
             </div>
         </div>

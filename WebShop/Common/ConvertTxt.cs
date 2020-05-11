@@ -23,7 +23,7 @@ namespace WebShop.Common
             }
             sb = sb.Replace('Đ', 'D');
             sb = sb.Replace('đ', 'd');
-            var text = sb.ToString().Normalize(NormalizationForm.FormD).Replace(" ", String.Empty);
+            var text = sb.ToString().Normalize(NormalizationForm.FormD).Replace(" ", "-");
             return (text);
         }
     }

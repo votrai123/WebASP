@@ -9,7 +9,7 @@ using WebShop.Common;
 
 namespace WebShop.Areas.Admin.Controllers
 {
-    public class CategoryController : Controller
+    public class CategoryController : BaseController
     {
         // GET: Admin/Category
         public ActionResult Index(string searchString, int page =1, int pageSize =5)

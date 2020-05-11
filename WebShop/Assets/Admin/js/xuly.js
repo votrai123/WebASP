@@ -107,3 +107,52 @@ function deleteProductCategory() {
         });
     // console.log('abcd')
 }
+$(document).ready(function () {
+    $('#summernote').summernote({
+        toolbar: [
+
+            // This is a Custom Button in a new Toolbar Area
+            ['custom', ['examplePlugin']],
+
+            // You can also add Interaction to an existing Toolbar Area
+            ['style', ['style', 'examplePlugin']]
+        ]
+    });
+});
+$(document).ready(function () {
+    $('#summernote').summernote({
+        popover: {
+            image: [
+
+                // This is a Custom Button in a new Toolbar Area
+                ['custom', ['examplePlugin']],
+                ['imagesize', ['imageSize100', 'imageSize50', 'imageSize25']],
+                ['float', ['floatLeft', 'floatRight', 'floatNone']],
+                ['remove', ['removeMedia']]
+            ]
+        }
+    });
+});
+$.extend(true, $.summernote.lang, {
+    'en-US': { /* US English(Default Language) */
+        examplePlugin: {
+            exampleText: 'Example Text',
+            dialogTitle: 'Example Plugin',
+            okButton: 'OK'
+        }
+    }
+});
+$('#summernote').summernote({
+    placeholder: 'Hello stand alone ui',
+    tabsize: 2,
+    height: 120,
+    toolbar: [
+        ['style', ['style']],
+        ['font', ['bold', 'underline', 'clear']],
+        ['color', ['color']],
+        ['para', ['ul', 'ol', 'paragraph']],
+        ['table', ['table']],
+        ['insert', ['link', 'picture', 'video']],
+        ['view', ['fullscreen', 'codeview', 'help']]
+    ]
+});

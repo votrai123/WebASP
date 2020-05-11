@@ -10,10 +10,10 @@ using WebShop.Common;
 
 namespace WebShop.Areas.Admin.Controllers
 {
-    public class ContentController : Controller
+    public class ContentController : BaseController
     {
         // GET: Admin/Content
-        public ActionResult Index(string searchString, int page = 1, int pageSize = 8)
+        public ActionResult Index(string searchString, int page = 1, int pageSize = 4)
         {
             var dao = new ContentDao();
             var model = dao.ListAllPaping(searchString, page, pageSize);
@@ -60,7 +60,7 @@ namespace WebShop.Areas.Admin.Controllers
                     }
 
                 }
-                return View("Index", "Content");
+                return View("Index");
 
 
 
@@ -68,7 +68,7 @@ namespace WebShop.Areas.Admin.Controllers
             catch
             {
                 ViewBag.Message = "File upload failed!!";
-                return View("Create");
+                return RedirectToAction("Create", "Content");
             }
         }
         public ActionResult Delete(int id)
@@ -125,7 +125,7 @@ namespace WebShop.Areas.Admin.Controllers
                 }
 
             }
-            return View("Index", "Content");
+            return View("Index");
 
 
 

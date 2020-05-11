@@ -10,7 +10,7 @@ using WebShop.Common;
 
 namespace WebShop.Areas.Admin.Controllers
 {
-    public class ProductController : Controller
+    public class ProductController : BaseController
     {
         // GET: Admin/Product
         public ActionResult Index(string searchString, int page = 1, int pageSize = 6)
@@ -41,8 +41,7 @@ namespace WebShop.Areas.Admin.Controllers
         {
             try
             {
-
-                if (file.ContentLength > 0 && ModelState.IsValid)
+                if (ModelState.IsValid)
                 {
 
                     var dao = new ProductDao();
@@ -52,33 +51,37 @@ namespace WebShop.Areas.Admin.Controllers
                     product.ViewCount = 0;
                     product.TopHot = DateTime.Now;
                     product.CreatedDate = DateTime.Now;
-                    string _FileName = Path.GetFileName(file.FileName);
-                    string _path = Path.Combine(Server.MapPath("~/Assets/Client/images"), _FileName);
-                    product.Image = "/Assets/Client/images/" + _FileName;
-                    long id = dao.Insert(product);
-                    if (id > 0)
+                    if (file.ContentLength > 0)
                     {
-                        file.SaveAs(_path);
-                        ViewBag.Message = "File Uploaded Successfully!!";
-                        ModelState.AddModelError("", "Them  thanh cong");
-                        return RedirectToAction("Index", "Product");
 
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "Them khong thanh cong");
+                        string _FileName = Path.GetFileName(file.FileName);
+                        string _path = Path.Combine(Server.MapPath("~/Assets/Client/images"), _FileName);
+                        product.Image = "/Assets/Client/images/" + _FileName;
+
+                        long id = dao.Insert(product);
+                        if (id > 0)
+                        {
+                            file.SaveAs(_path);
+                            ViewBag.Message = "File Uploaded Successfully!!";
+                            ModelState.AddModelError("", "Them  thanh cong");
+                            return RedirectToAction("Index", "Product");
+
+                        }
+                        else
+                        {
+                            ModelState.AddModelError("", "Them khong thanh cong");
+                        }
                     }
 
                 }
-                return View("Create", "Product");
-
-
+                return RedirectToAction("Create", "Product");
 
             }
             catch
             {
                 ViewBag.Message = "File upload failed!!";
-                return View("Create");
+                return RedirectToAction("Create", "Product");
+
             }
         }
         public ActionResult Delete(int id)
@@ -143,6 +146,6 @@ namespace WebShop.Areas.Admin.Controllers
 
 
         }
-       
+
     }
 }

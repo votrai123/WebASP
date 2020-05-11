@@ -41,6 +41,7 @@ namespace Model.EF
         public string MetaKeywords { get; set; }
 
         [StringLength(250)]
+        [Display(Name = "Descriptions")]
         [Required(ErrorMessage = "You must provide a MetaDescriptions")]
         public string MetaDescriptions { get; set; }
 

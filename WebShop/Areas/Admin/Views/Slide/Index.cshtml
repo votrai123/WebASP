@@ -10,14 +10,16 @@
 <div class="modal" tabindex="-1" role="dialog" id="mymodal" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Thông Báo</h5>
+           <div class="modal-header">
+                <h5 class="modal-title">Notification</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-                <p>Bạn có muốn xoá content này không??</p>
+                <p>
+                    Do you want to delete?
+                </p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" onclick="deleteSlide()">Yes</button>
@@ -27,129 +29,41 @@
     </div>
 </div>
 <!-- end modal static -->
+
 <div class="section__content section__content--p30">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12">
-                <!-- DATA TABLE -->
-                <h3 class="title-5 m-b-35">data table</h3>
-                <div class="table-data__tool">
-                    <div class="table-data__tool-left">
-                        <div class="rs-select2--light rs-select2--md">
-                            <select class="js-select2" name="property">
-                                <option selected="selected">All Properties</option>
-                                <option value="">Option 1</option>
-                                <option value="">Option 2</option>
-                            </select>
-                            <div class="dropDownSelect2"></div>
-                        </div>
-                        <div class="rs-select2--light rs-select2--sm">
-                            <select class="js-select2" name="time">
-                                <option selected="selected">Today</option>
-                                <option value="">3 Days</option>
-                                <option value="">1 Week</option>
-                            </select>
-                            <div class="dropDownSelect2"></div>
-                        </div>
-                        <button class="au-btn-filter">
-                            <i class="zmdi zmdi-filter-list"></i>filters
-                        </button>
-                    </div>
-                    <div class="table-data__tool-right">
-                        <a href="/Admin/Slide/Create">
-                            <button class="au-btn au-btn-icon au-btn--green au-btn--small">
-                                <i class="zmdi zmdi-plus"></i>add item
-                            </button>
-                        </a>
-                        <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
-                            <select class="js-select2" name="type">
-                                <option selected="selected">Export</option>
-                                <option value="">Option 1</option>
-                                <option value="">Option 2</option>
-                            </select>
-                            <div class="dropDownSelect2"></div>
-                        </div>
-                    </div>
-                </div>
-              
-                <div class="table-responsive table-responsive-data2">
-                    <table class="table table-data2">
-                        <thead>
-                            <tr>
-                                <th>
-                                    <label class="au-checkbox">
-                                        <input type="checkbox">
-                                        <span class="au-checkmark"></span>
-                                    </label>
-                                </th>
-                                <th>image</th>
-                                <th>link</th>
-                                <th>text small</th>
-                                <th>text big</th>
-                                <th>status</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
-                                <tr class="tr-shadow">
-                                    <td>
-                                        <label class="au-checkbox">
-                                            <input type="checkbox">
-                                            <span class="au-checkmark"></span>
-                                        </label>
-                                    </td>
-                                    <td>
-                                    <img src="@item.Image"/>
-                                    </td>
-                                    <td class="desc">@item.Link</td>
-                                    <td>@item.TextSmall</td>
-                                    <td>@item.TextBig</td>
-
-                                    <td>
-                                        @if (@item.Status == true)
-                                        {
-                                            <span class="role member">run</span>
-                                        }
-                                        else
-                                        {
-                                            <span class="role admin">stop</span>
-                                        }
-                                    </td>
-                                    <td>
-                                        <div class="table-data-feature">
-                                            <button class="item" data-toggle="tooltip" data-placement="top" title="Send">
-                                                <i class="zmdi zmdi-mail-send"></i>
-                                            </button>
-                                            <a href="/Admin/Slide/Update/@item.ID">
-                                                <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
-                                                    <i class="zmdi zmdi-edit"></i>
-                                                </button>
-                                            </a>
-                                            @*<a href="/Admin/User/Delete/@item.ID">*@
-                                            <button class="item" onclick='setiduser(@item.ID)' data-toggle="modal" data-target="#mymodal" title="Delete">
-                                                <i class="zmdi zmdi-delete"></i>
-                                            </button>
-                                            @*</a>*@
-                                            <button class="item" data-toggle="tooltip" data-placement="top" title="More">
-                                                <i class="zmdi zmdi-more"></i>
-                                            </button>
-                                        </div>
-                                    </td>
-                                </tr>
-                            }
-
-                        </tbody>
-                    </table>
-                </div>
-                <!-- END DATA TABLE -->
-
-                <br />
-                Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
-                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "" }))
+            <div class="table-data__tool-right">
+                <a href="/Admin/Slide/Create">
+                    <button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                        <i class="zmdi zmdi-plus"></i>add item
+                    </button>
+                </a>
             </div>
         </div>
-    </div>
+        <br />
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-6">
+                    <div class="card">
+                        <img src="@item.Image" style="height: 18rem;" class="card-img-top">
+                        <div class="card-body">
+                            <h5 class="card-title">@item.TextBig</h5>
+                            <p class="card-text">@item.TextSmall</p>
 
+                        </div>
+                        <div class="card-body">
+                            <a href="/Admin/Slide/Update/@item.ID" class="btn btn-primary">
+                                Edit
+                            </a>
+                            <button onclick='setiduser(@item.ID)' data-toggle="modal" data-target="#mymodal" class="btn btn-primary">
+                                Delete
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
 </div>

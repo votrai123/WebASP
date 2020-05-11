@@ -32,11 +32,11 @@ namespace Model.Dao
                 db.SaveChanges();
                 return entity.ID;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return 0;
             }
-            
+
         }
         public long InsertForFacebook(User entity)
         {
@@ -106,7 +106,7 @@ namespace Model.Dao
             }
             return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
         }
-        public int Login(string userName, string passWord, bool isLoginAdmin = false)
+        public int Login(string userName, string passWord, bool isLoginAdmin = true)
         {
             var result = db.Users.SingleOrDefault(x => x.UserName == userName);
             if (result == null)
@@ -119,12 +119,17 @@ namespace Model.Dao
                 {
                     return -1;
                 }
+                else if (result.Password != passWord)
+                {
+                    return -2;
+                }
+                else if (result.Password == passWord && result.role == true)
+                {
+                    return 1;
+                }
                 else
                 {
-                    if (result.Password == passWord)
-                        return 1;
-                    else
-                        return -2;
+                    return 2;
                 }
             }
         }
