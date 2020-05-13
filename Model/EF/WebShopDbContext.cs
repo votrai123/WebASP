@@ -23,7 +23,8 @@ namespace Model.EF
         public virtual DbSet<ProductCategory> ProductCategories { get; set; }
         public virtual DbSet<Slide> Slides { get; set; }
         public virtual DbSet<User> Users { get; set; }
-
+        public virtual DbSet<Tag> Tags { get; set; }
+        public virtual DbSet<ContentTag> ContentTags { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<About>()
@@ -56,6 +57,10 @@ namespace Model.EF
 
             modelBuilder.Entity<Content>()
                 .Property(e => e.CreateBy)
+                .IsUnicode(false); 
+            
+            modelBuilder.Entity<ContentTag>()
+                .Property(e => e.TagID)
                 .IsUnicode(false);
 
             modelBuilder.Entity<Content>()
@@ -64,7 +69,11 @@ namespace Model.EF
 
             modelBuilder.Entity<Content>()
                 .Property(e => e.MetaDescriptions)
-                .IsFixedLength();
+                .IsFixedLength(); 
+            
+            modelBuilder.Entity<Tag>()
+                 .Property(e => e.ID)
+                 .IsUnicode(false);
 
             modelBuilder.Entity<Order>()
                 .Property(e => e.Email)

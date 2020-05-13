@@ -61,5 +61,10 @@ namespace Model.EF
 
         [Display(Name = "View Count")]
         public int? ViewCount { get; set; }
+
+        [Required(ErrorMessage = "You must provide a TAGs")]
+        [StringLength(500)]
+        public string Tags { get; set; }
+
     }
 }

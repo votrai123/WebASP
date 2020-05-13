@@ -60,7 +60,7 @@ namespace WebShop.Areas.Admin.Controllers
                     }
 
                 }
-                return View("Index");
+                return View("Create");
 
 
 

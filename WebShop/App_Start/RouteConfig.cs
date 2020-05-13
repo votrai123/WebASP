@@ -30,13 +30,19 @@ namespace WebShop
             routes.MapRoute(
              name: "Tags",
              url: "tag/{tagId}",
-             defaults: new { controller = "Content", action = "Tag", id = UrlParameter.Optional },
+             defaults: new { controller = "Blog", action = "Tag", id = UrlParameter.Optional },
              namespaces: new[] { "WebShop.Controllers" }
          );
             routes.MapRoute(
              name: "Content Detail",
              url: "tin-tuc/{metatitle}-{id}",
              defaults: new { controller = "Blog", action = "Detail", id = UrlParameter.Optional },
+             namespaces: new[] { "WebShop.Controllers" }
+         );
+            routes.MapRoute(
+             name: "Content Category",
+             url: "tin-tuc/the-loai/{metatitle}-{id}",
+             defaults: new { controller = "Blog", action = "ListAllByCategory", id = UrlParameter.Optional },
              namespaces: new[] { "WebShop.Controllers" }
          );
             routes.MapRoute(
