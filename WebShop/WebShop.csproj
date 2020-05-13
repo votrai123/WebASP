@@ -211,6 +211,9 @@
     <Content Include="Areas\Admin\Views\ProductCategory\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ProductCategory\Update.cshtml" />
     <Content Include="Areas\Admin\Views\Slide\ABC.cshtml" />
+    <Content Include="Areas\Admin\Views\About\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\About\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\About\Update.cshtml" />
     <None Include="scripts\jquery-1.8.0.intellisense.js" />
     <Content Include="scripts\jquery-1.8.0.js" />
     <Content Include="scripts\jquery-1.8.0.min.js" />
@@ -221,6 +224,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\AboutController.cs" />
     <Compile Include="Areas\Admin\Controllers\BaseController.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\ContentController.cs" />
@@ -234,6 +238,7 @@
     <Compile Include="Common\CommonConstants.cs" />
     <Compile Include="Common\ConvertTxt.cs" />
     <Compile Include="Common\Encrytor.cs" />
+    <Compile Include="Controllers\AboutController.cs" />
     <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
@@ -277,6 +282,7 @@
     <Content Include="Views\Blog\Detail.cshtml" />
     <Content Include="Views\Blog\Tag.cshtml" />
     <Content Include="Views\Blog\ListAllByCategory.cshtml" />
+    <Content Include="Views\About\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

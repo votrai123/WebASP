@@ -11,6 +11,7 @@ namespace Model.EF
     {
         public long ID { get; set; }
 
+        [Required(ErrorMessage = "You must provide a Name")]
         [StringLength(250)]
         public string Name { get; set; }
 
@@ -23,6 +24,7 @@ namespace Model.EF
         [StringLength(250)]
         public string Image { get; set; }
 
+        [Required(ErrorMessage = "You must provide a Detail")]
         [Column(TypeName = "ntext")]
         public string Detail { get; set; }
 

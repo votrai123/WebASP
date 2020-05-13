@@ -1,28 +1,23 @@
-﻿using System;
+﻿using Model.Dao;
+using Model.EF;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.IO;
-using Model.EF;
-using Model.Dao;
 using WebShop.Common;
 
 namespace WebShop.Areas.Admin.Controllers
 {
-    public class SlideController : BaseController
+    public class AboutController : BaseController
     {
-        // GET: Admin/Slide
-        public ActionResult Index(int page=1,int pageSize=5)
+        // GET: Admin/About
+        public ActionResult Index(string searchString, int page = 1, int pageSize = 4)
         {
-            var dao = new SlideDao();
-            var model = dao.ListAllPaping( page, pageSize);
-            return View(model);
-        }
-        public ActionResult ABC(int page = 1, int pageSize = 5)
-        {
-            var dao = new SlideDao();
-            var model = dao.ListAllPaping(page, pageSize);
+            var dao = new AboutDao();
+            var model = dao.ListAllPaping(searchString, page, pageSize);
+            ViewBag.searchString = searchString;
             return View(model);
         }
 
@@ -32,7 +27,7 @@ namespace WebShop.Areas.Admin.Controllers
             return View();
         }
         [HttpPost, ValidateInput(false)]
-        public ActionResult Create(Slide slide, HttpPostedFileBase file)
+        public ActionResult Create(About about, HttpPostedFileBase file)
         {
             try
             {
@@ -40,19 +35,21 @@ namespace WebShop.Areas.Admin.Controllers
                 if (file.ContentLength > 0 && ModelState.IsValid)
                 {
 
-                    var dao = new SlideDao();
-                    slide.Status = true;
-                    slide.CreatedDate = DateTime.Now;
+                    var dao = new AboutDao();
+                    var convert = ConvertTxt.utf8Convert3(about.Name);
+                    about.MetaTitle = convert;
+                    about.Status = true;
+                    about.CreatedDate = DateTime.Now;
                     string _FileName = Path.GetFileName(file.FileName);
-                    string _path = Path.Combine(Server.MapPath("/Assets/Client/images"), _FileName);
-                    slide.Image = "/Assets/Client/images/"+ _FileName;
-                    long id = dao.Insert(slide);
+                    string _path = Path.Combine(Server.MapPath("~/Assets/Client/images"), _FileName);
+                    about.Image = "/Assets/Client/images/" + _FileName;
+                    long id = dao.Insert(about);
                     if (id > 0)
                     {
                         file.SaveAs(_path);
                         ViewBag.Message = "File Uploaded Successfully!!";
                         ModelState.AddModelError("", "Them  thanh cong");
-                        return RedirectToAction("Index", "Slide");
+                        return RedirectToAction("Index", "About");
 
                     }
                     else
@@ -74,42 +71,48 @@ namespace WebShop.Areas.Admin.Controllers
         }
         public ActionResult Delete(int id)
         {
-            new SlideDao().Delete(id);
+            new AboutDao().Delete(id);
             return RedirectToAction("Index");
         }
-        [HttpGet]
         public ActionResult Update(int id)
         {
-            var slide = new SlideDao().ViewDetail(id);
-            return View(slide);
+            var dao = new AboutDao();
+
+            var about = new AboutDao().ViewDetail(id);
+            return View(about);
         }
 
 
         [HttpPost, ValidateInput(false)]
-        public ActionResult Update(Slide slide, HttpPostedFileBase file)
+        public ActionResult Update(About about, HttpPostedFileBase file)
         {
 
             if (ModelState.IsValid)
             {
-                var dao = new SlideDao();
+                var dao = new AboutDao();
 
-                slide.ModifiedDate = DateTime.Now;
-             
+                about.ModifiedDate = DateTime.Now;
+                if (!string.IsNullOrEmpty(about.Name))
+                {
+                    var convert = ConvertTxt.utf8Convert3(about.Name);
+                    about.MetaTitle = convert;
+                }
+
                 if (file != null)
                 {
                     string _FileName = Path.GetFileName(file.FileName);
                     string _path = Path.Combine(Server.MapPath("~/Assets/Client/images"), _FileName);
-                    slide.Image = "/Assets/Client/images/" + _FileName;
+                    about.Image = "/Assets/Client/images/" + _FileName;
                     file.SaveAs(_path);
                 }
 
 
-                var result = dao.Update(slide);
+                var result = dao.Update(about);
                 if (result)
                 {
                     ViewBag.Message = "File Uploaded Successfully!!";
                     ModelState.AddModelError("", "Cap nhat  thanh cong");
-                    return RedirectToAction("Index", "Slide");
+                    return RedirectToAction("Index", "About");
 
                 }
                 else
@@ -123,6 +126,5 @@ namespace WebShop.Areas.Admin.Controllers
 
 
         }
-
     }
 }
