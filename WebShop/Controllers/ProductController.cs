@@ -54,6 +54,7 @@ namespace WebShop.Controllers
         public ActionResult Detail(long id)
         {
             var product = new ProductDao().ViewDetail(id);
+            new ProductDao().CountView(id);
             ViewBag.Category = new ProductDao().ViewDetailProductCategory(product.CategoryID.Value);
             return View(product);
         }

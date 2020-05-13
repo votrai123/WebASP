@@ -84,28 +84,28 @@ namespace Model.Dao
                        on b.ParentID equals c.ID
                        select new ThreeViewModel()
                        {
-                           IDCategory=c.ID,
-                           CreatedDate=a.CreatedDate,
-                           Description=a.Description,
-                           Detail=a.Detail,
-                           IDProduct=a.ID,
-                           IDProductCategory=b.ID,
-                           Image=a.Image,
-                           MetaTitleCategory=c.MetaTitle,
-                           MetaTitleProduct=a.MetaTitle,
-                           MetaTitleProductCategory=b.MetaTitle,
-                           NameCategory=c.Name,
-                           NameProductCategory=b.Name,
-                           Promotion=a.Promotion,
-                           Prrice=a.Prrice,
-                            Quantity=a.Quantity,
-                            Status=a.Status,
-                            TopHot=a.TopHot,
-                            ViewCount=a.ViewCount,
-                            CategoryID=a.CategoryID,
-                            NameProduct=a.Name
+                           IDCategory = c.ID,
+                           CreatedDate = a.CreatedDate,
+                           Description = a.Description,
+                           Detail = a.Detail,
+                           IDProduct = a.ID,
+                           IDProductCategory = b.ID,
+                           Image = a.Image,
+                           MetaTitleCategory = c.MetaTitle,
+                           MetaTitleProduct = a.MetaTitle,
+                           MetaTitleProductCategory = b.MetaTitle,
+                           NameCategory = c.Name,
+                           NameProductCategory = b.Name,
+                           Promotion = a.Promotion,
+                           Prrice = a.Prrice,
+                           Quantity = a.Quantity,
+                           Status = a.Status,
+                           TopHot = a.TopHot,
+                           ViewCount = a.ViewCount,
+                           CategoryID = a.CategoryID,
+                           NameProduct = a.Name
                        };
-            totalRecord = join.Where(x => x.IDCategory == categoryID || x.IDProductCategory ==categoryID).Count();
+            totalRecord = join.Where(x => x.IDCategory == categoryID || x.IDProductCategory == categoryID).Count();
             var model = join.Where(x => x.IDCategory == categoryID || x.IDProductCategory == categoryID).OrderByDescending(x => x.CreatedDate).Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
             return model;
         }
@@ -184,6 +184,12 @@ namespace Model.Dao
         public List<ProductCategory> ListProductCategoryByGroupStatus(bool status)
         {
             return db.ProductCategories.Where(x => x.Status == status).ToList();
+        }
+        public void CountView(long id)
+        {
+            var product = db.Products.Find(id);
+            product.ViewCount += 1;
+            db.SaveChanges();
         }
     }
 }

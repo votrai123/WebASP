@@ -35,6 +35,8 @@ namespace WebShop.Controllers
         public ActionResult Detail(long id)
         {
             var model = new ContentDao().GetByID(id);
+            new ContentDao().CountView(id);
+            ViewBag.Categorys = new ContentDao().ListByGroupStatusCategory(true);
             ViewBag.TagAll = new ContentDao().ListAllTag();
             ViewBag.Tags = new ContentDao().ListTag(id);
             return View(model);
@@ -45,6 +47,7 @@ namespace WebShop.Controllers
             var model = new ContentDao().ListAllByTag(tagId, page, pageSize);
             int totalRecord = 0;
             ViewBag.TagAll = new ContentDao().ListAllTag();
+            ViewBag.Categorys = new ContentDao().ListByGroupStatusCategory(true);
 
             ViewBag.Total = totalRecord;
             ViewBag.Page = page;

@@ -293,5 +293,11 @@ namespace Model.Dao
         {
             return db.Categories.Find(id);
         }
+        public void CountView(long id)
+        {
+            var content = db.Contents.Find(id);
+            content.ViewCount += 1;
+            db.SaveChanges();
+        }
     }
 }
