@@ -1,0 +1,117 @@
+﻿@model PagedList.IPagedList<Model.EF.Order>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<!-- modal static -->
+<div class="modal" tabindex="-1" role="dialog" id="mymodal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Notification</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>
+                    Do you want to delete?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="deleteOrder()">Yes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="">
+    <div class="container-fluid">
+        <div class="user-data m-b-30">
+            <h3 class="title-3 m-b-30">
+                <i class="zmdi zmdi-account-calendar"></i>List Order
+            </h3>
+            @using (Html.BeginForm("Index", "Order", FormMethod.Get))
+            {
+                <div class="row form-group">
+                    <div class="col col-md-7">
+                        <div class="input-group">
+                            <div class="input-group-btn">
+                                <button class="btn btn-primary">
+                                    <i class="fa fa-search"></i> Search
+                                </button>
+                            </div>
+                            <input type="text" id="searchString" name="searchString" placeholder="Searching............" value="@ViewBag.searchString" class="form-control">
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="text-center">Date</th>
+                            <th class="text-center">Order ID</th>
+                            <th class="text-center">Email</th>
+                            <th class="text-center">Full Name</th>
+                            <th class="text-center">Address</th>
+                            <th class="text-center">Phone</th>
+                            <th class="text-center">Status</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td class="text-center">@item.CreatedDate</td>
+                                <td class="text-center">@item.ID</td>
+                                <td class="text-center">@item.Email</td>
+                                <td class="text-center">@item.FullName</td>
+                                <td class="text-center">@item.StreetAddress @item.Country</td>
+                                <td class="text-center">@item.Phone</td>
+                                @if (item.Status == 1)
+                                {
+                                    <td><span class="role user">Đang Giao</span></td>
+                                }
+                                else if (item.Status == 2)
+                                {
+                                    <td><span class="role member">Đã Giao</span></td>
+                                }
+                                else
+                                {
+                                    <td><span class="role admin">Huỷ</span></td>
+                                }
+                                <td>
+                                    <div class="table-data-feature">
+                                        <a href="/Admin/Order/Detail/@item.ID">
+                                            <button class="item" data-toggle="tooltip" data-placement="top" title="More">
+                                                <i class="zmdi zmdi-more"></i>
+                                            </button>
+                                        </a>
+                                        <a href="/Admin/Order/Update/@item.ID">
+                                            <button class="item" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                <i class="zmdi zmdi-edit"></i>
+                                            </button>
+                                        </a>
+                                        @*<a href="/Admin/User/Delete/@item.ID">*@
+                                        <button class="item" onclick='setiduser(@item.ID)' data-toggle="modal" data-target="#mymodal" title="Delete">
+                                            <i class="zmdi zmdi-delete"></i>
+                                        </button>
+                                        @*</a>*@
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <br />
+            <div style="text-align:center;">
+                Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) / @Model.PageCount
+                @Html.PagedListPager(Model, page => Url.Action("Index", new { page, @searchString = @ViewBag.searchString }), PagedListRenderOptions.EnableUnobtrusiveAjaxReplacing(new AjaxOptions() { HttpMethod = "GET", UpdateTargetId = "" }))
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,98 @@
+﻿@model List<Model.ViewModel.OrderViewModel>
+
+@{
+    ViewBag.Title = "Detail";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="section__content section__content--p30">
+    <div class="container-fluid">
+        <div class="user-data m-b-30">
+            <h3 class="title-3 m-b-30">
+                <i class="zmdi zmdi-account-calendar"></i><a href="/Admin/Order">List Order </a> > Order Detail
+            </h3>
+            <div class="table-responsive m-b-40">
+                <table class="table table-borderless table-data3">
+                    <thead>
+                        <tr>
+                            <th>date</th>
+                            <th>product id</th>
+                            <th>name</th>
+                            <th>image</th>
+                            <th>quantity</th>
+                            <th>price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td>@item.OrderCreatedDate</td>
+                            <td class="text-center">@item.ProductID</td>
+                            <td>@item.NameProduct</td>
+                            <td class="text-center"><img src="@item.ImageProduct" style="width:200px;height:200px;"/></td>
+                            <td class="text-center">@item.OrderQuantity</td>
+                            <td class="text-center">@item.OrderPrice</td>
+                        </tr>
+                        }
+
+                        @*<tr>
+                                <td>2018-09-28 01:22</td>
+                                <td>Mobile</td>
+                                <td>Samsung S8 Black</td>
+                                <td class="process">Processed</td>
+                                <td>$756.00</td>
+                            </tr>
+                            <tr>
+                                <td>2018-09-27 02:12</td>
+                                <td>Game</td>
+                                <td>Game Console Controller</td>
+                                <td class="denied">Denied</td>
+                                <td>$22.00</td>
+                            </tr>
+                            <tr>
+                                <td>2018-09-26 23:06</td>
+                                <td>Mobile</td>
+                                <td>iPhone X 256Gb Black</td>
+                                <td class="denied">Denied</td>
+                                <td>$1199.00</td>
+                            </tr>
+                            <tr>
+                                <td>2018-09-25 19:03</td>
+                                <td>Accessories</td>
+                                <td>USB 3.0 Cable</td>
+                                <td class="process">Processed</td>
+                                <td>$10.00</td>
+                            </tr>
+                            <tr>
+                                <td>2018-09-29 05:57</td>
+                                <td>Accesories</td>
+                                <td>Smartwatch 4.0 LTE Wifi</td>
+                                <td class="denied">Denied</td>
+                                <td>$199.00</td>
+                            </tr>
+                            <tr>
+                                <td>2018-09-24 19:10</td>
+                                <td>Camera</td>
+                                <td>Camera C430W 4k</td>
+                                <td class="process">Processed</td>
+                                <td>$699.00</td>
+                            </tr>
+                            <tr>
+                                <td>2018-09-22 00:43</td>
+                                <td>Computer</td>
+                                <td>Macbook Pro Retina 2017</td>
+                                <td class="process">Processed</td>
+                                <td>$10.00</td>
+                            </tr>*@
+                    </tbody>
+                </table>
+
+            </div>
+            <h2>
+                Total order
+                : @Model.Sum(x => x.OrderPrice * x.OrderQuantity)
+            </h2>
+        </div>
+    </div>
+</div>
+<!-- END DATA TABLE-->

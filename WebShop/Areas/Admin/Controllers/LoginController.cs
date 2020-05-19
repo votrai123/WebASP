@@ -54,5 +54,10 @@ namespace WebShop.Areas.Admin.Controllers
             return View("Index");
 
         }
+        public ActionResult Logout()
+        {
+            Session[Common.CommonConstants.USER_SESSION] = null;
+            return Redirect("/Admin/Home");
+        }
     }
 }

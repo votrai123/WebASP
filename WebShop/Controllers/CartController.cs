@@ -135,6 +135,7 @@ namespace WebShop.Controllers
             try
             {
                 var order = new Order();
+                var session = (UserLogin)Session[WebShop.Common.CommonConstants.USER_SESSION];
                 order.FullName = FullName;
                 order.CreatedDate = DateTime.Now;
                 order.Country = Country;
@@ -143,7 +144,10 @@ namespace WebShop.Controllers
                 order.Phone = Phone;
                 order.StreetAddress = StreetAddress;
                 order.Status = 1;
-
+                if(session != null)
+                {
+                    order.UserID = session.UserID;
+                }
                 var id = new OrderDao().Insert(order);
                 var cart = (List<CartItem>)Session[Common.CommonConstants.CartSession];
 

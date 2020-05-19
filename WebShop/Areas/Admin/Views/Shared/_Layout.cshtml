@@ -101,6 +101,11 @@
                                 <i class="fa fa-list-ul"></i>About
                             </a>
                         </li>
+                        <li>
+                            <a href="/Admin/Order">
+                                <i class="fa fa-list-ul"></i>Order
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -120,7 +125,7 @@
                             <a class="js-arrow" href="/Admin/Home">
                                 <i class="fas fa-tachometer-alt"></i>Dashboard
                             </a>
-                            
+
                         </li>
                         <li>
                             <a href="/Admin/User">
@@ -158,6 +163,11 @@
                                 <i class="fa fa-list-ul"></i>About
                             </a>
                         </li>
+                        <li>
+                            <a href="/Admin/Order">
+                                <i class="fa fa-list-ul"></i>Order
+                            </a>
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -170,54 +180,66 @@
                 <div class="section__content section__content--p30">
                     <div class="container-fluid">
                         <div class="header-wrap">
-                            
+
                             <div class="header-button">
                                 <div class="account-wrap">
-                                    <div class="account-item clearfix js-item-menu">
-                                        <div class="image">
-                                            <img src="~/Assets/Admin/images/icon/avatar-01.jpg" alt="John Doe" />
-                                        </div>
-                                        <div class="content">
-                                            <a class="js-acc-btn" href="#">john doe</a>
-                                        </div>
-                                        <div class="account-dropdown js-dropdown">
-                                            <div class="info clearfix">
-                                                <div class="image">
-                                                    <a href="#">
-                                                        <img src="~/Assets/Admin/images/icon/avatar-01.jpg" alt="John Doe" />
-                                                    </a>
+                                    @{
+                                        var session = (UserLogin)Session[WebShop.Common.CommonConstants.USER_SESSION];
+                                    }
+                                    @if (session == null)
+                                    {
+                                        <div></div>
+                                    }
+                                    else
+                                    {
+
+                                        <div class="account-item clearfix js-item-menu">
+                                            <div class="image">
+                                                <img src="~/Assets/Admin/images/icon/avatar-01.jpg" alt="John Doe" />
+                                            </div>
+                                            <div class="content">
+                                                <a class="js-acc-btn" href="#">Welcome: @session.UserName </a>
+                                            </div>
+                                            <div class="account-dropdown js-dropdown">
+                                                <div class="info clearfix">
+                                                    <div class="image">
+                                                        <a href="#">
+                                                            <img src="~/Assets/Admin/images/icon/avatar-01.jpg" alt="John Doe" />
+                                                        </a>
+                                                    </div>
+                                                    <div class="content">
+                                                        <h5 class="name">
+                                                            <a href="#">@session.UserName</a>
+                                                        </h5>
+                                                        @*<span class="email">johndoe@example.com</span>*@
+                                                    </div>
                                                 </div>
-                                                <div class="content">
-                                                    <h5 class="name">
-                                                        <a href="#">john doe</a>
-                                                    </h5>
-                                                    <span class="email">johndoe@example.com</span>
+                                                <div class="account-dropdown__body">
+                                                    @*<div class="account-dropdown__item">
+                                                            <a href="#">
+                                                                <i class="zmdi zmdi-account"></i>Account
+                                                            </a>
+                                                        </div>*@
+                                                    <div class="account-dropdown__item">
+                                                        <a href="/Admin/User/Update/@session.UserID">
+                                                            <i class="zmdi zmdi-settings"></i>Setting
+                                                        </a>
+                                                    </div>
+                                                    @*<div class="account-dropdown__item">
+                                                            <a href="#">
+                                                                <i class="zmdi zmdi-money-box"></i>Billing
+                                                            </a>
+                                                        </div>*@
+                                                </div>
+                                                <div class="account-dropdown__footer">
+                                                    <a>
+                                                        @Html.ActionLink("Logout", "Logout", "Login")
+                                                    </a>
                                                 </div>
                                             </div>
-                                            <div class="account-dropdown__body">
-                                                <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-account"></i>Account
-                                                    </a>
-                                                </div>
-                                                <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-settings"></i>Setting
-                                                    </a>
-                                                </div>
-                                                <div class="account-dropdown__item">
-                                                    <a href="#">
-                                                        <i class="zmdi zmdi-money-box"></i>Billing
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="account-dropdown__footer">
-                                                <a href="#">
-                                                    <i class="zmdi zmdi-power"></i>Logout
-                                                </a>
-                                            </div>
                                         </div>
-                                    </div>
+                                    }
+
                                 </div>
                             </div>
                         </div>
@@ -225,14 +247,13 @@
                 </div>
             </header>
             <!-- HEADER DESKTOP-->
-            
             <!-- MAIN CONTENT-->
             <div class="main-content">
                 @RenderBody()
             </div>
             <!-- END MAIN CONTENT-->
             <!-- END PAGE CONTAINER-->
-           
+
         </div>
 
     </div>

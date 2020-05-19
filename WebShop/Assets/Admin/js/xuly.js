@@ -120,6 +120,19 @@ function deleteAbout() {
         });
     // console.log('abcd')
 }
+//deleteOrder
+function deleteOrder() {
+
+    $.post(`/Admin/Order/Delete/${selected_id}`,
+        {
+
+        },
+        function (data, status) {
+            //   alert("Data: " + data + "\nStatus: " + status);
+            location.reload();
+        });
+    // console.log('abcd')
+}
 $(document).ready(function () {
     $('#summernote').summernote({
         toolbar: [
