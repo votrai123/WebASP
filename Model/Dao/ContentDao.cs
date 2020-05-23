@@ -8,6 +8,7 @@ using Model.ViewModel;
 using PagedList;
 using Common;
 using WebShop.Common;
+using System.Data.Entity;
 
 namespace Model.Dao
 {
@@ -58,6 +59,26 @@ namespace Model.Dao
             IQueryable<Content> model = db.Contents;
             return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
         }
+        public List<CommentViewModel> ListComment(long idconent)
+        {
+            IQueryable<CommentViewModel> model = from a in db.CommentContents
+                                                 join b in db.Users
+                                                 on a.IDUser equals b.ID
+                                                 select new CommentViewModel()
+                                                 {
+                                                     IDUser = a.IDUser,
+                                                     CommentCreatedDate = a.CreatedDate,
+                                                     Content = a.Content,
+                                                     FullName = b.FullName,
+                                                     IDContent = a.IDContent
+                                                 };
+            return model.OrderByDescending(x => x.CommentCreatedDate).Where(x => x.IDContent == idconent).ToList();
+        }
+        public int CountCommentById(long id)
+        {
+            return db.CommentContents.Where(x=>x.IDContent==id).Count();
+        }
+
         public long Insert(Content entity)
         {
             db.Contents.Add(entity);
@@ -163,6 +184,8 @@ namespace Model.Dao
         {
             return db.Categories.Where(x => x.Status == status).ToList();
         }
+
+
         public void InsertTag(string id, string name)
         {
             var tag = new Tag();
@@ -298,6 +321,11 @@ namespace Model.Dao
             var content = db.Contents.Find(id);
             content.ViewCount += 1;
             db.SaveChanges();
+        }
+
+        public List<Content> ListThreeContent(bool status)
+        {
+            return db.Contents.OrderByDescending(x => x.CreatedDate).Where(x => x.Status == status).Skip(3).ToList();
         }
     }
 }

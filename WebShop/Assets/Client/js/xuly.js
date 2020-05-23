@@ -129,6 +129,29 @@ $("#btnPayment").click(function () {
 	});
 });
 
+$("#btnsendcomment").click(function () {
+	//alert("da vo");
+
+	var IDUser = $("#IdUser").val();
+	var IDContent = $("#IdContent").val();
+	var Content = $("#message").val();
+
+	$.ajax({
+		type: "POST",
+		url: "/Blog/Comment",
+		data: { IDUser, IDContent, Content},
+		dataType: "json",
+		success: function (res) {
+			if (res.status == true) {
+				location.reload();
+			}
+		},
+		error: function () {
+			location.reload();
+		}
+	});
+});
+
 $("#btnSendFeed").click(function () {
 	//alert("da vo");
 

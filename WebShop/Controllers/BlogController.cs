@@ -15,6 +15,7 @@ namespace WebShop.Controllers
         {
             var model = new ContentDao().ListAllPaging(page, pageSize);
             int totalRecord = 0;
+            ViewBag.ThreeContent = new ContentDao().ListThreeContent(true);
             ViewBag.Tags = new ContentDao().ListAllTag();
             ViewBag.Categorys = new ContentDao().ListByGroupStatusCategory(true);
             ViewBag.Total = totalRecord;
@@ -37,6 +38,9 @@ namespace WebShop.Controllers
             var model = new ContentDao().GetByID(id);
             new ContentDao().CountView(id);
             ViewBag.Categorys = new ContentDao().ListByGroupStatusCategory(true);
+            ViewBag.ThreeContent = new ContentDao().ListThreeContent(true);
+            ViewBag.Comment = new ContentDao().ListComment(id);
+            ViewBag.CountComment = new ContentDao().CountCommentById(id);
             ViewBag.TagAll = new ContentDao().ListAllTag();
             ViewBag.Tags = new ContentDao().ListTag(id);
             return View(model);
@@ -48,7 +52,7 @@ namespace WebShop.Controllers
             int totalRecord = 0;
             ViewBag.TagAll = new ContentDao().ListAllTag();
             ViewBag.Categorys = new ContentDao().ListByGroupStatusCategory(true);
-
+            ViewBag.ThreeContent = new ContentDao().ListThreeContent(true);
             ViewBag.Total = totalRecord;
             ViewBag.Page = page;
 
@@ -71,6 +75,7 @@ namespace WebShop.Controllers
             int totalRecord = 0;
             ViewBag.TagAll = new ContentDao().ListAllTag();
             ViewBag.Categorys = new ContentDao().ListByGroupStatusCategory(true);
+            ViewBag.ThreeContent = new ContentDao().ListThreeContent(true);
             ViewBag.Total = totalRecord;
             ViewBag.Page = page;
 
@@ -86,6 +91,25 @@ namespace WebShop.Controllers
             ViewBag.Next = page + 1;
             ViewBag.Prev = page - 1;
             return View(model);
+        }
+        [HttpPost]
+        public JsonResult Comment(long IDUser, long IDContent, string Content)
+        {
+            var comment = new CommentContent();
+            comment.IDUser = IDUser;
+            comment.IDContent = IDContent;
+            comment.Content = Content;
+            comment.CreatedDate = DateTime.Now;
+            var id = new CommentContentDao().Insert(comment);
+            if (id > 0)
+            {
+                
+                return Json(new { status = true });
+            }
+            else
+            {
+                return Json(new { status = false });
+            }
         }
     }
 }

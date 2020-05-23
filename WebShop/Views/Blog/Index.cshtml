@@ -3,6 +3,7 @@
 @{
     ViewBag.Title = "Blog";
     Layout = "~/Views/Shared/_layout.cshtml";
+    var threecontent = ViewBag.ThreeContent;
 }
 
 
@@ -129,61 +130,69 @@
                             foreach (var cate in categorys)
                             {
                                 var count = 0;
-                                <li><a href="tin-tuc/the-loai/@cate.MetaTitle-@cate.ID">@cate.Name 
-                                    @foreach(var ahihi in Model)
+                                <li>
+                                    <a href="tin-tuc/the-loai/@cate.MetaTitle-@cate.ID">
+                                        @cate.Name
+                                    @foreach (var ahihi in Model)
                                     {
                                         if (ahihi.CategoryID == cate.ID)
                                         {
                                             count = count + 1;
                                         }
                                     }
-                                    <span>(@count)</span></a></li>
-                            }
+                                    <span>(@count)</span>
+                                </a>
+                            </li>
+                        }
                         }
                         @*<li><a href="#">Shoes <span>(12)</span></a></li>
-                        <li><a href="#">Men's Shoes <span>(22)</span></a></li>
-                        <li><a href="#">Women's <span>(37)</span></a></li>
-                        <li><a href="#">Accessories <span>(42)</span></a></li>
-                        <li><a href="#">Sports <span>(14)</span></a></li>
-                        <li><a href="#">Lifestyle <span>(140)</span></a></li>*@
+                            <li><a href="#">Men's Shoes <span>(22)</span></a></li>
+                            <li><a href="#">Women's <span>(37)</span></a></li>
+                            <li><a href="#">Accessories <span>(42)</span></a></li>
+                            <li><a href="#">Sports <span>(14)</span></a></li>
+                            <li><a href="#">Lifestyle <span>(140)</span></a></li>*@
                     </ul>
                 </div>
 
                 <div class="sidebar-box ftco-animate">
                     <h3 class="heading">Recent Blog</h3>
-                    <div class="block-21 mb-4 d-flex">
-                        <a class="blog-img mr-4" style="background-image: url(/Assets/Client/images/image_1.jpg);"></a>
-                        <div class="text">
-                            <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                            <div class="meta">
-                                <div><a href="#"><span class="icon-calendar"></span> April 27, 2019</a></div>
-                                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                    @foreach (var content in threecontent)
+                    {
+                        <div class="block-21 mb-4 d-flex">
+                            <a class="blog-img mr-4" style="background-image: url(@content.Image);"></a>
+                            <div class="text">
+                                <h3 class="heading-1"><a href="/tin-tuc/@content.MetaTitle-@content.ID">@content.Name</a></h3>
+                                <div class="meta">
+                                    <div><a><span class="icon-calendar"></span>@content.CreatedDate</a></div>
+                                    <div><a><span class="icon-person"></span> Admin</a></div>
+                                    <div><a><span class="icon-chat"></span> 19</a></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="block-21 mb-4 d-flex">
-                        <a class="blog-img mr-4" style="background-image: url(/Assets/Client/images/image_2.jpg);"></a>
-                        <div class="text">
-                            <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                            <div class="meta">
-                                <div><a href="#"><span class="icon-calendar"></span> April 27, 2019</a></div>
-                                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                    }
+
+                    @*<div class="block-21 mb-4 d-flex">
+                            <a class="blog-img mr-4" style="background-image: url(/Assets/Client/images/image_2.jpg);"></a>
+                            <div class="text">
+                                <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+                                <div class="meta">
+                                    <div><a href="#"><span class="icon-calendar"></span> April 27, 2019</a></div>
+                                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="block-21 mb-4 d-flex">
-                        <a class="blog-img mr-4" style="background-image: url(/Assets/Client/images/image_3.jpg);"></a>
-                        <div class="text">
-                            <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
-                            <div class="meta">
-                                <div><a href="#"><span class="icon-calendar"></span> April 27, 2019</a></div>
-                                <div><a href="#"><span class="icon-person"></span> Admin</a></div>
-                                <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                        <div class="block-21 mb-4 d-flex">
+                            <a class="blog-img mr-4" style="background-image: url(/Assets/Client/images/image_3.jpg);"></a>
+                            <div class="text">
+                                <h3 class="heading-1"><a href="#">Even the all-powerful Pointing has no control about the blind texts</a></h3>
+                                <div class="meta">
+                                    <div><a href="#"><span class="icon-calendar"></span> April 27, 2019</a></div>
+                                    <div><a href="#"><span class="icon-person"></span> Admin</a></div>
+                                    <div><a href="#"><span class="icon-chat"></span> 19</a></div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                        </div>*@
                 </div>
 
                 <div class="sidebar-box ftco-animate">

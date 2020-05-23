@@ -174,7 +174,7 @@ namespace WebShop.Controllers
                 {
                     var userSession = new UserLogin();
                     userSession.UserName = user.UserName;
-                    userSession.UserID = user.ID;
+                    userSession.UserID = resultInsert;
                     Session.Add(CommonConstants.USER_SESSION, userSession);
                 }
             }
