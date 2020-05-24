@@ -131,5 +131,17 @@ namespace WebShop.Areas.Admin.Controllers
 
         }
 
+        [HttpGet]
+        public ActionResult Comment(int id)
+        {
+            var model = new ContentDao().ListComment(id);
+            return View(model);
+        }
+
+        public ActionResult DeleteComment(int id)
+        {
+            new ContentDao().DeleteComment(id);
+            return RedirectToAction("Index");
+        }
     }
 }

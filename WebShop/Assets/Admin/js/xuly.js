@@ -133,6 +133,19 @@ function deleteOrder() {
         });
     // console.log('abcd')
 }
+//deleteCommentContent
+function deleteCommentContent() {
+
+    $.post(`/Admin/Content/DeleteComment/${selected_id}`,
+        {
+
+        },
+        function (data, status) {
+            //   alert("Data: " + data + "\nStatus: " + status);
+            location.reload();
+        });
+    // console.log('abcd')
+}
 $(document).ready(function () {
     $('#summernote').summernote({
         toolbar: [

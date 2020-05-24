@@ -8,6 +8,7 @@ namespace Model.ViewModel
 {
     public class CommentViewModel
     {
+        public long ID { set; get; }
         public long IDContent { set; get; }
 
         public long IDUser { set; get; }

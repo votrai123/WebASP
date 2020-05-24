@@ -66,6 +66,7 @@ namespace Model.Dao
                                                  on a.IDUser equals b.ID
                                                  select new CommentViewModel()
                                                  {
+                                                     ID=a.ID,
                                                      IDUser = a.IDUser,
                                                      CommentCreatedDate = a.CreatedDate,
                                                      Content = a.Content,
@@ -120,7 +121,20 @@ namespace Model.Dao
                 return false;
             }
         }
-
+        public bool DeleteComment(int id)
+        {
+            try
+            {
+                var comment = db.CommentContents.Find(id);
+                db.CommentContents.Remove(comment);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
         public Content ViewDetail(int id)
         {
             return db.Contents.Find(id);

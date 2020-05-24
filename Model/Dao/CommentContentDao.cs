@@ -31,20 +31,6 @@ namespace Model.Dao
             }
             return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
         }
-        public bool Delete(int id)
-        {
-            try
-            {
-                var about = db.Abouts.Find(id);
-                db.Abouts.Remove(about);
-                db.SaveChanges();
-                return true;
-            }
-            catch (Exception ex)
-            {
-                return false;
-            }
-        }
 
     }
 }

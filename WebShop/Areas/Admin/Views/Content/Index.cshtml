@@ -102,6 +102,7 @@
                             <p class="card-text">Category: @item.CateName</p>
                             <p class="card-text">View: @item.ViewCount</p>
                             <p class="card-text">@item.CreatedDate</p>
+                            <p class="card-text">@item.CreatedDate</p>
 
                         </div>
                         <div class="card-body">
@@ -111,6 +112,9 @@
                             <button onclick='setiduser(@item.ID)' data-toggle="modal" data-target="#mymodal" class="btn btn-primary">
                                 Delete
                             </button>
+                            <a href="/Admin/Content/Comment/@item.ID" class="btn btn-primary">
+                                Comment
+                            </a>
                         </div>
                     </div>
                 </div>

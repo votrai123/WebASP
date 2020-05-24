@@ -1,0 +1,71 @@
+﻿@model List<Model.ViewModel.CommentViewModel>
+
+@{
+    ViewBag.Title = "Comment";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+@if (Model == null)
+{
+    <h1>No Comment</h1>
+}
+else
+{
+    <!-- modal static -->
+    <div class="modal" tabindex="-1" role="dialog" id="mymodal" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Notification</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        Do you want to delete?
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="deleteCommentContent()">Yes</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end modal static -->
+    <div class="container">
+        <h3 class="title-3 m-b-30">
+            <i class="zmdi zmdi-account-calendar"></i><a href="/Admin/Content">List Content </a> > Comment Of Content
+        </h3>
+        <div class="list-group">
+            @foreach (var item in Model)
+            {
+                <div class="list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="row">
+                        <div class="col-xl-2">
+                            <img class="rounded-circle" src="https://s3.amazonaws.com/uifaces/faces/twitter/dancounsell/128.jpg" alt="profile">
+                        </div>
+                        <div class="col-xl-10">
+                            <div class="row d-flex w-100 justify-content-between">
+                                @*<div class="row border-info">*@
+                                <div class="col-md-6">
+                                    <h5 class="mb-auto">@item.FullName</h5>
+                                </div>
+                                <div class="col-md-5">
+                                    <small>@item.CommentCreatedDate</small>
+                                </div>
+                                <div class="col-md-1"><button onclick='setiduser(@item.ID)' data-toggle="modal" data-target="#mymodal" class="btn btn-danger">Delete</button></div>
+                                @*</div>*@
+                            </div>
+                            <p class="mb-1">@item.Content</p>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+        </div>
+    </div>
+}
