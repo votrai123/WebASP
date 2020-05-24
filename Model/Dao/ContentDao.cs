@@ -158,14 +158,15 @@ namespace Model.Dao
                 {
                     content.CategoryID = entity.CategoryID;
                 }
+                content.Tags = entity.Tags;
                 content.Status = entity.Status;
                 content.ModifiedDate = DateTime.Now;
                 db.SaveChanges();
                 //Xử lý tag
-                if (!string.IsNullOrEmpty(content.Tags))
+                if (!string.IsNullOrEmpty(entity.Tags))
                 {
-                    this.RemoveAllContentTag(content.ID);
-                    string[] tags = content.Tags.Split(',');
+                    this.RemoveAllContentTag(entity.ID);
+                    string[] tags = entity.Tags.Split(',');
                     foreach (var tag in tags)
                     {
                         var tagId = ConvertTxt.utf8Convert3(tag);
@@ -178,7 +179,7 @@ namespace Model.Dao
                         }
 
                         //insert to content tag
-                        this.InsertContentTag(content.ID, tagId);
+                        this.InsertContentTag(entity.ID, tagId);
 
                     }
                 }

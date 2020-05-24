@@ -75,6 +75,23 @@ namespace Model.Dao
             }
             return model.OrderByDescending(x => x.CreatedDate).ToPagedList(page, pageSize);
         }
+
+        public List<CommentViewModel> ListComment(long idproduct)
+        {
+            IQueryable<CommentViewModel> model = from a in db.CommentProducts
+                                                 join b in db.Users
+                                                 on a.IDUser equals b.ID
+                                                 select new CommentViewModel()
+                                                 {
+                                                     ID = a.ID,
+                                                     IDUser = a.IDUser,
+                                                     CommentCreatedDate = a.CreatedDate,
+                                                     Content = a.Content,
+                                                     FullName = b.FullName,
+                                                     IDContent = a.IDProduct
+                                                 };
+            return model.OrderByDescending(x => x.CommentCreatedDate).Where(x => x.IDContent == idproduct).ToList();
+        }
         public List<ThreeViewModel> ListByCategoryId(long categoryID, ref int totalRecord, int pageIndex = 1, int pageSize = 2)
         {
             var join = from a in db.Products
@@ -129,7 +146,10 @@ namespace Model.Dao
                 return false;
             }
         }
-
+        public int CountCommentById(long id)
+        {
+            return db.CommentProducts.Where(x => x.IDProduct == id).Count();
+        }
         public Product ViewDetail(long id)
         {
             return db.Products.Find(id);

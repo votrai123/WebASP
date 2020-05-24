@@ -70,6 +70,7 @@
     <Compile Include="Dao\AboutDao.cs" />
     <Compile Include="Dao\CategoryDao.cs" />
     <Compile Include="Dao\CommentContentDao.cs" />
+    <Compile Include="Dao\CommentProductDao.cs" />
     <Compile Include="Dao\ContentDao.cs" />
     <Compile Include="Dao\FeedbackDao.cs" />
     <Compile Include="Dao\OrderDao.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="EF\About.cs" />
     <Compile Include="EF\Category.cs" />
     <Compile Include="EF\CommentContent.cs" />
+    <Compile Include="EF\CommentProduct.cs" />
     <Compile Include="EF\Contact.cs" />
     <Compile Include="EF\Content.cs" />
     <Compile Include="EF\ContentTag.cs" />

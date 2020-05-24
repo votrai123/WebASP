@@ -3,6 +3,8 @@
     ViewBag.Title = "Prodcut";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var category = (Model.EF.ProductCategory)ViewBag.Category;
+    var comment = ViewBag.Comment;
+    var countcomment = ViewBag.CountComment;
 }
 
 
@@ -128,84 +130,61 @@
                     <div class="tab-pane fade" id="v-pills-3" role="tabpanel" aria-labelledby="v-pills-day-3-tab">
                         <div class="row p-4">
                             <div class="col-md-7">
-                                <h3 class="mb-4">23 Reviews</h3>
-                                <div class="review">
-                                    <div class="user-img" style="background-image: url(images/person_1.jpg)"></div>
-                                    <div class="desc">
-                                        <h4>
-                                            <span class="text-left">Jacob Webb</span>
-                                            <span class="text-right">14 March 2018</span>
-                                        </h4>
-                                        <p class="star">
-                                            <span>
-                                                <i class="ion-ios-star-outline"></i>
-                                                <i class="ion-ios-star-outline"></i>
-                                                <i class="ion-ios-star-outline"></i>
-                                                <i class="ion-ios-star-outline"></i>
-                                                <i class="ion-ios-star-outline"></i>
-                                            </span>
-                                            <span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
-                                        </p>
-                                        <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
-                                    </div>
-                                </div>
-                                <div class="review">
-                                    <div class="user-img" style="background-image: url(images/person_2.jpg)"></div>
-                                    <div class="desc">
-                                        <h4>
-                                            <span class="text-left">Jacob Webb</span>
-                                            <span class="text-right">14 March 2018</span>
-                                        </h4>
-                                        <p class="star">
-                                            <span>
-                                                <i class="ion-ios-star-outline"></i>
-                                                <i class="ion-ios-star-outline"></i>
-                                                <i class="ion-ios-star-outline"></i>
-                                                <i class="ion-ios-star-outline"></i>
-                                                <i class="ion-ios-star-outline"></i>
-                                            </span>
-                                            <span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
-                                        </p>
-                                        <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
-                                    </div>
-                                </div>
-                                <div class="review">
-                                    <div class="user-img" style="background-image: url(images/person_3.jpg)"></div>
-                                    <div class="desc">
-                                        <h4>
-                                            <span class="text-left">Jacob Webb</span>
-                                            <span class="text-right">14 March 2018</span>
-                                        </h4>
-                                        <p class="star">
-                                            <span>
-                                                <i class="ion-ios-star-outline"></i>
-                                                <i class="ion-ios-star-outline"></i>
-                                                <i class="ion-ios-star-outline"></i>
-                                                <i class="ion-ios-star-outline"></i>
-                                                <i class="ion-ios-star-outline"></i>
-                                            </span>
-                                            <span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
-                                        </p>
-                                        <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrov</p>
-                                    </div>
-                                </div>
-                                <div class="review">
-                                    <div class="comment-form-wrap pt-5">
-                                        <h3 class="mb-5">Leave a comment</h3>
-                                        <div class="p-5 bg-light">
-                                            <div class="form-group">
-                                                <label for="message">Message</label>
-                                                <input type="hidden" id="IdUser" value="" />
-                                                <input type="hidden" id="IdContent" value="" />
-                                                <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
-                                            </div>
-                                            <div class="form-group">
-                                                <input type="submit" id="" value="Post Comment" class="btn py-3 px-4 btn-primary">
-                                            </div>
-
+                                <h3 class="mb-4">@countcomment Reviews</h3>
+                                @foreach (var cm in comment)
+                                {
+                                    <div class="review">
+                                        <div class="user-img" style="background-image: url(/Assets/Client/images/person_1.jpg)"></div>
+                                        <div class="desc">
+                                            <h4>
+                                                <span class="text-left">@cm.FullName</span>
+                                                <span class="text-right">@cm.CommentCreatedDate</span>
+                                            </h4>
+                                            <p class="star">
+                                                <span>
+                                                    <i class="ion-ios-star-outline"></i>
+                                                    <i class="ion-ios-star-outline"></i>
+                                                    <i class="ion-ios-star-outline"></i>
+                                                    <i class="ion-ios-star-outline"></i>
+                                                    <i class="ion-ios-star-outline"></i>
+                                                </span>
+                                                @*<span class="text-right"><a href="#" class="reply"><i class="icon-reply"></i></a></span>*@
+                                            </p>
+                                            <p>@cm.Content</p>
                                         </div>
                                     </div>
-                                </div>
+                                }
+
+                                @{
+                                    var session = (UserLogin)Session[WebShop.Common.CommonConstants.USER_SESSION];
+                                }
+                                @if (session != null)
+                                {
+                                    <div class="review">
+                                        <div class="comment-form-wrap pt-5">
+                                            <h3 class="mb-5">Leave a comment</h3>
+                                            <div class="p-5 bg-light">
+                                                <div class="form-group">
+                                                    <label for="message">Message</label>
+                                                    <input type="hidden" id="IdUser" value="@session.UserID" />
+                                                    <input type="hidden" id="IdProduct" value="@Model.ID" />
+                                                    <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <input type="submit" id="BtnSendCMP" value="Post Comment" class="btn py-3 px-4 btn-primary">
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="comment-form-wrap pt-5">
+                                        <h3 class="mb-5">Login to comment</h3>
+
+                                    </div>
+                                }
                             </div>
                             <div class="col-md-4">
                                 <div class="rating-wrap">

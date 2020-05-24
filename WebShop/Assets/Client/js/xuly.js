@@ -151,6 +151,28 @@ $("#btnsendcomment").click(function () {
 		}
 	});
 });
+$("#BtnSendCMP").click(function () {
+	//alert("da vo");
+
+	var IDUser = $("#IdUser").val();
+	var IDProduct = $("#IdProduct").val();
+	var Content = $("#message").val();
+
+	$.ajax({
+		type: "POST",
+		url: "/Product/Comment",
+		data: { IDUser, IDProduct, Content },
+		dataType: "json",
+		success: function (res) {
+			if (res.status == true) {
+				location.reload();
+			}
+		},
+		error: function () {
+			location.reload();
+		}
+	});
+});
 
 $("#btnSendFeed").click(function () {
 	//alert("da vo");

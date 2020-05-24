@@ -55,6 +55,8 @@ namespace WebShop.Controllers
         {
             var product = new ProductDao().ViewDetail(id);
             new ProductDao().CountView(id);
+            ViewBag.CountComment = new ProductDao().CountCommentById(id);
+            ViewBag.Comment = new ProductDao().ListComment(id);
             ViewBag.Category = new ProductDao().ViewDetailProductCategory(product.CategoryID.Value);
             return View(product);
         }
@@ -65,6 +67,23 @@ namespace WebShop.Controllers
             ViewBag.ListCategory = model;
             return PartialView(model);
         }
-        
+        public JsonResult Comment(long IDUser, long IDProduct, string Content)
+        {
+            var comment = new CommentProduct();
+            comment.IDUser = IDUser;
+            comment.IDProduct = IDProduct;
+            comment.Content = Content;
+            comment.CreatedDate = DateTime.Now;
+            var id = new CommentProductDao().Insert(comment);
+            if (id > 0)
+            {
+
+                return Json(new { status = true });
+            }
+            else
+            {
+                return Json(new { status = false });
+            }
+        }
     }
 }

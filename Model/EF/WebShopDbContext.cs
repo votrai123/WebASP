@@ -26,6 +26,7 @@ namespace Model.EF
         public virtual DbSet<Tag> Tags { get; set; }
         public virtual DbSet<ContentTag> ContentTags { get; set; }
         public virtual DbSet<CommentContent> CommentContents { get; set; }
+        public virtual DbSet<CommentProduct> CommentProducts { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<About>()
