@@ -211,5 +211,19 @@ namespace Model.Dao
             product.ViewCount += 1;
             db.SaveChanges();
         }
+        public bool DeleteComment(int id)
+        {
+            try
+            {
+                var comment = db.CommentProducts.Find(id);
+                db.CommentProducts.Remove(comment);
+                db.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }

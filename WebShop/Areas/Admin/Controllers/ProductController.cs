@@ -155,7 +155,7 @@ namespace WebShop.Areas.Admin.Controllers
 
         public ActionResult DeleteComment(int id)
         {
-            new ContentDao().DeleteComment(id);
+            new ProductDao().DeleteComment(id);
             return RedirectToAction("Index");
         }
     }

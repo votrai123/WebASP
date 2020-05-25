@@ -176,7 +176,7 @@ namespace WebShop.Controllers
                 var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
 
                 new MailHelper().SendMail(Email, "Đơn hàng mới từ Three-T Shop", content);
-                //new MailHelper().SendMail(toEmail, "Đơn hàng mới từ OnlineShop", content);
+                new MailHelper().SendMail(toEmail, "Đơn hàng mới từ OnlineShop", content);
                 Session[Common.CommonConstants.CartSession] = null;
                 return Json(new
                 {

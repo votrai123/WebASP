@@ -146,6 +146,19 @@ function deleteCommentContent() {
         });
     // console.log('abcd')
 }
+//deleteCommentProduct
+function deleteCommentProduct() {
+
+    $.post(`/Admin/Product/DeleteComment/${selected_id}`,
+        {
+
+        },
+        function (data, status) {
+            //   alert("Data: " + data + "\nStatus: " + status);
+            location.reload();
+        });
+    // console.log('abcd')
+}
 $(document).ready(function () {
     $('#summernote').summernote({
         toolbar: [
