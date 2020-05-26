@@ -63,13 +63,17 @@
                                 <i class="zmdi zmdi-plus"></i>add item
                             </button>
                         </a>
-                        <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
-                            <select class="js-select2" name="type">
-                                <option selected="selected">Export</option>
-                                <option value="">Option 1</option>
-                                <option value="">Option 2</option>
-                            </select>
-                            <div class="dropDownSelect2"></div>
+                        <!-- Example single danger button -->
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Export
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item">@Html.ActionLink("Export to Excel", "Reports", new { ReportType = "Excel" })</a>
+                                <a class="dropdown-item">@Html.ActionLink("Export to PDF", "Reports", new { ReportType = "PDF" })</a>
+                                <a class="dropdown-item">@Html.ActionLink("Export to Word", "Reports", new { ReportType = "Word" })</a>
+                                <a class="dropdown-item">@Html.ActionLink("Export to Image", "Reports", new { ReportType = "Image" })</a>
+                            </div>
                         </div>
                     </div>
                 </div>

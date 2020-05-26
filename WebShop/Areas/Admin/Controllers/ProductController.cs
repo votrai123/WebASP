@@ -1,4 +1,5 @@
-﻿using Model.Dao;
+﻿using Microsoft.Reporting.WebForms;
+using Model.Dao;
 using Model.EF;
 using System;
 using System.Collections.Generic;
@@ -157,6 +158,46 @@ namespace WebShop.Areas.Admin.Controllers
         {
             new ProductDao().DeleteComment(id);
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Reports(string ReportType)
+        {
+            var model = new ProductDao().ListAllProduct();
+            LocalReport localReport = new LocalReport();
+            localReport.ReportPath = Server.MapPath("/Areas/Admin/Reports/ProductsReport.rdlc");
+            var abc = localReport.ReportPath;
+            ReportDataSource reportDataSource = new ReportDataSource();
+            reportDataSource.Name = "ProductDataSet";
+            reportDataSource.Value = model;
+            localReport.DataSources.Add(reportDataSource);
+            string reportType = ReportType;
+            string mimeType;
+            string encoding;
+            string fileNameExtendtion;
+            if (reportType == "Excel")
+            {
+                fileNameExtendtion = "xlsx";
+            }
+            else if (reportType == "Word")
+            {
+                fileNameExtendtion = "docx";
+            }
+            else if (reportType == "PDF")
+            {
+                fileNameExtendtion = "pdf";
+            }
+            else
+            {
+                fileNameExtendtion = "jpg";
+            }
+            string[] streams;
+            Warning[] warnings;
+            byte[] renderedByte;
+            renderedByte = localReport.Render(reportType, "", out mimeType, out encoding, out fileNameExtendtion, out streams,
+                out warnings);
+            Response.AddHeader("content-disposition", "attachment;filename= product_report." + fileNameExtendtion);
+
+            return File(renderedByte, fileNameExtendtion);
         }
     }
 }

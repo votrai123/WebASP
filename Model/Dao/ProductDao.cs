@@ -225,5 +225,9 @@ namespace Model.Dao
                 return false;
             }
         }
+        public List<Product> ListAllProduct()
+        {
+            return db.Products.ToList();
+        }
     }
 }

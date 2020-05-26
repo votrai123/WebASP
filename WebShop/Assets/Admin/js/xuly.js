@@ -208,3 +208,4 @@ $('#summernote').summernote({
         ['view', ['fullscreen', 'codeview', 'help']]
     ]
 });
+$('.dropdown-toggle').dropdown()
