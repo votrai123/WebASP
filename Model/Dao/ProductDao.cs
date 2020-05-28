@@ -225,9 +225,31 @@ namespace Model.Dao
                 return false;
             }
         }
-        public List<Product> ListAllProduct()
+        public List<ThreeViewModel> ListAllProduct()
         {
-            return db.Products.ToList();
+            var join = from a in db.Products
+                       join b in db.ProductCategories
+                       on a.CategoryID equals b.ID
+                       select new ThreeViewModel()
+                       {
+                           CreatedDate = a.CreatedDate,
+                           Description = a.Description,
+                           Detail = a.Detail,
+                           IDProduct = a.ID,
+                           IDProductCategory = b.ID,
+                           Image = a.Image,
+                           NameProductCategory = b.Name,
+                           Promotion = a.Promotion,
+                           Prrice = a.Prrice,
+                           Quantity = a.Quantity,
+                           Status = a.Status,
+                           TopHot = a.TopHot,
+                           ViewCount = a.ViewCount,
+                           CategoryID = a.CategoryID,
+                           NameProduct = a.Name,
+                           MetaTitleProduct= a.MetaTitle
+                       };
+            return join.ToList();
         }
     }
 }
