@@ -64,6 +64,7 @@ namespace Model.Dao
                 {
                     about.MetaTitle = entity.MetaTitle;
                 }
+                about.Detail = entity.Detail;
                 about.Status = entity.Status;
                 about.ModifiedDate = DateTime.Now;
                 db.SaveChanges();
