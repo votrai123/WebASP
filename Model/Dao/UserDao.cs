@@ -123,7 +123,7 @@ namespace Model.Dao
                 {
                     return -2;
                 }
-                else if (result.Password == passWord && result.role == true)
+                else if (result.Password == passWord && result.role == true || result.role == false)
                 {
                     return 1;
                 }

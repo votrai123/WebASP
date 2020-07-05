@@ -6,27 +6,27 @@
         <TablixBody>
           <TablixColumns>
             <TablixColumn>
-              <Width>0.61458in</Width>
+              <Width>0.70684in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>1.80208in</Width>
+              <Width>1.89434in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.82292in</Width>
+              <Width>0.91518in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.79167in</Width>
+              <Width>0.88393in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.61458in</Width>
+              <Width>0.70684in</Width>
             </TablixColumn>
             <TablixColumn>
-              <Width>0.6875in</Width>
+              <Width>0.77976in</Width>
             </TablixColumn>
           </TablixColumns>
           <TablixRows>
             <TablixRow>
-              <Height>0.32292in</Height>
+              <Height>0.30209in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -235,7 +235,7 @@
               </TablixCells>
             </TablixRow>
             <TablixRow>
-              <Height>0.32292in</Height>
+              <Height>0.30209in</Height>
               <TablixCells>
                 <TablixCell>
                   <CellContents>
@@ -447,7 +447,7 @@
           <TablixMembers>
             <TablixMember>
               <TablixHeader>
-                <Size>1.20833in</Size>
+                <Size>1.30059in</Size>
                 <CellContents>
                   <Textbox Name="Textbox58">
                     <CanGrow>true</CanGrow>
@@ -498,7 +498,7 @@
                 </SortExpression>
               </SortExpressions>
               <TablixHeader>
-                <Size>1.20833in</Size>
+                <Size>1.30059in</Size>
                 <CellContents>
                   <Textbox Name="NameProductCategory">
                     <CanGrow>true</CanGrow>
@@ -540,9 +540,9 @@
         </TablixRowHierarchy>
         <DataSetName>ProductDataSet</DataSetName>
         <Top>0.31125in</Top>
-        <Left>0.64458in</Left>
-        <Height>0.64583in</Height>
-        <Width>6.54167in</Width>
+        <Left>0.24875in</Left>
+        <Height>0.60417in</Height>
+        <Width>7.18749in</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -559,7 +559,7 @@
       <BackgroundColor>PaleTurquoise</BackgroundColor>
     </Style>
   </Body>
-  <Width>9.12722in</Width>
+  <Width>7.6793in</Width>
   <Page>
     <PageHeader>
       <Height>1in</Height>
@@ -577,7 +577,7 @@
                   <Style>
                     <FontStyle>Italic</FontStyle>
                     <FontFamily>times New Roman</FontFamily>
-                    <FontSize>26pt</FontSize>
+                    <FontSize>20pt</FontSize>
                     <FontWeight>Bold</FontWeight>
                   </Style>
                 </TextRun>
@@ -590,8 +590,8 @@
           <rd:DefaultName>Textbox17</rd:DefaultName>
           <Top>0.155in</Top>
           <Left>2.04042in</Left>
-          <Height>0.65625in</Height>
-          <Width>4.45833in</Width>
+          <Height>0.52083in</Height>
+          <Width>4.27083in</Width>
           <Style>
             <Border>
               <Style>None</Style>
@@ -618,7 +618,7 @@
           </Paragraphs>
           <rd:DefaultName>ExecutionTime</rd:DefaultName>
           <Top>0.67583in</Top>
-          <Left>7.00917in</Left>
+          <Left>0.24875in</Left>
           <Height>0.25in</Height>
           <Width>1in</Width>
           <ZIndex>1</ZIndex>
@@ -641,7 +641,7 @@
       </Style>
     </PageHeader>
     <PageFooter>
-      <Height>1in</Height>
+      <Height>0.87375in</Height>
       <PrintOnFirstPage>true</PrintOnFirstPage>
       <PrintOnLastPage>true</PrintOnLastPage>
       <ReportItems>

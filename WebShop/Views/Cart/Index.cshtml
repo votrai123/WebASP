@@ -100,7 +100,7 @@
                 Please purchase before payment
             </h3>
         }
-        else if (Model.Sum(x => x.Product.Promotion * x.Quantity) == 0)
+        else if (Model.Sum(x => x.Product.Promotion * x.Quantity) <= 0)
         {
             <h3>
                 If Total price < 0, No Payment 

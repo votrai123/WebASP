@@ -1,4 +1,5 @@
-﻿using Model.Dao;
+﻿using Microsoft.Reporting.WebForms;
+using Model.Dao;
 using Model.EF;
 using System;
 using System.Collections.Generic;
@@ -45,6 +46,12 @@ namespace WebShop.Areas.Admin.Controllers
         {
             new OrderDao().Delete(id);
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Export(long id)
+        {
+            
+            return View();
         }
     }
 }
