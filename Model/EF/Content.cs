@@ -21,7 +21,7 @@ namespace Model.EF
         public string MetaTitle { get; set; }
         
         [Display(Name = "Description")]
-        [StringLength(500)]
+        [StringLength(10000)]
         public string Description { get; set; }
         
         [Display(Name = "Image")]
@@ -33,7 +33,7 @@ namespace Model.EF
         public long? CategoryID { get; set; }
 
         [Display(Name = "Detail")]
-        [Column(TypeName = "ntext")]
+        [StringLength(10000)]
         public string Detail { get; set; }
 
         public DateTime? CreatedDate { get; set; }

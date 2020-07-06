@@ -60,6 +60,8 @@ namespace WebShop.Areas.Admin.Controllers
                     }
 
                 }
+                var daoo = new ContentDao();
+                ViewBag.Category = daoo.ListByGroupStatusCategory(true);
                 return View("Create");
 
 
@@ -67,8 +69,10 @@ namespace WebShop.Areas.Admin.Controllers
             }
             catch
             {
+                var daoo = new ContentDao();
+                ViewBag.Category = daoo.ListByGroupStatusCategory(true);
                 ViewBag.Message = "File upload failed!!";
-                return RedirectToAction("Create", "Content");
+                return View("Create");
             }
         }
         public ActionResult Delete(int id)
