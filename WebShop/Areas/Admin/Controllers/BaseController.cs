@@ -13,7 +13,7 @@ namespace WebShop.Areas.Admin.Controllers
         protected override void OnActionExecuted(ActionExecutedContext filterContext)
         {
             var sess = (UserLogin)Session[CommonConstants.USER_SESSION];
-            if (sess == null)
+            if (sess == null || sess.role != true)
             {
                 filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(new { controller = "Login", action = "Index", Area = "Admin" }));
             }

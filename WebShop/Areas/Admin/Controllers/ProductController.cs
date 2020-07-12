@@ -70,18 +70,24 @@ namespace WebShop.Areas.Admin.Controllers
                         }
                         else
                         {
+                            ViewBag.Category = dao.ListByGroupStatus(true);
                             ModelState.AddModelError("", "Them khong thanh cong");
+                            return View("Create");
                         }
                     }
 
                 }
-                return RedirectToAction("Create", "Product");
+                var dao1 = new ProductDao();
+                ViewBag.Category = dao1.ListByGroupStatus(true);
+                return View("Create");
 
             }
             catch
             {
+                var dao = new ProductDao();
+                ViewBag.Category = dao.ListByGroupStatus(true);
                 ViewBag.Message = "File upload failed!!";
-                return RedirectToAction("Create", "Product");
+                return View("Create");
 
             }
         }

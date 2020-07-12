@@ -10,5 +10,6 @@ namespace WebShop
     {
         public long UserID { set; get; }
         public string UserName { set; get; }
+        public bool? role { set; get; }
     }
 }
